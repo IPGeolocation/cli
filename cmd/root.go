@@ -49,9 +49,7 @@ func Execute() {
 	}
 }
 
-/*************  ✨ Windsurf Command ⭐  *************/
 // init sets up the root command with flags.
-/*******  783c30d5-e48e-483f-84b1-cf8624f2b4b4  *******/
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
