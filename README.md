@@ -7,6 +7,9 @@ The `ipgeolocation` CLI lets you interact with the [ipgeolocation.io](https://ip
 ## Table of Contents
 
 - [Installation](#installation)
+    - [1. Go install](#1-go-install)
+    - [2. Download and build from source](#2-download-and-build-from-source)
+    - [3. Download pre-built binaries](#3-download-pre-built-binaries)
 - [Global Flags](#global-flags)
 - [Commands](#commands)
     - [1. `config`](#1-config)
