@@ -33,7 +33,7 @@ The `ipgeolocation` CLI lets you interact with the [ipgeolocation.io](https://ip
 
 To install `ipgeolocation` using `go install`, run:
 ```bash
-go install github.com/IPGeolocation/cli@latest
+go install github.com/IPGeolocation/cli/cmd/ipgeolocation@latest
 ```
 
 Make sure `$GOBIN` or `$GOPATH/bin` is in your `PATH`, then run:
@@ -47,9 +47,102 @@ ipgeolocation --help
 ```bash
 git clone https://github.com/IPGeolocation/cli.git
 cd cli
-go build -o ipgeolocation .
+go build -o ipgeolocation ./cmd/ipgeolocation
 ./ipgeolocation --help
 ```
+
+### 3. Download pre-built binaries
+
+#### IPGeolocation CLI - Prebuilt Binaries Documentation
+
+#### Overview
+These are prebuilt binaries for the IPGeolocation CLI tool, version **1.0.0**. Users can download these files directly from GitHub Releases without needing to build from source.
+
+The CLI provides geolocation information, timezone, user-agent parsing, bulk IP lookups, and more.
+
+---
+
+#### Prebuilt Binaries
+
+| Platform | Architecture | File Name |
+|----------|-------------|-----------|
+| Linux    | amd64       | ipgeolocation-1.0.0-linux-amd64.tar.gz |
+| Linux    | arm64       | ipgeolocation-1.0.0-linux-arm64.tar.gz |
+| macOS    | amd64       | ipgeolocation-1.0.0-darwin-amd64.tar.gz |
+| macOS    | arm64       | ipgeolocation-1.0.0-darwin-arm64.tar.gz |
+| Windows  | amd64       | ipgeolocation-1.0.0-windows-amd64.zip |
+
+---
+
+#### Installation Instructions
+
+##### 1. Linux
+1. Download the `.tar.gz` file for your architecture.
+2. Extract it to a folder in your PATH, e.g., `/usr/local/bin`:
+```bash
+tar -xzf ipgeolocation-1.0.0-linux-amd64.tar.gz -C /usr/local/bin
+```
+3. Rename the binary for simplicity:
+```bash
+mv /usr/local/bin/ipgeolocation-1.0.0-linux-amd64 /usr/local/bin/ipgeolocation
+```
+4. Make the binary executable:
+```bash
+chmod +x /usr/local/bin/ipgeolocation
+```
+5. Verify installation:
+```bash
+ipgeolocation --help
+```
+
+##### 2. macOS
+1. Download the `.tar.gz` file for your architecture (amd64 or arm64).
+2. Extract to a folder in your PATH, e.g., `/usr/local/bin`:
+```bash
+tar -xzf ipgeolocation-1.0.0-darwin-amd64.tar.gz -C /usr/local/bin
+```
+3. Rename the binary:
+```bash
+mv /usr/local/bin/ipgeolocation-1.0.0-darwin-amd64 /usr/local/bin/ipgeolocation
+```
+4. Make executable:
+```bash
+chmod +x /usr/local/bin/ipgeolocation
+```
+5. Verify installation:
+```bash
+ipgeolocation --help
+```
+
+##### 3. Windows
+1. Download the `.zip` file.
+2. Extract the `ipgeolocation-1.0.0-windows-amd64.exe` to a folder included in your system `PATH`.
+3. Rename the binary to `ipgeolocation.exe` for convenience.
+4. Open Command Prompt and verify:
+```cmd
+ipgeolocation --help
+```
+
+---
+
+##### Notes
+- Ensure execution permissions on Linux/macOS.
+- Recommended folder for binaries: `/usr/local/bin` or any folder in your PATH.
+- Prebuilt binaries include version **1.0.0** in their filename. Rename them after extraction for easier usage.
+- For updates, check GitHub Releases.
+- Users can also install via Go if Go environment is set up:
+```bash
+go install github.com/IPGeolocation/cli/cmd/ipgeolocation@v1.0.0
+```
+
+---
+
+##### Troubleshooting
+- **Command not found:** Ensure the binary is in a folder included in your PATH.
+- **Execution permission error:** Run `chmod +x <binary>` on Linux/macOS.
+- **Wrong architecture:** Download the binary matching your OS and CPU architecture.
+- **Go install issues:** Use `GOPROXY=direct` if Go module proxy caching creates issues.
+
 
 ## Global Flags
 These flags are available for all commands:

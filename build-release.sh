@@ -28,7 +28,7 @@ for target in "${targets[@]}"; do
   fi
 
   echo "👉 Building for $os/$arch ..."
-  GOOS=$os GOARCH=$arch go build -o dist/$output .
+  GOOS=$os GOARCH=$arch go build -o dist/$output ./cmd/$APP_NAME
 
   # package
   if [ "$os" == "windows" ]; then
