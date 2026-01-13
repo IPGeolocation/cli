@@ -39,7 +39,7 @@ Retrieving security information for a list of IP addresses with including additi
 
 		// If --file is provided, read IPs from file
 		if bulkSecurityFlags.File != "" {
-			file, err := os.Open(bulkIpgeoFlags.File)
+			file, err := os.Open(bulkSecurityFlags.File)
 			if err != nil {
 				fmt.Println("Error opening file:", err)
 				return
