@@ -3,3 +3,5 @@ dist/
 *.exe
 *.tar.gz
 *.zip
+
+.idea/
