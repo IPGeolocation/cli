@@ -29,7 +29,7 @@ Based on:
 2. [Installation](#installation)
     - [Go install](#go-install)
     - [Download and build from source](#download-and-build-from-source)
-    - [Download pre-built binaries](#download-pre-built-binaries)
+    - [Using Download Prebuilt Binaries](#using-download-prebuilt-binaries)
     - [Troubleshooting](#troubleshooting)
 3. [API Plan Tiers and Documentation](#api-plan-tiers-and-documentation)
 4. [Fields and commands Availability](#fields-and-commands-availability)
@@ -138,9 +138,7 @@ go build -o ipgeolocation ./cmd/ipgeolocation
 ```
 Here you will need to add `$GOBIN` or `$GOPATH/bin` is in your `PATH` as well.
 
-### Download pre-built binaries
-
-#### IPGeolocation CLI - Prebuilt Binaries Documentation
+### Using Download Prebuilt Binaries
 
 #### Overview
 These are prebuilt binaries for the IPGeolocation CLI tool, version **1.0.1**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
@@ -937,13 +935,13 @@ ipgeolocation asn [flags]
 > [!NOTE]
 > ASN API is only available in the Advanced Plan
 
-### Get ASN Information of your IP
+#### Get ASN Information of your IP
 Get ASN information about your current IP address:
 ```bash
 ipgeolocation asn
 ```
 
-### Get ASN Information by ASN Number
+#### Get ASN Information by ASN Number
 Lookup a specific ASN. The AS number can be prefixed with 'AS' or 'as':
 ```bash
 ipgeolocation asn --asn 15169
