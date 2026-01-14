@@ -2151,4 +2151,4 @@ Sample output:
 ---
 
 ## License
-This project is released under the [MIT License](LICENSE).
+This project is released under the [MIT License](https://github.com/IPGeolocation/cli/blob/main/LICENSE).
