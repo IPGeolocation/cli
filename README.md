@@ -1,4 +1,4 @@
-# ipgeolocation CLI Tool
+# IPGeolocation.io CLI Tool
 
 ## Overview
 
