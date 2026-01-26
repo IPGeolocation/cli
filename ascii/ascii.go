@@ -1,4 +1,5 @@
-// For more details visit: https://ipgeolocation.io
+// Package ascii
+// For more details visit: https://ipgeolocation.io/cli/ipgeolocation
 package ascii
 
 const asciiArt = `

@@ -1,5 +1,5 @@
 /*
-Copyright © 2025 IPGeolocation.io <support@ipgeolocation.io>
+Copyright © 2026 IPGeolocation.io <support@ipgeolocation.io>
 */
 package cmd
 

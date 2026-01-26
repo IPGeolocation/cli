@@ -1,6 +1,6 @@
 /*
-Copyright © 2025 IPGeolocation.io <support@ipgeolocation.io>
-For more details visit: https://ipgeolocation.io
+Copyright © 2026 IPGeolocation.io <support@ipgeolocation.io>
+For more details visit: https://ipgeolocation.io/cli/ipgeolocation
 */
 package cmd
 
