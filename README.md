@@ -141,7 +141,7 @@ Here you will need to add `$GOBIN` or `$GOPATH/bin` is in your `PATH` as well.
 ### Using Download Prebuilt Binaries
 
 #### Overview
-These are prebuilt binaries for the IPGeolocation CLI tool, version **1.0.1**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
+These are prebuilt binaries for the IPGeolocation CLI tool, version **1.0.3**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
 
 The CLI provides geolocation information, timezone, user-agent parsing, bulk IP lookups, and more.
 
@@ -149,11 +149,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 
 | Platform | Architecture | File Name / Downoad Link                                                                                                                             |
 |----------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Linux    | amd64        | [**ipgeolocation-1.0.1-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v1.0.1/ipgeolocation-1.0.1-linux-amd64.tar.gz)   |
-| Linux    | arm64        | [**ipgeolocation-1.0.1-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v1.0.1/ipgeolocation-1.0.1-linux-arm64.tar.gz)   |
-| macOS    | amd64        | [**ipgeolocation-1.0.1-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v1.0.1/ipgeolocation-1.0.1-darwin-amd64.tar.gz) |
-| macOS    | arm64        | [**ipgeolocation-1.0.1-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v1.0.1/ipgeolocation-1.0.1-darwin-arm64.tar.gz) |
-| Windows  | amd64        | [**ipgeolocation-1.0.1-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v1.0.1/ipgeolocation-1.0.1-windows-amd64.zip)     |
+| Linux    | amd64        | [**ipgeolocation-1.0.3-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v1.0.3/ipgeolocation-1.0.3-linux-amd64.tar.gz)   |
+| Linux    | arm64        | [**ipgeolocation-1.0.3-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v1.0.3/ipgeolocation-1.0.3-linux-arm64.tar.gz)   |
+| macOS    | amd64        | [**ipgeolocation-1.0.3-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v1.0.3/ipgeolocation-1.0.3-darwin-amd64.tar.gz) |
+| macOS    | arm64        | [**ipgeolocation-1.0.3-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v1.0.3/ipgeolocation-1.0.3-darwin-arm64.tar.gz) |
+| Windows  | amd64        | [**ipgeolocation-1.0.3-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v1.0.3/ipgeolocation-1.0.3-windows-amd64.zip)     |
 
 #### Installation Instructions
 
@@ -161,11 +161,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 1. Download the `.tar.gz` file for your architecture.
 2. Extract it to a folder in your PATH, e.g., `/usr/local/bin`:
    ```bash
-   tar -xzf ipgeolocation-1.0.1-linux-amd64.tar.gz -C /usr/local/bin
+   tar -xzf ipgeolocation-1.0.3-linux-amd64.tar.gz -C /usr/local/bin
    ```
 3. Rename the binary for simplicity:
    ```bash
-   mv /usr/local/bin/ipgeolocation-1.0.1-linux-amd64 /usr/local/bin/ipgeolocation
+   mv /usr/local/bin/ipgeolocation-1.0.3-linux-amd64 /usr/local/bin/ipgeolocation
    ```
 4. Make the binary executable:
    ```bash
@@ -180,11 +180,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 1. Download the `.tar.gz` file for your architecture (amd64 or arm64).
 2. Extract to a folder in your PATH, e.g., `/usr/local/bin`:
    ```bash
-   tar -xzf ipgeolocation-1.0.1-darwin-amd64.tar.gz -C /usr/local/bin
+   tar -xzf ipgeolocation-1.0.3-darwin-amd64.tar.gz -C /usr/local/bin
    ```
 3. Rename the binary:
    ```bash
-   mv /usr/local/bin/ipgeolocation-1.0.1-darwin-amd64 /usr/local/bin/ipgeolocation
+   mv /usr/local/bin/ipgeolocation-1.0.3-darwin-amd64 /usr/local/bin/ipgeolocation
    ```
 4. Make executable:
    ```bash
@@ -197,7 +197,7 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 
 **Windows:**
 1. Download the `.zip` file.
-2. Extract the `ipgeolocation-1.0.1-windows-amd64.exe` to a folder included in your system `PATH`.
+2. Extract the `ipgeolocation-1.0.3-windows-amd64.exe` to a folder included in your system `PATH`.
 3. Rename the binary to `ipgeolocation.exe` for convenience.
 4. Open Command Prompt and verify:
    ```cmd
@@ -207,7 +207,7 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 > [!NOTE]
 > - Ensure execution permissions on Linux/macOS.
 > - Recommended folder for binaries: `/usr/local/bin` or any folder in your PATH.
-> - Prebuilt binaries include version **1.0.1** in their filename. Rename them after extraction for easier usage.
+> - Prebuilt binaries include version **1.0.3** in their filename. Rename them after extraction for easier usage.
 > - For updates, check GitHub Releases.
 
 ### Troubleshooting
