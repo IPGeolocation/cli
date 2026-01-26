@@ -5,3 +5,5 @@ dist/
 *.zip
 
 .idea/
+
+/build-release-steps.md
