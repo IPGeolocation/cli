@@ -31,7 +31,7 @@ Based on:
     - [Download and build from source](#download-and-build-from-source)
     - [Using Download Prebuilt Binaries](#using-download-prebuilt-binaries)
     - [Troubleshooting](#troubleshooting)
-3. [API Plan Tiers and Documentation](#api-plan-tiers-and-documentation)
+3. [API Documentation Links](#api-documentations)
 4. [Fields and commands Availability](#fields-and-commands-availability)
 5. [Authentication Setup](#authentication-setup)
    - [How to Get Your API Key](#how-to-get-your-api-key)
@@ -216,14 +216,17 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 - **Wrong architecture:** Download the binary matching your OS and CPU architecture.
 - **Go install issues:** Use `GOPROXY=direct` if Go module proxy caching creates issues.
 
-## API Plan Tiers and Documentation
+## API Documentations
 
-The documentation below corresponds to the four available API tier plans:
-
-- **Developer Plan** (Free): [Full Documentation](https://ipgeolocation.io/ip-location-api.html#Free)
-- **Standard Plan**: [Full Documentation](https://ipgeolocation.io/ip-location-api.html#Standard)
-- **Advance Plan**: [Full Documentation](https://ipgeolocation.io/ip-location-api.html#Advance)
-- **Security Plan**: [Full Documentation](https://ipgeolocation.io/ip-security-api.html#documentation-overview)
+The documentation below corresponds to the available APIs:
+- [**Overview**](https://ipgeolocation.io/documentation.html)
+- [**IP GeoLocation API**](https://ipgeolocation.io/documentation/ip-location-api.html)
+- [**IP Security API**](https://ipgeolocation.io/documentation/ip-security-api.html)
+- [**ASN API**](https://ipgeolocation.io/documentation/asn-api.html)
+- [**IP Abuse Contact API**](https://ipgeolocation.io/documentation/ip-abuse-contact-api.html)
+- [**Timezone API**](https://ipgeolocation.io/documentation/timezone-api.html)
+- [**User-Agent API**](https://ipgeolocation.io/documentation/user-agent-api.html)
+- [**Astronomy API**](https://ipgeolocation.io/documentation/astronomy-api.html)
 
 For a detailed comparison of what each plan offers, visit the [Pricing Page](https://ipgeolocation.io/pricing.html).
 
@@ -247,7 +250,7 @@ IP Geolocation offers four plans from billing point of view: **Free, Standard, S
 | `parse-bulk-user-agents` | Parse multiple User Agent String at once.                                                                                    |  ✖   |    ✔     |    ✔     |    ✔    |
 
 > [!TIP]
-> The availability of fields in every API endpoint across all API plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for IPGeolocationApi, please visit [https://ipgeolocation.io/ip-location-api.html#reference-to-ipgeolocation-api-response](https://ipgeolocation.io/ip-location-api.html#reference-to-ipgeolocation-api-response).
+> The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for IPGeolocationApi, please visit [https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response).
 
 ## Authentication Setup
 To authenticate API requests, you need to get an API key from [ipgeolocation.io](https://ipgeolocation.io/).
@@ -316,7 +319,7 @@ ipgeolocation ipgeo [flags]
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.                                |
 
 > [!NOTE]
-> Available language options can be found here: [https://ipgeolocation.io/ip-location-api.html#response-in-multiple-languages](https://ipgeolocation.io/ip-location-api.html#response-in-multiple-languages)
+> Available language options can be found here: [https://ipgeolocation.io/documentation/ip-location-api.html#response-in-multiple-languages](https://ipgeolocation.io/documentation/ip-location-api.html#response-in-multiple-languages)
 
 #### Developer Plan Examples
 Get info about your current IP:
@@ -750,7 +753,7 @@ ipgeolocation bulk-ip-geo [flags]
 | `--output-file` | string   | `""`     | Save output to JSON file. Example: `--output-file results`    |
 
 
-For further information, please visit [IP Geolocation API Documentation](https://ipgeolocation.io/ip-location-api.html#documentation-overview).
+For further information, please visit [IP Geolocation API Documentation](https://ipgeolocation.io/documentation/ip-location-api.html).
 
 Lookup 3 IP addresses:
 ```bash
@@ -847,7 +850,7 @@ ipgeolocation ip-security --ip 8.8.8.8 --output=yaml
 > [!NOTE]
 > You can get all the available fields in standard plan in combination with security data, when subscribed to security plan.
 
-For full API specifications, refer to the [official IP Security API documentation](https://ipgeolocation.io/ip-security-api.html#documentation-overview).
+For full API specifications, refer to the [official IP Security API documentation](https://ipgeolocation.io/documentation/ip-security-api.html).
 
 #### Request with Field Filtering `ip-security`
 ```bash
@@ -913,7 +916,7 @@ Save results to JSON file:
 ipgeolocation bulk-ip-security --ips=8.8.8.8,1.1.1.1 --output-file=output
 ```
 
-For further information, please visit [Bulk IP Security API Documentation](https://ipgeolocation.io/ip-security-api.html#bulk-ip-security-lookup-api).
+For further information, please visit [Bulk IP Security API Documentation](https://ipgeolocation.io/documentation/ip-security-api.html#bulk-ip-security-lookup-endpoint).
 
 ### `asn` Command
 Lookup ASN (Autonomous System Number) information using the `ipgeolocation.io` API.
@@ -1065,7 +1068,7 @@ Output as YAML:
 ipgeolocation asn --ip 8.8.8.8 --output=yaml
 ```
 
-For further information, please visit [ASN API Documentation](https://ipgeolocation.io/asn-api.html#documentation-overview).
+For further information, please visit [ASN API Documentation](https://ipgeolocation.io/documentation/asn-api.html).
 
 ### `abuse` Command
 Lookup IP abuse contact information using the `ipgeolocation.io` API.
@@ -1142,12 +1145,12 @@ abuse:
 ip: 8.8.8.8
 ```
 
-For further information, please visit [Abuse API Documentation](https://ipgeolocation.io/ip-abuse-contact-api.html#documentation-overview).
+For further information, please visit [Abuse API Documentation](https://ipgeolocation.io/documentation/ip-abuse-contact-api.html).
 
 ### `timezone` Command
 Lookup timezone information using the `ipgeolocation.io` API using different query types like IP address, latitude/longitude, and timezone ID.
 
-For full API specifications, refer to the [Timezone API documentation](https://ipgeolocation.io/timezone-api.html#documentation-overview).
+For full API specifications, refer to the [Timezone API documentation](https://ipgeolocation.io/documentation/timezone-api.html).
 
 #### `timezone` Usage
 ```bash
@@ -1532,7 +1535,7 @@ ipgeolocation timezone --ip 8.8.8.8 --output=yaml
 ### `time-conversion` Command
 Convert between timezones using the `ipgeolocation.io` API to convert a specific time from one timezone to another using timezone identifiers and optional date/time inputs.
 
-For more details, refer to official documentation: [Timezone Converter API](https://ipgeolocation.io/timezone-api.html#convert-time-between-time-zones).
+For more details, refer to official documentation: [Timezone Converter API](https://ipgeolocation.io/documentation/timezone-api.html#convert-time-between-time-zones).
 
 #### `time-conversion` Usage
 ```bash
@@ -1617,7 +1620,7 @@ The `astronomy` command uses the ipgeolocation.io Astronomy API to fetch astrono
 
 You can specify the location using IP, city name, coordinates, or timezone.
 
-For further information, please visit [Astronomy API Documentation](https://ipgeolocation.io/astronomy-api.html#documentation-overview).
+For further information, please visit [Astronomy API Documentation](https://ipgeolocation.io/documentation/astronomy-api.html).
 
 #### `astronomy` Usage
 ```bash
@@ -1867,7 +1870,7 @@ The `astronomy-timeseries` command uses the ipgeolocation.io Astronomy API to fe
 - Day length
 - Timezone-based or coordinate-based location support
 
-For further information, please visit [Astronomy Timeseries API Documentation](https://ipgeolocation.io/astronomy-api.html#time-series-lookup).
+For further information, please visit [Astronomy Timeseries API Documentation](https://ipgeolocation.io/documentation/astronomy-api.html#time-series-lookup).
 
 #### `astronomy-timeseries` Usage
 ```bash
@@ -2023,7 +2026,7 @@ ipgeolocation parse-user-agent [flags]
 | `--user-agent` | string | `""`     | User agent string.                               |
 | `--output`     | string | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`. |
 
-For further information, please visit [User Agent Parser API Documentation](https://ipgeolocation.io/user-agent-api.html#documentation-overview).
+For further information, please visit [User Agent Parser API Documentation](https://ipgeolocation.io/documentation/user-agent-api.html).
 
 #### Parse a user agent string
 ```bash
@@ -2080,7 +2083,7 @@ ipgeolocation parse-bulk-user-agents [flags]
 | `--user-agents` | string[] | `[]`     | User agent strings.                              |
 | `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`. |
 
-For further information, please visit [Bulk User Agent Parser API Documentation](https://ipgeolocation.io/user-agent-api.html#parse-bulk-ua-strings).
+For further information, please visit [Bulk User Agent Parser API Documentation](https://ipgeolocation.io/documentation/user-agent-api.html#parse-bulk-user-agent-strings).
 
 > [!NOTE] 
 > - The `user-agents` flag is required.
