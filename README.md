@@ -440,7 +440,7 @@ Sample output:
 ```
 
 #### Paid Plan Examples
-##### Get Default Fields in standard plan
+##### Get Default Fields in Paid Plan
 Lookup domain name with default fields
 ```bash
 ipgeolocation ipgeo --ip google.com
