@@ -17,7 +17,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:     "ipgeolocation",
 	Short:   "CLI for accessing IPGeolocation.io API endpoints",
-	Version: "1.0.3",
+	Version: "2.0.0",
 	Long: `ipgeolocation is a command-line interface (CLI) tool for accessing all major endpoints of the IPGeolocation.io API. 
 It allows you to retrieve IP geolocation data, timezone information, currency details, user-agent parsing, and more, directly from your terminal.
 

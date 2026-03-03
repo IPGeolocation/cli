@@ -59,7 +59,7 @@ Notes:
 			return
 		}
 
-		baseURL := "https://api.ipgeolocation.io/v2/timezone/convert"
+		baseURL := "https://api.ipgeolocation.io/v3/timezone/convert"
 		url := baseURL + "?apiKey=" + cfg.ApiKey
 
 		if timeConversionFlags.TimezoneFrom != "" {

@@ -55,7 +55,7 @@ Note:
 			return
 		}
 
-		baseURL := "https://api.ipgeolocation.io/v2/user-agent-bulk"
+		baseURL := "https://api.ipgeolocation.io/v3/user-agent-bulk"
 		url := baseURL + "?apiKey=" + cfg.ApiKey
 
 		payload := map[string]interface{}{

@@ -54,7 +54,7 @@ API Reference: https://ipgeolocation.io/astronomy-api.html
 			return
 		}
 
-		baseURL := "https://api.ipgeolocation.io/v2/astronomy"
+		baseURL := "https://api.ipgeolocation.io/v3/astronomy"
 		url := baseURL + "?apiKey=" + cfg.ApiKey
 		if astronomyFlags.IP != "" {
 			url += "&ip=" + astronomyFlags.IP

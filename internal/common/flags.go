@@ -72,19 +72,15 @@ type TimeConversionFlags struct {
 
 type IPSecurityFlags struct {
 	IP       string
-	Include  []string
 	Excludes []string
 	Fields   []string
-	Language string
 	Output   string
 }
 
 type BulkIPSecurityFlags struct {
 	IPs        []string
-	Include    []string
 	Excludes   []string
 	Fields     []string
-	Language   string
 	Output     string
 	OutputFile string
 	File       string

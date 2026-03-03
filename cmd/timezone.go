@@ -61,7 +61,7 @@ Note:
 			return
 		}
 
-		baseURL := "https://api.ipgeolocation.io/v2/timezone"
+		baseURL := "https://api.ipgeolocation.io/v3/timezone"
 		url := baseURL + "?apiKey=" + cfg.ApiKey
 		if timezoneFlags.IP != "" {
 			url += "&ip=" + timezoneFlags.IP

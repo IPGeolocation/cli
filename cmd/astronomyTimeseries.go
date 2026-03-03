@@ -43,7 +43,7 @@ Examples:
 			return
 		}
 
-		baseURL := "https://api.ipgeolocation.io/v2/astronomy/timeSeries"
+		baseURL := "https://api.ipgeolocation.io/v3/astronomy/timeSeries"
 		url := baseURL + "?apiKey=" + cfg.ApiKey
 
 		if astronomyTimeseriesFlags.DateStart == "" || astronomyTimeseriesFlags.DateEnd == "" {

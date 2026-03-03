@@ -71,7 +71,7 @@ Examples:
 			return
 		}
 
-		baseURL := "https://api.ipgeolocation.io/v2/ipgeo-bulk"
+		baseURL := "https://api.ipgeolocation.io/v3/ipgeo-bulk"
 		url := baseURL + "?apiKey=" + cfg.ApiKey
 
 		if len(bulkIpgeoFlags.Include) > 0 {

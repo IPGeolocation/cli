@@ -38,7 +38,7 @@ Getting peering relationships for an ASN number: ipgeolocation asn --asn 12345 -
 			return
 		}
 
-		baseURL := "https://api.ipgeolocation.io/v2/asn"
+		baseURL := "https://api.ipgeolocation.io/v3/asn"
 		url := baseURL + "?apiKey=" + cfg.ApiKey
 		if asnFlags.IP != "" {
 			url += "&ip=" + asnFlags.IP

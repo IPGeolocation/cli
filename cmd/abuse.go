@@ -36,7 +36,7 @@ Example:
 			return
 		}
 
-		baseURL := "https://api.ipgeolocation.io/v2/abuse"
+		baseURL := "https://api.ipgeolocation.io/v3/abuse"
 		url := baseURL + "?apiKey=" + cfg.ApiKey
 		if abuseFlags.IP != "" {
 			url += "&ip=" + abuseFlags.IP

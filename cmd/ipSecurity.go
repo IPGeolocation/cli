@@ -34,8 +34,6 @@ Examples:
   # Get security info of a public IP
   ipgeolocation ip-security --ip 8.8.8.8
 
-  # Get security info of a public IP with additional fields
-  ipgeolocation ip-security --ip 8.8.8.8 --include=location,time_zone
 
 Notes: 
   - You must have a valid API key configured using: ipgeolocation config --apikey=<your_key>
@@ -48,14 +46,10 @@ Notes:
 			return
 		}
 
-		baseURL := "https://api.ipgeolocation.io/v2/security"
+		baseURL := "https://api.ipgeolocation.io/v3/security"
 		url := baseURL + "?apiKey=" + cfg.ApiKey
 		if securityFlags.IP != "" {
 			url += "&ip=" + securityFlags.IP
-		}
-
-		if len(securityFlags.Include) > 0 {
-			url += "&include=" + strings.Join(securityFlags.Include, ",")
 		}
 
 		if len(securityFlags.Excludes) > 0 {
@@ -64,10 +58,6 @@ Notes:
 
 		if len(securityFlags.Fields) > 0 {
 			url += "&fields=" + strings.Join(securityFlags.Fields, ",")
-		}
-
-		if securityFlags.Language != "" {
-			url += "&lang=" + securityFlags.Language
 		}
 
 		resp, err := http.Get(url)
@@ -111,10 +101,8 @@ Notes:
 
 func init() {
 	ipSecurityCmd.Flags().StringVar(&securityFlags.IP, "ip", "", "IPv4 or IPv6 address (e.g. 8.8.8.8)")
-	ipSecurityCmd.Flags().StringSliceVar(&securityFlags.Include, "include", []string{}, "To include additional values in the output")
 	ipSecurityCmd.Flags().StringSliceVar(&securityFlags.Excludes, "exclude", []string{}, "Fields to exclude from the output")
 	ipSecurityCmd.Flags().StringSliceVar(&securityFlags.Fields, "fields", []string{}, "Get Specific Fields to include in the output")
-	ipSecurityCmd.Flags().StringVar(&securityFlags.Language, "lang", "", "Language for the output")
 	ipSecurityCmd.Flags().StringVar(&securityFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml")
 
 	rootCmd.AddCommand(ipSecurityCmd)

@@ -28,8 +28,7 @@ Example Use Cases:
 
 Retrieving security information for a list of IP addresses: ipgeolocation bulk-ip-security --ips "8.8.8.8,8.8.4.4"
 
-Retrieving security information for a list of IP addresses with including additional fields: ipgeolocation bulk-ip-security --ips "8.8.8.8,8.8.4.4" --include=location,time_zone
-`,
+Retrieving security information for IP addresses from a file: ipgeolocation bulk-ip-security --file ips.txt`,
 	Run: func(cmd *cobra.Command, args []string) {
 		cfg, err := config.Load()
 		if err != nil || cfg.ApiKey == "" {
@@ -64,12 +63,8 @@ Retrieving security information for a list of IP addresses with including additi
 			return
 		}
 
-		baseURL := "https://api.ipgeolocation.io/v2/security-bulk"
+		baseURL := "https://api.ipgeolocation.io/v3/security-bulk"
 		url := baseURL + "?apiKey=" + cfg.ApiKey
-
-		if len(bulkSecurityFlags.Include) > 0 {
-			url += "&include=" + strings.Join(bulkSecurityFlags.Include, ",")
-		}
 
 		if len(bulkSecurityFlags.Excludes) > 0 {
 			url += "&excludes=" + strings.Join(bulkSecurityFlags.Excludes, ",")
@@ -79,9 +74,6 @@ Retrieving security information for a list of IP addresses with including additi
 			url += "&fields=" + strings.Join(bulkSecurityFlags.Fields, ",")
 		}
 
-		if bulkSecurityFlags.Language != "" {
-			url += "&lang=" + bulkSecurityFlags.Language
-		}
 		payload := map[string]interface{}{
 			"ips": bulkSecurityFlags.IPs,
 		}
@@ -128,10 +120,8 @@ Retrieving security information for a list of IP addresses with including additi
 
 func init() {
 	bulkIpSecurityCmd.Flags().StringSliceVar(&bulkSecurityFlags.IPs, "ips", []string{}, "IPs")
-	bulkIpSecurityCmd.Flags().StringSliceVar(&bulkSecurityFlags.Include, "include", []string{}, "To include additional values in the output")
 	bulkIpSecurityCmd.Flags().StringSliceVar(&bulkSecurityFlags.Excludes, "exclude", []string{}, "Fields to exclude from the output")
 	bulkIpSecurityCmd.Flags().StringSliceVar(&bulkSecurityFlags.Fields, "fields", []string{}, "Get Specific Fields to include in the output")
-	bulkIpSecurityCmd.Flags().StringVar(&bulkSecurityFlags.Language, "lang", "", "Language for the output")
 	bulkIpSecurityCmd.Flags().StringVar(&bulkSecurityFlags.Output, "output", "pretty", "Output format: pretty, raw, table")
 	bulkIpSecurityCmd.Flags().StringVar(&bulkSecurityFlags.File, "file", "", "Path to a text file containing IPs (one per line)")
 	bulkIpSecurityCmd.Flags().StringVar(&bulkSecurityFlags.OutputFile, "output-file", "", "Save output to a file (JSON only)")

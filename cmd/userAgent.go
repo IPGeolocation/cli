@@ -40,7 +40,7 @@ Examples:
 			fmt.Println("Please provide a user agent string using --user-agent")
 			return
 		}
-		baseURL := "https://api.ipgeolocation.io/v2/user-agent"
+		baseURL := "https://api.ipgeolocation.io/v3/user-agent"
 		url := baseURL + "?apiKey=" + cfg.ApiKey
 
 		payload := map[string]interface{}{

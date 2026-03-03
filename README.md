@@ -6,7 +6,7 @@ The official `ipgeolocation` **Command Line Interface (CLI)** provides a fast, l
 
 Using a single executable, you can query **IP location, security intelligence, ASN details, timezone, astronomy, abuse contact information, and user agent parsing** for your own IP or for any IPv4, IPv6 address, or domain name. The CLI outputs structured, machine-readable data that integrates seamlessly into shell scripts, cron jobs, CI/CD pipelines, monitoring systems, and log-processing workflows.
 
-- [IP Location API](https://ipgeolocation.io/ip-location-api.html): Get all-in-one unified solution for **location** (city, locality, state, country, etc.), **currency**, **network** (AS number, ASN name, organization, asn type, date of allocation, company/ISP name, company type, company domain), **timezone** , **useragent** string parsing, **security** (threat score, is_tor, is_bot, proxy_provider, cloud_provider), and **abuse contact** (route/CIDR network, country, address, email, phone numbers) information.
+- [IP Location API](https://ipgeolocation.io/ip-location-api.html): Get all-in-one unified solution for **location** (city, locality, state, country, accuracy-radius, confidence etc.), **currency**, **ASN** (AS number, ASN name, organization, asn type, date of allocation, routes, upstreams, downstreams, peers), **company** (company/ISP name, company type, company domain), **timezone** , **user agent** string parsing, **security** (threat score, is_tor, is_bot, proxy_provider, cloud_provider, relay_provider, vpn_provider, proxy, relay, vpn), and **abuse contact** (route/CIDR network, country, address, email, phone numbers) information.
 - [IP Security API](https://ipgeolocation.io/ip-security-api.html): Get security, network, location, hostname, timezone and useragent parsing.
 - [ASN API](https://ipgeolocation.io/asn-api.html): Get ASN details along with peers, upstreams, downstreams, routes, and raw WHOIS.
 - [Abuse Contact API](https://ipgeolocation.io/ip-abuse-contact-api.html): Get abuse emails, phone numbers, kind, organization, route/CIDR network and country.
@@ -18,7 +18,7 @@ Using a single executable, you can query **IP location, security intelligence, A
 The `ipgeolocation` CLI is built for speed and automation, making it easy to integrate IP intelligence into shell scripts, bash pipelines, cron jobs, and CI/CD workflows. It enriches server logs, firewall events, and SIEM data, supports on the fly lookups during incident response, and enables automated fraud detection, geo based routing, and access control without language specific dependencies. Designed for system administrators, DevOps engineers, and developers, the CLI delivers consistent and reliable insights directly from the terminal.
 
 Based on:
-- API version: 2.0.0
+- API version: 3.0.0
 
 **Official Release:**
 - Available on [**pkg.go.dev**](https://pkg.go.dev/github.com/IPGeolocation/cli) and [**GitHub Releases**](https://github.com/IPGeolocation/cli/releases)
@@ -45,8 +45,7 @@ Based on:
       - [`ipgeo` Usage](#ipgeo-usage)
       - [Flags for `ipgeo`](#flags-for-ipgeo)
       - [Developer Plan Examples](#developer-plan-examples)
-      - [Standard Plan Examples](#standard-plan-examples)
-      - [Advanced Plan Examples](#advanced-plan-examples)
+      - [Paid Plan Examples](#paid-plan-examples)
     - [`bulk-ip-geo` Command](#bulk-ip-geo-command)
       - [`bulk-ip-geo` Usage](#bulk-ip-geo-usage)
       - [Flags for `bulk-ip-geo`](#flags-for-bulk-ip-geo)
@@ -141,7 +140,7 @@ Here you will need to add `$GOBIN` or `$GOPATH/bin` is in your `PATH` as well.
 ### Using Download Prebuilt Binaries
 
 #### Overview
-These are prebuilt binaries for the IPGeolocation CLI tool, version **1.0.3**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
+These are prebuilt binaries for the IPGeolocation CLI tool, version **2.0.0**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
 
 The CLI provides geolocation information, timezone, user-agent parsing, bulk IP lookups, and more.
 
@@ -149,11 +148,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 
 | Platform | Architecture | File Name / Downoad Link                                                                                                                             |
 |----------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Linux    | amd64        | [**ipgeolocation-1.0.3-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v1.0.3/ipgeolocation-1.0.3-linux-amd64.tar.gz)   |
-| Linux    | arm64        | [**ipgeolocation-1.0.3-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v1.0.3/ipgeolocation-1.0.3-linux-arm64.tar.gz)   |
-| macOS    | amd64        | [**ipgeolocation-1.0.3-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v1.0.3/ipgeolocation-1.0.3-darwin-amd64.tar.gz) |
-| macOS    | arm64        | [**ipgeolocation-1.0.3-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v1.0.3/ipgeolocation-1.0.3-darwin-arm64.tar.gz) |
-| Windows  | amd64        | [**ipgeolocation-1.0.3-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v1.0.3/ipgeolocation-1.0.3-windows-amd64.zip)     |
+| Linux    | amd64        | [**ipgeolocation-2.0.0-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.0-linux-amd64.tar.gz)   |
+| Linux    | arm64        | [**ipgeolocation-2.0.0-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.0-linux-arm64.tar.gz)   |
+| macOS    | amd64        | [**ipgeolocation-2.0.0-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.0-darwin-amd64.tar.gz) |
+| macOS    | arm64        | [**ipgeolocation-2.0.0-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.0-darwin-arm64.tar.gz) |
+| Windows  | amd64        | [**ipgeolocation-2.0.0-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.0-windows-amd64.zip)     |
 
 #### Installation Instructions
 
@@ -161,11 +160,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 1. Download the `.tar.gz` file for your architecture.
 2. Extract it to a folder in your PATH, e.g., `/usr/local/bin`:
    ```bash
-   tar -xzf ipgeolocation-1.0.3-linux-amd64.tar.gz -C /usr/local/bin
+   tar -xzf ipgeolocation-2.0.0-linux-amd64.tar.gz -C /usr/local/bin
    ```
 3. Rename the binary for simplicity:
    ```bash
-   mv /usr/local/bin/ipgeolocation-1.0.3-linux-amd64 /usr/local/bin/ipgeolocation
+   mv /usr/local/bin/ipgeolocation-2.0.0-linux-amd64 /usr/local/bin/ipgeolocation
    ```
 4. Make the binary executable:
    ```bash
@@ -180,11 +179,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 1. Download the `.tar.gz` file for your architecture (amd64 or arm64).
 2. Extract to a folder in your PATH, e.g., `/usr/local/bin`:
    ```bash
-   tar -xzf ipgeolocation-1.0.3-darwin-amd64.tar.gz -C /usr/local/bin
+   tar -xzf ipgeolocation-2.0.0-darwin-amd64.tar.gz -C /usr/local/bin
    ```
 3. Rename the binary:
    ```bash
-   mv /usr/local/bin/ipgeolocation-1.0.3-darwin-amd64 /usr/local/bin/ipgeolocation
+   mv /usr/local/bin/ipgeolocation-2.0.0-darwin-amd64 /usr/local/bin/ipgeolocation
    ```
 4. Make executable:
    ```bash
@@ -197,7 +196,7 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 
 **Windows:**
 1. Download the `.zip` file.
-2. Extract the `ipgeolocation-1.0.3-windows-amd64.exe` to a folder included in your system `PATH`.
+2. Extract the `ipgeolocation-2.0.0-windows-amd64.exe` to a folder included in your system `PATH`.
 3. Rename the binary to `ipgeolocation.exe` for convenience.
 4. Open Command Prompt and verify:
    ```cmd
@@ -207,7 +206,7 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 > [!NOTE]
 > - Ensure execution permissions on Linux/macOS.
 > - Recommended folder for binaries: `/usr/local/bin` or any folder in your PATH.
-> - Prebuilt binaries include version **1.0.3** in their filename. Rename them after extraction for easier usage.
+> - Prebuilt binaries include version **2.0.0** in their filename. Rename them after extraction for easier usage.
 > - For updates, check GitHub Releases.
 
 ### Troubleshooting
@@ -231,23 +230,23 @@ The documentation below corresponds to the available APIs:
 For a detailed comparison of what each plan offers, visit the [Pricing Page](https://ipgeolocation.io/pricing.html).
 
 ## Fields and commands Availability
-IP Geolocation offers four plans from billing point of view: **Free, Standard, Security, Advance**. The availability of each command, over all plans are presented below.
+IP Geolocation offers two plans from billing point of view: **Developer(Free), Paid**. The availability of each command, over plans are presented below.
 
-| Sub Command              | Details                                                                                                                      | Free | Standard | Security | Advance |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------|:----:|:--------:|:--------:|:-------:|
-| `config`                 | Set up and check API Key.                                                                                                    |  ✔   |    ✔     |    ✔     |    ✔    |
-| `ipgeo`                  | Get geolocation data for a single IP address, along with network, currency, abuse, timezone, security, asn, useragent, etc.  |  ✔   |    ✔     |    ✖     |    ✔    |
-| `bulk-ip-geo`            | Get geolocation data for multiple IP addresses in a single API request, along with same data as in `ipgeo`.                  |  ✖   |    ✔     |    ✖     |    ✔    |
-| `ip-security`            | Get security information (VPN, TOR, proxy, etc.) for a single IP, along with network, timezone, location, and currency, etc. |  ✖   |    ✖     |    ✔     |    ✖    |
-| `bulk-ip-security`       | Get security threat intelligence for multiple IP addresses, along with same data as in `ip-security`.                        |  ✖   |    ✖     |    ✔     |    ✖    |
-| `asn`                    | Get details of any AS number or IP address associated ASN.                                                                   |  ✖   |    ✖     |    ✖     |    ✔    |
-| `abuse`                  | Get abuse reporting contact information for a given IP address.                                                              |  ✖   |    ✖     |    ✖     |    ✔    |
-| `astronomy`              | Get sunrise, sunset, moonrise, moonset, and related data for a location.                                                     |  ✔   |    ✔     |    ✔     |    ✔    |
-| `astronomy-timeseries`   | Get astronomy information for given date range at once.                                                                      |  ✔   |    ✔     |    ✔     |    ✔    |
-| `timezone`               | Get timezone details using IP address, city, coordinates, IATA, ICAO, UNLOCODE, or timezone ID.                              |  ✔   |    ✔     |    ✔     |    ✔    |
-| `time-conversion`        | Convert time between two specified timezones using city, coordinates, IATA, ICAO, UNLOCODE, or timezone ID.                  |  ✔   |    ✔     |    ✔     |    ✔    |
-| `parse-user-agent`       | Parse single User Agent string.                                                                                              |  ✔   |    ✔     |    ✔     |    ✔    |
-| `parse-bulk-user-agents` | Parse multiple User Agent String at once.                                                                                    |  ✖   |    ✔     |    ✔     |    ✔    |
+| Sub Command              | Details                                                                                                                      | Developer (Free) | Paid |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------|:----:|:--------:|
+| `config`                 | Set up and check API Key.                                                                                                    |  ✔   |    ✔     |
+| `ipgeo`                  | Get geolocation data for a single IP address, along with network, currency, abuse, timezone, security, asn, useragent, etc.  |  ✔   |    ✔     |
+| `bulk-ip-geo`            | Get geolocation data for multiple IP addresses in a single API request, along with same data as in `ipgeo`.                  |  ✖   |    ✔     |
+| `ip-security`            | Get security information (VPN, TOR, proxy, etc.) for a single IP, along with network, timezone, location, and currency, etc. |  ✖   |    ✖     |
+| `bulk-ip-security`       | Get security threat intelligence for multiple IP addresses, along with same data as in `ip-security`.                        |  ✖   |    ✖     |
+| `asn`                    | Get details of any AS number or IP address associated ASN.                                                                   |  ✖   |    ✖     |
+| `abuse`                  | Get abuse reporting contact information for a given IP address.                                                              |  ✖   |    ✖     |
+| `astronomy`              | Get sunrise, sunset, moonrise, moonset, and related data for a location.                                                     |  ✔   |    ✔     |
+| `astronomy-timeseries`   | Get astronomy information for given date range at once.                                                                      |  ✔   |    ✔     |
+| `timezone`               | Get timezone details using IP address, city, coordinates, IATA, ICAO, UNLOCODE, or timezone ID.                              |  ✔   |    ✔     |
+| `time-conversion`        | Convert time between two specified timezones using city, coordinates, IATA, ICAO, UNLOCODE, or timezone ID.                  |  ✔   |    ✔     |
+| `parse-user-agent`       | Parse single User Agent string.                                                                                              |  ✖   |    ✔     |
+| `parse-bulk-user-agents` | Parse multiple User Agent String at once.                                                                                    |  ✖   |    ✔     |
 
 > [!TIP]
 > The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for IPGeolocationApi, please visit [https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response).
@@ -312,8 +311,8 @@ ipgeolocation ipgeo [flags]
 | Flag         | Type     | Default  | Description                                                                     |
 |--------------|----------|----------|---------------------------------------------------------------------------------|
 | `--ip`       | string   | `""`     | IPv4, IPv6, or domain name (e.g. `8.8.8.8`, `google.com`).                      |
-| `--include`  | string[] | `[]`     | Include extra fields (e.g. `hostname,dma,security,abuse,time_zone,user_agent`). |
-| `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `location,network.asn.organization`).         |
+| `--include`  | string[] | `[]`     | Include extra fields (e.g. `hostname,geo_accuracy,dma_code,security,abuse,user_agent`). |
+| `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `location,asn.organization`).         |
 | `--excludes` | string[] | `[]`     | Exclude fields from output.                                                     |
 | `--lang`     | string   | `""`     | Response language.                                                              |
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.                                |
@@ -335,6 +334,12 @@ ipgeolocation ipgeo --ip 8.8.8.8
 Sample output:
 ```json
 {
+  "ip": "8.8.8.8",
+  "asn": {
+    "as_number": "AS15169",
+    "country": "US",
+    "organization": "Google LLC"
+  },
   "country_metadata": {
     "calling_code": "+1",
     "languages": [
@@ -350,7 +355,6 @@ Sample output:
     "name": "US Dollar",
     "symbol": "$"
   },
-  "ip": "8.8.8.8",
   "location": {
     "city": "Mountain View",
     "continent_code": "NA",
@@ -370,6 +374,38 @@ Sample output:
     "state_code": "US-CA",
     "state_prov": "California",
     "zipcode": "94043-1351"
+  },
+  "time_zone": {
+    "current_time": "2026-03-03 03:01:15.329-0800",
+    "current_time_unix": 1772535675.329,
+    "current_tz_abbreviation": "PST",
+    "current_tz_full_name": "Pacific Standard Time",
+    "dst_end": {
+      "date_time_after": "2026-11-01 TIME 01:00",
+      "date_time_before": "2026-11-01 TIME 02:00",
+      "duration": "-1.00H",
+      "gap": false,
+      "overlap": true,
+      "utc_time": "2026-11-01 TIME 09:00"
+    },
+    "dst_exists": true,
+    "dst_savings": 0,
+    "dst_start": {
+      "date_time_after": "2026-03-08 TIME 03:00",
+      "date_time_before": "2026-03-08 TIME 02:00",
+      "duration": "+1.00H",
+      "gap": true,
+      "overlap": false,
+      "utc_time": "2026-03-08 TIME 10:00"
+    },
+    "dst_tz_abbreviation": "PDT",
+    "dst_tz_full_name": "Pacific Daylight Time",
+    "is_dst": false,
+    "name": "America/Los_Angeles",
+    "offset": -8,
+    "offset_with_dst": -8,
+    "standard_tz_abbreviation": "PST",
+    "standard_tz_full_name": "Pacific Standard Time"
   }
 }
 ```
@@ -403,7 +439,7 @@ Sample output:
 }
 ```
 
-#### Standard Plan Examples
+#### Paid Plan Examples
 ##### Get Default Fields in standard plan
 Lookup domain name with default fields
 ```bash
@@ -412,49 +448,80 @@ ipgeolocation ipgeo --ip google.com
 Sample output:
 ```json
 {
+  "asn": {
+    "as_number": "AS15169",
+    "country": "US",
+    "date_allocated": "2000-03-30",
+    "domain": "google.com",
+    "organization": "Google LLC",
+    "rir": "ARIN",
+    "type": "BUSINESS"
+  },
+  "company": {
+    "domain": "google.com",
+    "name": "Google LLC",
+    "type": "HOSTING"
+  },
   "country_metadata": {
-    "calling_code": "+49",
+    "calling_code": "+65",
     "languages": [
-      "de"
+      "cmn",
+      "en-SG",
+      "ms-SG",
+      "ta-SG",
+      "zh-SG"
     ],
-    "tld": ".de"
+    "tld": ".sg"
   },
   "currency": {
-    "code": "EUR",
-    "name": "Euro",
-    "symbol": "€"
+    "code": "SGD",
+    "name": "Singapore Dollar",
+    "symbol": "S$"
   },
   "domain": "google.com",
-  "ip": "142.250.185.174",
+  "ip": "142.250.4.100",
   "location": {
-    "city": "Frankfurt",
-    "continent_code": "EU",
-    "continent_name": "Europe",
-    "country_capital": "Berlin",
-    "country_code2": "DE",
-    "country_code3": "DEU",
-    "country_emoji": "🇩🇪",
-    "country_flag": "https://ipgeolocation.io/static/flags/de_64.png",
-    "country_name": "Germany",
-    "country_name_official": "Federal Republic of Germany",
-    "district": "Frankfurt",
-    "geoname_id": "6463469",
-    "is_eu": true,
-    "latitude": "50.11208",
-    "longitude": "8.68341",
-    "state_code": "DE-HE",
-    "state_prov": "Hesse",
-    "zipcode": "60311"
+    "city": "Singapore",
+    "continent_code": "AS",
+    "continent_name": "Asia",
+    "country_capital": "Singapore",
+    "country_code2": "SG",
+    "country_code3": "SGP",
+    "country_emoji": "🇸🇬",
+    "country_flag": "https://ipgeolocation.io/static/flags/sg_64.png",
+    "country_name": "Singapore",
+    "country_name_official": "Republic of Singapore",
+    "district": "Singapore",
+    "geoname_id": "6951474",
+    "is_eu": false,
+    "latitude": "1.29041",
+    "longitude": "103.85211",
+    "state_code": "SG-01",
+    "state_prov": "Central Singapore Community Development Council",
+    "zipcode": "17"
   },
   "network": {
-    "asn": {
-      "as_number": "AS15169",
-      "country": "US",
-      "organization": "Google LLC"
-    },
-    "company": {
-      "name": "Google LLC"
-    }
+    "connection_type": "",
+    "is_anycast": false,
+    "route": "142.250.4.0/24"
+  },
+  "time_zone": {
+    "current_time": "2026-03-03 19:03:29.994+0800",
+    "current_time_unix": 1772535809.994,
+    "current_tz_abbreviation": "SGT",
+    "current_tz_full_name": "Singapore Standard Time",
+    "dst_end": {},
+    "dst_exists": false,
+    "dst_savings": 0,
+    "dst_start": {},
+    "dst_tz_abbreviation": "",
+    "dst_tz_full_name": "",
+    "is_dst": false,
+    "name": "Asia/Singapore",
+    "offset": 8,
+    "offset_with_dst": 8,
+    "standard_tz_abbreviation": "SGT",
+    "standard_tz_full_name": "Singapore Standard Time"
   }
 }
 ```
@@ -467,6 +534,20 @@ ipgeolocation ipgeo --ip 2001:4230:4890::1 --lang fr
 Sample output:
 ```json
 {
+  "asn": {
+    "as_number": "AS0",
+    "country": "",
+    "date_allocated": "",
+    "domain": "",
+    "organization": "",
+    "rir": "",
+    "type": ""
+  },
+  "company": {
+    "domain": "afrinic.net",
+    "name": "African Network Information Center AfriNIC Ltd",
+    "type": "BUSINESS"
+  },
   "country_metadata": {
     "calling_code": "+230",
     "languages": [
@@ -503,25 +584,52 @@ Sample output:
     "zipcode": "72201"
   },
   "network": {
-    "asn": {
-      "as_number": "AS52095",
-      "country": "CZ",
-      "organization": "Netassist International s.r.o."
-    },
-    "company": {
-      "name": "African Network Information Center AfriNIC Ltd"
-    }
+    "connection_type": "",
+    "is_anycast": false,
+    "route": ""
+  },
+  "time_zone": {
+    "current_time": "2026-03-03 15:04:29.479+0400",
+    "current_time_unix": 1772535869.479,
+    "current_tz_abbreviation": "MUT",
+    "current_tz_full_name": "Mauritius Standard Time",
+    "dst_end": {},
+    "dst_exists": false,
+    "dst_savings": 0,
+    "dst_start": {},
+    "dst_tz_abbreviation": "",
+    "dst_tz_full_name": "",
+    "is_dst": false,
+    "name": "Indian/Mauritius",
+    "offset": 4,
+    "offset_with_dst": 4,
+    "standard_tz_abbreviation": "MUT",
+    "standard_tz_full_name": "Mauritius Standard Time"
   }
 }
 ```
 
-##### Include HostName, Timezone and User-Agent
+##### Include HostName and User-Agent
 ```bash
-ipgeolocation ipgeo --ip 219.100.37.207 --include hostname,time_zone
+ipgeolocation ipgeo --ip 219.100.37.207 --include hostname,user_agent
 ```
 Sample output:
 ```json
 {
+  "asn": {
+    "as_number": "AS36599",
+    "country": "US",
+    "date_allocated": "2017-01-25",
+    "domain": "rt.open.ad.jp",
+    "organization": "SoftEther Telecommunication Research Institute, LLC",
+    "rir": "ARIN",
+    "type": "ISP"
+  },
+  "company": {
+    "domain": "softether.co.jp",
+    "name": "SoftEther Corporation",
+    "type": "BUSINESS"
+  },
   "country_metadata": {
     "calling_code": "+81",
     "languages": [
@@ -557,18 +665,13 @@ Sample output:
     "zipcode": "135-0022"
   },
   "network": {
-    "asn": {
-      "as_number": "AS36599",
-      "country": "US",
-      "organization": "SoftEther Telecommunication Research Institute, LLC"
-    },
-    "company": {
-      "name": "SoftEther Corporation"
-    }
+    "connection_type": "",
+    "is_anycast": false,
+    "route": "219.100.37.0/24"
   },
   "time_zone": {
-    "current_time": "2026-01-13 17:30:42.949+0900",
-    "current_time_unix": 1768293042.949,
+    "current_time": "2026-03-03 20:05:37.058+0900",
+    "current_time_unix": 1772535937.058,
     "current_tz_abbreviation": "JST",
     "current_tz_full_name": "Japan Standard Time",
     "dst_end": {},
@@ -583,6 +686,32 @@ Sample output:
     "offset_with_dst": 9,
     "standard_tz_abbreviation": "JST",
     "standard_tz_full_name": "Japan Standard Time"
+  },
+  "user_agent": {
+    "device": {
+      "brand": "GO",
+      "cpu": "Unknown",
+      "name": "GO Http Client",
+      "type": "Robot"
+    },
+    "engine": {
+      "name": "Go-http-client",
+      "type": "Robot",
+      "version": "2.0",
+      "version_major": "2"
+    },
+    "name": "Go-http-client",
+    "operating_system": {
+      "build": "??",
+      "name": "Cloud",
+      "type": "Cloud",
+      "version": "??",
+      "version_major": "??"
+    },
+    "type": "Robot",
+    "user_agent_string": "Go-http-client/2.0",
+    "version": "2.0",
+    "version_major": "2"
   }
 }
 ```
@@ -594,139 +723,173 @@ Sample output:
 > - `liveHostname`: Queries live sources for accurate hostname resolution. This may increase response time.
 > - `hostnameFallbackLive`: Attempts the internal database first, and falls back to live sources if no result is found. This option provides a balance of speed and reliability.
 
-#### Advanced Plan Examples
 ##### Include DMA, Abuse and Security
 ```bash
-ipgeolocation ipgeo --ip 8.8.8.8 --include dma,abuse,security
+ipgeolocation ipgeo --ip 8.8.8.8 --include dma_code,abuse,security
 ```
 
 Sample output:
 ```json
 {
-  "ip": "8.8.8.8",
-  "location": {
-    "continent_code": "NA",
-    "continent_name": "North America",
-    "country_code2": "US",
-    "country_code3": "USA",
-    "country_name": "United States",
-    "country_name_official": "United States of America",
-    "country_capital": "Washington, D.C.",
-    "state_prov": "California",
-    "state_code": "US-CA",
-    "district": "Santa Clara",
-    "city": "Mountain View",
-    "zipcode": "94043-1351",
-    "latitude": "37.42240",
-    "longitude": "-122.08421",
-    "is_eu": false,
-    "geoname_id": "6301403",
-    "accuracy_radius": "25.388",
-    "locality": "Mountain View",
-    "country_emoji": "🇺🇸",
-    "country_flag": "https://ipgeolocation.io/static/flags/us_64.png",
-    "dma_code": "807"
+  "abuse": {
+    "address": "1600 Amphitheatre Parkway\nMountain View\nCA\n94043\nUnited States",
+    "country": "",
+    "emails": [
+      "network-abuse@google.com"
+    ],
+    "kind": "group",
+    "name": "Abuse",
+    "organization": "Abuse",
+    "phone_numbers": [
+      "+1-650-253-0000"
+    ],
+    "route": "8.8.8.0/24"
+  },
+  "asn": {
+    "as_number": "AS15169",
+    "country": "US",
+    "date_allocated": "2000-03-30",
+    "domain": "google.com",
+    "organization": "Google LLC",
+    "rir": "ARIN",
+    "type": "BUSINESS"
+  },
+  "company": {
+    "domain": "google.com",
+    "name": "Google LLC",
+    "type": "HOSTING"
   },
   "country_metadata": {
     "calling_code": "+1",
-    "tld": ".us",
     "languages": [
       "en-US",
       "es-US",
       "haw",
       "fr"
-    ]
-  },
-  "network": {
-    "asn": {
-      "as_number": "AS15169",
-      "organization": "Google LLC",
-      "country": "US",
-      "asn_name": "GOOGLE",
-      "type": "BUSINESS",
-      "domain": "google.com",
-      "date_allocated": "",
-      "allocation_status": "",
-      "num_of_ipv4_routes": "1026",
-      "num_of_ipv6_routes": "106",
-      "rir": "ARIN"
-    },
-    "connection_type": "",
-    "company": {
-      "name": "Google LLC",
-      "type": "business",
-      "domain": "google.com"
-    }
+    ],
+    "tld": ".us"
   },
   "currency": {
     "code": "USD",
     "name": "US Dollar",
     "symbol": "$"
   },
+  "ip": "8.8.8.8",
+  "location": {
+    "city": "Mountain View",
+    "continent_code": "NA",
+    "continent_name": "North America",
+    "country_capital": "Washington, D.C.",
+    "country_code2": "US",
+    "country_code3": "USA",
+    "country_emoji": "🇺🇸",
+    "country_flag": "https://ipgeolocation.io/static/flags/us_64.png",
+    "country_name": "United States",
+    "country_name_official": "United States of America",
+    "district": "Santa Clara",
+    "dma_code": "807",
+    "geoname_id": "6301403",
+    "is_eu": false,
+    "latitude": "37.42240",
+    "longitude": "-122.08421",
+    "state_code": "US-CA",
+    "state_prov": "California",
+    "zipcode": "94043-1351"
+  },
+  "network": {
+    "connection_type": "",
+    "is_anycast": true,
+    "route": "8.8.8.0/24"
+  },
   "security": {
-    "threat_score": 0,
-    "is_tor": false,
-    "is_proxy": false,
-    "proxy_type": "",
-    "proxy_provider": "",
+    "cloud_provider_name": "",
     "is_anonymous": false,
-    "is_known_attacker": false,
-    "is_spam": false,
     "is_bot": false,
     "is_cloud_provider": false,
-    "cloud_provider": ""
+    "is_known_attacker": false,
+    "is_proxy": false,
+    "is_relay": false,
+    "is_residential_proxy": false,
+    "is_spam": false,
+    "is_tor": false,
+    "is_vpn": false,
+    "proxy_confidence_score": 0,
+    "proxy_last_seen": "",
+    "proxy_provider_names": [],
+    "relay_provider_name": "",
+    "threat_score": 0,
+    "vpn_confidence_score": 0,
+    "vpn_last_seen": "",
+    "vpn_provider_names": []
   },
-  "abuse": {
-    "route": "8.8.8.0/24",
-    "country": "",
-    "handle": "ABUSE5250-ARIN",
-    "name": "Abuse",
-    "organization": "Abuse",
-    "role": "abuse",
-    "kind": "group",
-    "address": "1600 Amphitheatre Parkway\nMountain View\nCA\n94043\nUnited States",
-    "emails": [
-      "network-abuse@google.com"
-    ],
-    "phone_numbers": [
-      "+1-650-253-0000"
-    ]
+  "time_zone": {
+    "current_time": "2026-03-03 03:06:38.417-0800",
+    "current_time_unix": 1772535998.417,
+    "current_tz_abbreviation": "PST",
+    "current_tz_full_name": "Pacific Standard Time",
+    "dst_end": {
+      "date_time_after": "2026-11-01 TIME 01:00",
+      "date_time_before": "2026-11-01 TIME 02:00",
+      "duration": "-1.00H",
+      "gap": false,
+      "overlap": true,
+      "utc_time": "2026-11-01 TIME 09:00"
+    },
+    "dst_exists": true,
+    "dst_savings": 0,
+    "dst_start": {
+      "date_time_after": "2026-03-08 TIME 03:00",
+      "date_time_before": "2026-03-08 TIME 02:00",
+      "duration": "+1.00H",
+      "gap": true,
+      "overlap": false,
+      "utc_time": "2026-03-08 TIME 10:00"
+    },
+    "dst_tz_abbreviation": "PDT",
+    "dst_tz_full_name": "Pacific Daylight Time",
+    "is_dst": false,
+    "name": "America/Los_Angeles",
+    "offset": -8,
+    "offset_with_dst": -8,
+    "standard_tz_abbreviation": "PST",
+    "standard_tz_full_name": "Pacific Standard Time"
   }
 }
 ```
 
 > [!NOTE]
-> All features available in the Free plan are also included in the Standard and Advanced plans. Similarly, all features of the Standard plan are available in the Advanced plan.
+> All features available in the Free plan are also included in the Paid Plan.
 
-Get only specific fields in YAML:
+##### Get only specific fields in YAML:
 ```bash
-ipgeolocation ipgeo --ip 1.1.1.1 --fields location --output yaml
+ipgeolocation ipgeo --ip 1.1.1.1 --fields location --include dma_code,geo_accuracy --output yaml
 ```
 Sample response:
 ```yaml
 ip: 1.1.1.1
 location:
-    accuracy_radius: "8.778"
-    city: Hong Kong
-    confidence: high
-    continent_code: AS
-    continent_name: Asia
-    country_capital: Hong Kong
-    country_code2: HK
-    country_code3: HKG
-    country_emoji: "\U0001F1ED\U0001F1F0"
-    country_flag: https://ipgeolocation.io/static/flags/hk_64.png
-    country_name: Hong Kong
-    country_name_official: Hong Kong Special Administrative Region of the People's Republic of China
-    district: Wan Chai District
-    geoname_id: "10106797"
+    accuracy_radius: "27.276"
+    city: South Brisbane
+    confidence: low
+    continent_code: OC
+    continent_name: Oceania
+    country_capital: Canberra
+    country_code2: AU
+    country_code3: AUS
+    country_emoji: "\U0001F1E6\U0001F1FA"
+    country_flag: https://ipgeolocation.io/static/flags/au_64.png
+    country_name: Australia
+    country_name_official: Commonwealth of Australia
+    district: Brisbane
+    dma_code: ""
+    geoname_id: "10113228"
     is_eu: false
-    latitude: "22.27683"
-    locality: Hong Kong
-    longitude: "114.17612"
-    state_code: ""
-    state_prov: Hong Kong SAR
-    zipcode: ""
+    latitude: "-27.47306"
+    locality: South Brisbane
+    longitude: "153.01421"
+    state_code: AU-QLD
+    state_prov: Queensland
+    zipcode: "4101"
 
 ```
 Similarly, `raw`, `table` and `pretty` formats are also available. Or one can parse the simple response with `| jq`.
@@ -796,14 +959,12 @@ ipgeolocation ip-security [flags]
 ```
 
 #### Flags for `ip-security`
-| Flag         | Type     | Default  | Description                                                                                                        |
-|--------------|----------|----------|--------------------------------------------------------------------------------------------------------------------|
-| `--ip`       | string   | `""`     | IPv4 or IPv6 address.                                                                                              |
-| `--include`  | string[] | `[]`     | Include extra fields in output. (e.g., `location,network,currency,time_zone,user_agent,country_metadata,hostname`) |
-| `--excludes` | string[] | `[]`     | Exclude fields from output.                                                                                        |
-| `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `network.asn.organization`).                                                     |
-| `--lang`     | string   | `""`     | Response language.                                                                                                 |
-| `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.                                                                   |
+| Flag         | Type     | Default  | Description                                                    |
+|--------------|----------|----------|----------------------------------------------------------------|
+| `--ip`       | string   | `""`     | IPv4 or IPv6 address.                                          |
+| `--excludes` | string[] | `[]`     | Exclude fields from output.                                    |
+| `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `network.asn.organization`). |
+| `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.               |               
 
 #### Get Default Fields in `ip-security`
 Get info about your current IP:
@@ -813,42 +974,41 @@ ipgeolocation ip-security
 
 Lookup a specific IP:
 ```bash
-ipgeolocation ip-security --ip 8.8.8.8
+ipgeolocation ip-security --ip 2.56.188.34
 ```
 Sample output:
 ```json
 {
   "ip": "2.56.188.34",
   "security": {
-    "threat_score": 80,
-    "is_tor": false,
-    "is_proxy": true,
-    "proxy_type": "VPN",
-    "proxy_provider": "Nord VPN",
+    "cloud_provider_name": "Packethub S.A.",
     "is_anonymous": true,
-    "is_known_attacker": true,
-    "is_spam": false,
     "is_bot": false,
     "is_cloud_provider": true,
-    "cloud_provider": "Packethub S.A."
+    "is_known_attacker": true,
+    "is_proxy": true,
+    "is_relay": false,
+    "is_residential_proxy": true,
+    "is_spam": false,
+    "is_tor": false,
+    "is_vpn": true,
+    "proxy_confidence_score": 80,
+    "proxy_last_seen": "2025-12-12",
+    "proxy_provider_names": [
+      "Zyte Proxy"
+    ],
+    "relay_provider_name": "",
+    "threat_score": 80,
+    "vpn_confidence_score": 80,
+    "vpn_last_seen": "2026-01-19",
+    "vpn_provider_names": [
+      "Nord VPN"
+    ]
   }
 }
 ```
 
-#### Include Multiple Optional Fields
 
-Lookup security information for a specific IP with including additional fields:
-```bash
-ipgeolocation ip-security --ip 2.56.188.34  --include location,network,currency,time_zone,user_agent,country_metadata,hostname
-```
-
-Output as YAML:
-```bash
-ipgeolocation ip-security --ip 8.8.8.8 --output=yaml
-```
-
-> [!NOTE]
-> You can get all the available fields in standard plan in combination with security data, when subscribed to security plan.
 
 For full API specifications, refer to the [official IP Security API documentation](https://ipgeolocation.io/documentation/ip-security-api.html).
 
@@ -862,7 +1022,7 @@ Sample output:
   "ip": "195.154.221.54",
   "security": {
     "is_bot": false,
-    "is_proxy": true,
+    "is_proxy": false,
     "is_spam": false,
     "is_tor": false
   }
@@ -879,17 +1039,14 @@ ipgeolocation bulk-ip-security [flags]
 ```
 
 #### Flags for `bulk-ip-security`
-| Flag            | Type     | Default  | Description                                                                                             |
-|-----------------|----------|----------|---------------------------------------------------------------------------------------------------------|
-| `--ips`         | string[] | `[]`     | Comma-separated list of IPs. Example: `--ips 8.8.8.8,1.1.1.1`                                           |
-| `--file`        | string   | `""`     | Path to a text file containing IPs (one per line).                                                      |
-| `--include`     | string[] | `[]`     | Include extra fields (e.g. `location,network,currency,time_zone,user_agent,country_metadata,hostname`). |
-| `--excludes`    | string[] | `[]`     | Exclude fields (e.g. `currency`).                                                                       |
-| `--fields`      | string[] | `[]`     | Return only specific fields (e.g. `location`).                                                          |
-| `--lang`        | string   | `""`     | Response language (if supported).                                                                       |
-| `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.                                                        |
-| `--output-file` | string   | `""`     | Save output to JSON file. Example: `--output-file results`                                              |
-
+| Flag            | Type     | Default  | Description                                                    |
+|-----------------|----------|----------|----------------------------------------------------------------|
+| `--ips`         | string[] | `[]`     | Comma-separated list of IPs. Example: `--ips 8.8.8.8,1.1.1.1` |
+| `--file`        | string   | `""`     | Path to a text file containing IPs (one per line).             |
+| `--excludes`    | string[] | `[]`     | Exclude fields (e.g. `currency`).                              |
+| `--fields`      | string[] | `[]`     | Return only specific fields (e.g. `location`).                 |
+| `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.               |
+| `--output-file` | string   | `""`     | Save output to JSON file. Example: `--output-file results`     |
 #### `bulk-ip-security` Examples
 Lookup 3 IP addresses:
 ```bash
@@ -930,13 +1087,13 @@ ipgeolocation asn [flags]
 | Flag         | Type     | Default  | Description                                                                             |
 |--------------|----------|----------|-----------------------------------------------------------------------------------------|
 | `--ip`       | string   | `""`     | IPv4 or IPv6 address.                                                                   |
-| `--include`  | string[] | `[]`     | Include extra fields in output.(e.g., `peers, downstreams, upstreams, whois_response`)  |
+| `--include`  | string[] | `[]`     | Include extra fields in output.(e.g., `peers, downstreams, upstreams, routes, whois_response`)  |
 | `--excludes` | string[] | `[]`     | Exclude fields from output.                                                             |
 | `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `ip,organization`).                                   |
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.                                        |
 
 > [!NOTE]
-> ASN API is only available in the Advanced Plan
+> ASN API is only available in the Paid Plan
 
 #### Get ASN Information of your IP
 Get ASN information about your current IP address:
@@ -1087,7 +1244,7 @@ ipgeolocation abuse [flags]
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.      |
 
 > [!NOTE]
-> Abuse Contact API is only available in the Advanced Plan
+> Abuse Contact API is only available in the Paid Plan
 
 #### Get abuse info about your current IP
 ```bash
@@ -1101,12 +1258,12 @@ ipgeolocation abuse --ip 8.8.8.8
 
 #### Exclude unnecessary fields
 ```bash
-ipgeolocation abuse --ip 8.8.8.8 --exclude abuse.handle,abuse.emails
+ipgeolocation abuse --ip 8.8.8.8 --exclude abuse.emails
 ```
 
 #### Lookup Abuse Contact with Specific Fields
 ```bash
-ipgeolocation abuse --ip 8.8.8.8 --fields abuse.role,abuse.emails --output table
+ipgeolocation abuse --ip 8.8.8.8 --fields abuse.emails --output table
 ```
 Sample output:
 ```text
@@ -1115,7 +1272,6 @@ Abuse:
   Emails:
     [0]:
       network-abuse@google.com
-  Role                : abuse
 ```
 
 Get output as YAML:
@@ -1134,13 +1290,11 @@ abuse:
     country: ""
     emails:
         - network-abuse@google.com
-    handle: ABUSE5250-ARIN
     kind: group
     name: Abuse
     organization: Abuse
     phone_numbers:
         - +1-650-253-0000
-    role: abuse
     route: 8.8.8.0/24
 ip: 8.8.8.8
 ```
@@ -1201,44 +1355,45 @@ Sample output:
     "zipcode": "94043-1351"
   },
   "time_zone": {
+    "current_time": "2026-03-03 03:22:55.618-0800",
+    "current_time_unix": 1772536975.618,
     "current_tz_abbreviation": "PST",
     "current_tz_full_name": "Pacific Standard Time",
-    "date": "2026-01-13",
-    "date_time": "2026-01-13 04:10:37",
-    "date_time_txt": "Tuesday, January 13, 2026 04:10:37",
-    "date_time_unix": 1768306237.124,
-    "date_time_wti": "Tue, 13 Jan 2026 04:10:37 -0800",
-    "date_time_ymd": "2026-01-13T04:10:37-0800",
+    "date": "2026-03-03",
+    "date_time": "2026-03-03 03:22:55",
+    "date_time_txt": "Tuesday, March 03, 2026 03:22:55",
+    "date_time_wti": "Tue, 03 Mar 2026 03:22:55 -0800",
+    "date_time_ymd": "2026-03-03T03:22:55-0800",
     "dst_end": {
-      "date_time_after": "2026-11-01 TIME 01",
-      "date_time_before": "2026-11-01 TIME 02",
-      "duration": "-1H",
+      "date_time_after": "2026-11-01 TIME 01:00",
+      "date_time_before": "2026-11-01 TIME 02:00",
+      "duration": "-1.00H",
       "gap": false,
       "overlap": true,
-      "utc_time": "2026-11-01 TIME 09"
+      "utc_time": "2026-11-01 TIME 09:00"
     },
     "dst_exists": true,
     "dst_savings": 0,
     "dst_start": {
-      "date_time_after": "2026-03-08 TIME 03",
-      "date_time_before": "2026-03-08 TIME 02",
-      "duration": "+1H",
+      "date_time_after": "2026-03-08 TIME 03:00",
+      "date_time_before": "2026-03-08 TIME 02:00",
+      "duration": "+1.00H",
       "gap": true,
       "overlap": false,
-      "utc_time": "2026-03-08 TIME 10"
+      "utc_time": "2026-03-08 TIME 10:00"
     },
     "dst_tz_abbreviation": "PDT",
     "dst_tz_full_name": "Pacific Daylight Time",
     "is_dst": false,
-    "month": 1,
+    "month": 3,
     "name": "America/Los_Angeles",
     "offset": -8,
     "offset_with_dst": -8,
     "standard_tz_abbreviation": "PST",
     "standard_tz_full_name": "Pacific Standard Time",
-    "time_12": "04:10:37 AM",
-    "time_24": "04:10:37",
-    "week": 3,
+    "time_12": "03:22:55 AM",
+    "time_24": "03:22:55",
+    "week": 10,
     "year": 2026,
     "year_abbr": "26"
   }
@@ -1253,44 +1408,45 @@ Sample output:
 ```json
 {
   "time_zone": {
+    "current_time": "2026-03-03 06:23:30.451-0500",
+    "current_time_unix": 1772537010.451,
     "current_tz_abbreviation": "EST",
     "current_tz_full_name": "Eastern Standard Time",
-    "date": "2026-01-13",
-    "date_time": "2026-01-13 07:12:48",
-    "date_time_txt": "Tuesday, January 13, 2026 07:12:48",
-    "date_time_unix": 1768306368.774,
-    "date_time_wti": "Tue, 13 Jan 2026 07:12:48 -0500",
-    "date_time_ymd": "2026-01-13T07:12:48-0500",
+    "date": "2026-03-03",
+    "date_time": "2026-03-03 06:23:30",
+    "date_time_txt": "Tuesday, March 03, 2026 06:23:30",
+    "date_time_wti": "Tue, 03 Mar 2026 06:23:30 -0500",
+    "date_time_ymd": "2026-03-03T06:23:30-0500",
     "dst_end": {
-      "date_time_after": "2026-11-01 TIME 01",
-      "date_time_before": "2026-11-01 TIME 02",
-      "duration": "-1H",
+      "date_time_after": "2026-11-01 TIME 01:00",
+      "date_time_before": "2026-11-01 TIME 02:00",
+      "duration": "-1.00H",
       "gap": false,
       "overlap": true,
-      "utc_time": "2026-11-01 TIME 06"
+      "utc_time": "2026-11-01 TIME 06:00"
     },
     "dst_exists": true,
     "dst_savings": 0,
     "dst_start": {
-      "date_time_after": "2026-03-08 TIME 03",
-      "date_time_before": "2026-03-08 TIME 02",
-      "duration": "+1H",
+      "date_time_after": "2026-03-08 TIME 03:00",
+      "date_time_before": "2026-03-08 TIME 02:00",
+      "duration": "+1.00H",
       "gap": true,
       "overlap": false,
-      "utc_time": "2026-03-08 TIME 07"
+      "utc_time": "2026-03-08 TIME 07:00"
     },
     "dst_tz_abbreviation": "EDT",
     "dst_tz_full_name": "Eastern Daylight Time",
     "is_dst": false,
-    "month": 1,
+    "month": 3,
     "name": "America/New_York",
     "offset": -5,
     "offset_with_dst": -5,
     "standard_tz_abbreviation": "EST",
     "standard_tz_full_name": "Eastern Standard Time",
-    "time_12": "07:12:48 AM",
-    "time_24": "07:12:48",
-    "week": 3,
+    "time_12": "06:23:30 AM",
+    "time_24": "06:23:30",
+    "week": 10,
     "year": 2026,
     "year_abbr": "26"
   }
@@ -1315,44 +1471,45 @@ Sample output:
     "state_prov": "New York"
   },
   "time_zone": {
+    "current_time": "2026-03-03 06:24:17.824-0500",
+    "current_time_unix": 1772537057.824,
     "current_tz_abbreviation": "EST",
     "current_tz_full_name": "Eastern Standard Time",
-    "date": "2026-01-13",
-    "date_time": "2026-01-13 07:14:38",
-    "date_time_txt": "Tuesday, January 13, 2026 07:14:38",
-    "date_time_unix": 1768306478.948,
-    "date_time_wti": "Tue, 13 Jan 2026 07:14:38 -0500",
-    "date_time_ymd": "2026-01-13T07:14:38-0500",
+    "date": "2026-03-03",
+    "date_time": "2026-03-03 06:24:17",
+    "date_time_txt": "Tuesday, March 03, 2026 06:24:17",
+    "date_time_wti": "Tue, 03 Mar 2026 06:24:17 -0500",
+    "date_time_ymd": "2026-03-03T06:24:17-0500",
     "dst_end": {
-      "date_time_after": "2026-11-01 TIME 01",
-      "date_time_before": "2026-11-01 TIME 02",
-      "duration": "-1H",
+      "date_time_after": "2026-11-01 TIME 01:00",
+      "date_time_before": "2026-11-01 TIME 02:00",
+      "duration": "-1.00H",
       "gap": false,
       "overlap": true,
-      "utc_time": "2026-11-01 TIME 06"
+      "utc_time": "2026-11-01 TIME 06:00"
     },
     "dst_exists": true,
     "dst_savings": 0,
     "dst_start": {
-      "date_time_after": "2026-03-08 TIME 03",
-      "date_time_before": "2026-03-08 TIME 02",
-      "duration": "+1H",
+      "date_time_after": "2026-03-08 TIME 03:00",
+      "date_time_before": "2026-03-08 TIME 02:00",
+      "duration": "+1.00H",
       "gap": true,
       "overlap": false,
-      "utc_time": "2026-03-08 TIME 07"
+      "utc_time": "2026-03-08 TIME 07:00"
     },
     "dst_tz_abbreviation": "EDT",
     "dst_tz_full_name": "Eastern Daylight Time",
     "is_dst": false,
-    "month": 1,
+    "month": 3,
     "name": "America/New_York",
     "offset": -5,
     "offset_with_dst": -5,
     "standard_tz_abbreviation": "EST",
     "standard_tz_full_name": "Eastern Standard Time",
-    "time_12": "07:14:38 AM",
-    "time_24": "07:14:38",
-    "week": 3,
+    "time_12": "06:24:17 AM",
+    "time_24": "06:24:17",
+    "week": 10,
     "year": 2026,
     "year_abbr": "26"
   }
@@ -1367,44 +1524,45 @@ Sample output:
 ```json
 {
   "time_zone": {
+    "current_time": "2026-03-03 03:25:00.249-0800",
+    "current_time_unix": 1772537100.249,
     "current_tz_abbreviation": "PST",
     "current_tz_full_name": "Pacific Standard Time",
-    "date": "2026-01-13",
-    "date_time": "2026-01-13 04:15:42",
-    "date_time_txt": "Tuesday, January 13, 2026 04:15:42",
-    "date_time_unix": 1768306542.847,
-    "date_time_wti": "Tue, 13 Jan 2026 04:15:42 -0800",
-    "date_time_ymd": "2026-01-13T04:15:42-0800",
+    "date": "2026-03-03",
+    "date_time": "2026-03-03 03:25:00",
+    "date_time_txt": "Tuesday, March 03, 2026 03:25:00",
+    "date_time_wti": "Tue, 03 Mar 2026 03:25:00 -0800",
+    "date_time_ymd": "2026-03-03T03:25:00-0800",
     "dst_end": {
-      "date_time_after": "2026-11-01 TIME 01",
-      "date_time_before": "2026-11-01 TIME 02",
-      "duration": "-1H",
+      "date_time_after": "2026-11-01 TIME 01:00",
+      "date_time_before": "2026-11-01 TIME 02:00",
+      "duration": "-1.00H",
       "gap": false,
       "overlap": true,
-      "utc_time": "2026-11-01 TIME 09"
+      "utc_time": "2026-11-01 TIME 09:00"
     },
     "dst_exists": true,
     "dst_savings": 0,
     "dst_start": {
-      "date_time_after": "2026-03-08 TIME 03",
-      "date_time_before": "2026-03-08 TIME 02",
-      "duration": "+1H",
+      "date_time_after": "2026-03-08 TIME 03:00",
+      "date_time_before": "2026-03-08 TIME 02:00",
+      "duration": "+1.00H",
       "gap": true,
       "overlap": false,
-      "utc_time": "2026-03-08 TIME 10"
+      "utc_time": "2026-03-08 TIME 10:00"
     },
     "dst_tz_abbreviation": "PDT",
     "dst_tz_full_name": "Pacific Daylight Time",
     "is_dst": false,
-    "month": 1,
+    "month": 3,
     "name": "America/Los_Angeles",
     "offset": -8,
     "offset_with_dst": -8,
     "standard_tz_abbreviation": "PST",
     "standard_tz_full_name": "Pacific Standard Time",
-    "time_12": "04:15:42 AM",
-    "time_24": "04:15:42",
-    "week": 3,
+    "time_12": "03:25:00 AM",
+    "time_24": "03:25:00",
+    "week": 10,
     "year": 2026,
     "year_abbr": "26"
   }
@@ -1433,14 +1591,15 @@ Sample output:
     "type": "large_airport"
   },
   "time_zone": {
+    "current_time": "2026-03-03 15:26:04.634+0400",
+    "current_time_unix": 1772537164.634,
     "current_tz_abbreviation": "GST",
     "current_tz_full_name": "Gulf Standard Time",
-    "date": "2026-01-13",
-    "date_time": "2026-01-13 16:16:46",
-    "date_time_txt": "Tuesday, January 13, 2026 16:16:46",
-    "date_time_unix": 1768306606.662,
-    "date_time_wti": "Tue, 13 Jan 2026 16:16:46 +0400",
-    "date_time_ymd": "2026-01-13T16:16:46+0400",
+    "date": "2026-03-03",
+    "date_time": "2026-03-03 15:26:04",
+    "date_time_txt": "Tuesday, March 03, 2026 15:26:04",
+    "date_time_wti": "Tue, 03 Mar 2026 15:26:04 +0400",
+    "date_time_ymd": "2026-03-03T15:26:04+0400",
     "dst_end": {},
     "dst_exists": false,
     "dst_savings": 0,
@@ -1448,15 +1607,15 @@ Sample output:
     "dst_tz_abbreviation": "",
     "dst_tz_full_name": "",
     "is_dst": false,
-    "month": 1,
+    "month": 3,
     "name": "Asia/Dubai",
     "offset": 4,
     "offset_with_dst": 4,
     "standard_tz_abbreviation": "GST",
     "standard_tz_full_name": "Gulf Standard Time",
-    "time_12": "04:16:46 PM",
-    "time_24": "16:16:46",
-    "week": 3,
+    "time_12": "03:26:04 PM",
+    "time_24": "15:26:04",
+    "week": 10,
     "year": 2026,
     "year_abbr": "26"
   }
@@ -1483,44 +1642,45 @@ Sample ouput:
     "state_code": "BE"
   },
   "time_zone": {
+    "current_time": "2026-03-03 12:26:32.849+0100",
+    "current_time_unix": 1772537192.849,
     "current_tz_abbreviation": "CET",
     "current_tz_full_name": "Central European Standard Time",
-    "date": "2026-01-13",
-    "date_time": "2026-01-13 13:18:15",
-    "date_time_txt": "Tuesday, January 13, 2026 13:18:15",
-    "date_time_unix": 1768306695.348,
-    "date_time_wti": "Tue, 13 Jan 2026 13:18:15 +0100",
-    "date_time_ymd": "2026-01-13T13:18:15+0100",
+    "date": "2026-03-03",
+    "date_time": "2026-03-03 12:26:32",
+    "date_time_txt": "Tuesday, March 03, 2026 12:26:32",
+    "date_time_wti": "Tue, 03 Mar 2026 12:26:32 +0100",
+    "date_time_ymd": "2026-03-03T12:26:32+0100",
     "dst_end": {
-      "date_time_after": "2026-10-25 TIME 02",
-      "date_time_before": "2026-10-25 TIME 03",
-      "duration": "-1H",
+      "date_time_after": "2026-10-25 TIME 02:00",
+      "date_time_before": "2026-10-25 TIME 03:00",
+      "duration": "-1.00H",
       "gap": false,
       "overlap": true,
-      "utc_time": "2026-10-25 TIME 01"
+      "utc_time": "2026-10-25 TIME 01:00"
     },
     "dst_exists": true,
     "dst_savings": 0,
     "dst_start": {
-      "date_time_after": "2026-03-29 TIME 03",
-      "date_time_before": "2026-03-29 TIME 02",
-      "duration": "+1H",
+      "date_time_after": "2026-03-29 TIME 03:00",
+      "date_time_before": "2026-03-29 TIME 02:00",
+      "duration": "+1.00H",
       "gap": true,
       "overlap": false,
-      "utc_time": "2026-03-29 TIME 01"
+      "utc_time": "2026-03-29 TIME 01:00"
     },
     "dst_tz_abbreviation": "CEST",
     "dst_tz_full_name": "Central European Summer Time",
     "is_dst": false,
-    "month": 1,
+    "month": 3,
     "name": "Europe/Berlin",
     "offset": 1,
     "offset_with_dst": 1,
     "standard_tz_abbreviation": "CET",
     "standard_tz_full_name": "Central European Standard Time",
-    "time_12": "01:18:15 PM",
-    "time_24": "13:18:15",
-    "week": 3,
+    "time_12": "12:26:32 PM",
+    "time_24": "12:26:32",
+    "week": 10,
     "year": 2026,
     "year_abbr": "26"
   }

@@ -56,7 +56,7 @@ Notes:
 			return
 		}
 
-		baseURL := "https://api.ipgeolocation.io/v2/ipgeo"
+		baseURL := "https://api.ipgeolocation.io/v3/ipgeo"
 		url := baseURL + "?apiKey=" + cfg.ApiKey
 		if ipgeoFlags.IP != "" {
 			url += "&ip=" + ipgeoFlags.IP
