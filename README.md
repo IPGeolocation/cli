@@ -54,7 +54,6 @@ Based on:
       - [`ip-security` Usage](#ip-security-usage)
       - [Flags for `ip-security`](#flags-for-ip-security)
       - [Get Default Fields in `ip-security`](#get-default-fields-in-ip-security)
-      - [Include Multiple Optional Fields](#include-multiple-optional-fields)
       - [Request with Field Filtering `ip-security`](#request-with-field-filtering-ip-security)
     - [`bulk-ip-security` Command](#bulk-ip-security-command)
       - [`bulk-ip-security` Usage](#bulk-ip-security-usage)
@@ -249,7 +248,7 @@ IP Geolocation offers two plans from billing point of view: **Developer(Free), P
 | `parse-bulk-user-agents` | Parse multiple User Agent String at once.                                                                                    |  ✖   |    ✔     |
 
 > [!TIP]
-> The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for IPGeolocationApi, please visit [https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response).
+> The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for IP Geolocation Api, please visit [IP Location API](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response).
 
 ## Authentication Setup
 To authenticate API requests, you need to get an API key from [ipgeolocation.io](https://ipgeolocation.io/).
@@ -318,7 +317,7 @@ ipgeolocation ipgeo [flags]
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.                                |
 
 > [!NOTE]
-> Available language options can be found here: [https://ipgeolocation.io/documentation/ip-location-api.html#response-in-multiple-languages](https://ipgeolocation.io/documentation/ip-location-api.html#response-in-multiple-languages)
+> Available language options can be found [here](https://ipgeolocation.io/documentation/ip-location-api.html#response-in-multiple-languages)
 
 #### Developer Plan Examples
 Get info about your current IP:
@@ -963,8 +962,11 @@ ipgeolocation ip-security [flags]
 |--------------|----------|----------|----------------------------------------------------------------|
 | `--ip`       | string   | `""`     | IPv4 or IPv6 address.                                          |
 | `--excludes` | string[] | `[]`     | Exclude fields from output.                                    |
-| `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `network.asn.organization`). |
+| `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `security.threat_score`). |
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.               |               
+
+> [!NOTE]
+> IP Security API is only available in the Paid Plan
 
 #### Get Default Fields in `ip-security`
 Get info about your current IP:
