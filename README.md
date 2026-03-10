@@ -118,7 +118,7 @@ Based on:
 
 To install `ipgeolocation` using `go install`, run:
 ```bash
-go install github.com/IPGeolocation/cli/cmd/ipgeolocation@latest
+go install github.com/IPGeolocation/cli/v2/cmd/ipgeolocation@latest
 ```
 
 Make sure `$GOBIN` or `$GOPATH/bin` is in your `PATH`, then run:
@@ -147,11 +147,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 
 | Platform | Architecture | File Name / Downoad Link                                                                                                                             |
 |----------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Linux    | amd64        | [**ipgeolocation-2.0.0-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.0-linux-amd64.tar.gz)   |
-| Linux    | arm64        | [**ipgeolocation-2.0.0-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.0-linux-arm64.tar.gz)   |
-| macOS    | amd64        | [**ipgeolocation-2.0.0-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.0-darwin-amd64.tar.gz) |
-| macOS    | arm64        | [**ipgeolocation-2.0.0-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.0-darwin-arm64.tar.gz) |
-| Windows  | amd64        | [**ipgeolocation-2.0.0-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.0-windows-amd64.zip)     |
+| Linux    | amd64        | [**ipgeolocation-2.0.1-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.1-linux-amd64.tar.gz)   |
+| Linux    | arm64        | [**ipgeolocation-2.0.1-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.1-linux-arm64.tar.gz)   |
+| macOS    | amd64        | [**ipgeolocation-2.0.1-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.1-darwin-amd64.tar.gz) |
+| macOS    | arm64        | [**ipgeolocation-2.0.1-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.1-darwin-arm64.tar.gz) |
+| Windows  | amd64        | [**ipgeolocation-2.0.1-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.1-windows-amd64.zip)     |
 
 #### Installation Instructions
 
@@ -159,11 +159,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 1. Download the `.tar.gz` file for your architecture.
 2. Extract it to a folder in your PATH, e.g., `/usr/local/bin`:
    ```bash
-   tar -xzf ipgeolocation-2.0.0-linux-amd64.tar.gz -C /usr/local/bin
+   tar -xzf ipgeolocation-2.0.1-linux-amd64.tar.gz -C /usr/local/bin
    ```
 3. Rename the binary for simplicity:
    ```bash
-   mv /usr/local/bin/ipgeolocation-2.0.0-linux-amd64 /usr/local/bin/ipgeolocation
+   mv /usr/local/bin/ipgeolocation-2.0.1-linux-amd64 /usr/local/bin/ipgeolocation
    ```
 4. Make the binary executable:
    ```bash
@@ -178,11 +178,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 1. Download the `.tar.gz` file for your architecture (amd64 or arm64).
 2. Extract to a folder in your PATH, e.g., `/usr/local/bin`:
    ```bash
-   tar -xzf ipgeolocation-2.0.0-darwin-amd64.tar.gz -C /usr/local/bin
+   tar -xzf ipgeolocation-2.0.1-darwin-amd64.tar.gz -C /usr/local/bin
    ```
 3. Rename the binary:
    ```bash
-   mv /usr/local/bin/ipgeolocation-2.0.0-darwin-amd64 /usr/local/bin/ipgeolocation
+   mv /usr/local/bin/ipgeolocation-2.0.1-darwin-amd64 /usr/local/bin/ipgeolocation
    ```
 4. Make executable:
    ```bash
@@ -195,7 +195,7 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 
 **Windows:**
 1. Download the `.zip` file.
-2. Extract the `ipgeolocation-2.0.0-windows-amd64.exe` to a folder included in your system `PATH`.
+2. Extract the `ipgeolocation-2.0.1-windows-amd64.exe` to a folder included in your system `PATH`.
 3. Rename the binary to `ipgeolocation.exe` for convenience.
 4. Open Command Prompt and verify:
    ```cmd

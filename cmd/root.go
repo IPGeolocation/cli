@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/IPGeolocation/cli/ascii"
+	"github.com/IPGeolocation/cli/v2/ascii"
 
 	"github.com/spf13/cobra"
 )
@@ -17,7 +17,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:     "ipgeolocation",
 	Short:   "CLI for accessing IPGeolocation.io API endpoints",
-	Version: "2.0.0",
+	Version: "2.0.1",
 	Long: `ipgeolocation is a command-line interface (CLI) tool for accessing all major endpoints of the IPGeolocation.io API. 
 It allows you to retrieve IP geolocation data, timezone information, currency details, user-agent parsing, and more, directly from your terminal.
 

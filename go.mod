@@ -1,4 +1,4 @@
-module github.com/IPGeolocation/cli
+module github.com/IPGeolocation/cli/v2
 
 go 1.18
 

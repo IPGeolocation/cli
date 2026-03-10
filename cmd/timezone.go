@@ -6,9 +6,9 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/IPGeolocation/cli/internal/common"
-	"github.com/IPGeolocation/cli/internal/config"
-	"github.com/IPGeolocation/cli/internal/utils"
+	"github.com/IPGeolocation/cli/v2/internal/common"
+	"github.com/IPGeolocation/cli/v2/internal/config"
+	"github.com/IPGeolocation/cli/v2/internal/utils"
 
 	encoding "net/url"
 

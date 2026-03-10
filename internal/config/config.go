@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/IPGeolocation/cli/internal/utils"
+	"github.com/IPGeolocation/cli/v2/internal/utils"
 )
 
 type Config struct {

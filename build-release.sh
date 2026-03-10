@@ -2,7 +2,7 @@
 set -e
 
 APP_NAME="ipgeolocation"
-VERSION="2.0.0"   # fixed version
+VERSION="2.0.1"   # fixed version
 
 rm -rf dist
 mkdir -p dist

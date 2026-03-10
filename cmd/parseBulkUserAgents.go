@@ -7,9 +7,9 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/IPGeolocation/cli/internal/common"
-	"github.com/IPGeolocation/cli/internal/config"
-	"github.com/IPGeolocation/cli/internal/utils"
+	"github.com/IPGeolocation/cli/v2/internal/common"
+	"github.com/IPGeolocation/cli/v2/internal/config"
+	"github.com/IPGeolocation/cli/v2/internal/utils"
 
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
