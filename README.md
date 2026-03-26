@@ -147,11 +147,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 
 | Platform | Architecture | File Name / Downoad Link                                                                                                                             |
 |----------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Linux    | amd64        | [**ipgeolocation-2.0.1-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.1-linux-amd64.tar.gz)   |
-| Linux    | arm64        | [**ipgeolocation-2.0.1-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.1-linux-arm64.tar.gz)   |
-| macOS    | amd64        | [**ipgeolocation-2.0.1-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.1-darwin-amd64.tar.gz) |
-| macOS    | arm64        | [**ipgeolocation-2.0.1-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.1-darwin-arm64.tar.gz) |
-| Windows  | amd64        | [**ipgeolocation-2.0.1-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v2.0.0/ipgeolocation-2.0.1-windows-amd64.zip)     |
+| Linux    | amd64        | [**ipgeolocation-2.0.1-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.1/ipgeolocation-2.0.1-linux-amd64.tar.gz)   |
+| Linux    | arm64        | [**ipgeolocation-2.0.1-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.1/ipgeolocation-2.0.1-linux-arm64.tar.gz)   |
+| macOS    | amd64        | [**ipgeolocation-2.0.1-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.1/ipgeolocation-2.0.1-darwin-amd64.tar.gz) |
+| macOS    | arm64        | [**ipgeolocation-2.0.1-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.1/ipgeolocation-2.0.1-darwin-arm64.tar.gz) |
+| Windows  | amd64        | [**ipgeolocation-2.0.1-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v2.0.1/ipgeolocation-2.0.1-windows-amd64.zip)     |
 
 #### Installation Instructions
 
