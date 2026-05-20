@@ -236,10 +236,10 @@ IP Geolocation offers two plans from billing point of view: **Developer(Free), P
 | `config`                 | Set up and check API Key.                                                                                                    |  ✔   |    ✔     |
 | `ipgeo`                  | Get geolocation data for a single IP address, along with network, currency, abuse, timezone, security, asn, useragent, etc.  |  ✔   |    ✔     |
 | `bulk-ip-geo`            | Get geolocation data for multiple IP addresses in a single API request, along with same data as in `ipgeo`.                  |  ✖   |    ✔     |
-| `ip-security`            | Get security information (VPN, TOR, proxy, etc.) for a single IP, along with network, timezone, location, and currency, etc. |  ✖   |    ✖     |
-| `bulk-ip-security`       | Get security threat intelligence for multiple IP addresses, along with same data as in `ip-security`.                        |  ✖   |    ✖     |
-| `asn`                    | Get details of any AS number or IP address associated ASN.                                                                   |  ✖   |    ✖     |
-| `abuse`                  | Get abuse reporting contact information for a given IP address.                                                              |  ✖   |    ✖     |
+| `ip-security`            | Get security information (VPN, TOR, proxy, etc.) for a single IP, along with network, timezone, location, and currency, etc. |  ✖   |    ✔     |
+| `bulk-ip-security`       | Get security threat intelligence for multiple IP addresses, along with same data as in `ip-security`.                        |  ✖   |    ✔     |
+| `asn`                    | Get details of any AS number or IP address associated ASN.                                                                   |  ✖   |    ✔     |
+| `abuse`                  | Get abuse reporting contact information for a given IP address.                                                              |  ✖   |    ✔     |
 | `astronomy`              | Get sunrise, sunset, moonrise, moonset, and related data for a location.                                                     |  ✔   |    ✔     |
 | `astronomy-timeseries`   | Get astronomy information for given date range at once.                                                                      |  ✔   |    ✔     |
 | `timezone`               | Get timezone details using IP address, city, coordinates, IATA, ICAO, UNLOCODE, or timezone ID.                              |  ✔   |    ✔     |
