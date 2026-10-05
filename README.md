@@ -145,7 +145,7 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 
 #### Prebuilt Binaries
 
-| Platform | Architecture | File Name / Downoad Link                                                                                                                             |
+| Platform | Architecture | File Name / Download Link                                                                                                                             |
 |----------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Linux    | amd64        | [**ipgeolocation-2.0.1-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.1/ipgeolocation-2.0.1-linux-amd64.tar.gz)   |
 | Linux    | arm64        | [**ipgeolocation-2.0.1-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.1/ipgeolocation-2.0.1-linux-arm64.tar.gz)   |
@@ -214,11 +214,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 - **Wrong architecture:** Download the binary matching your OS and CPU architecture.
 - **Go install issues:** Use `GOPROXY=direct` if Go module proxy caching creates issues.
 
-## API Documentations
+## APIs Documentation
 
 The documentation below corresponds to the available APIs:
 - [**Overview**](https://ipgeolocation.io/documentation.html)
-- [**IP GeoLocation API**](https://ipgeolocation.io/documentation/ip-location-api.html)
+- [**IP Geolocation API**](https://ipgeolocation.io/documentation/ip-location-api.html)
 - [**IP Security API**](https://ipgeolocation.io/documentation/ip-security-api.html)
 - [**ASN API**](https://ipgeolocation.io/documentation/asn-api.html)
 - [**IP Abuse Contact API**](https://ipgeolocation.io/documentation/ip-abuse-contact-api.html)
@@ -229,7 +229,7 @@ The documentation below corresponds to the available APIs:
 For a detailed comparison of what each plan offers, visit the [Pricing Page](https://ipgeolocation.io/pricing.html).
 
 ## Fields and commands Availability
-IP Geolocation offers two plans from billing point of view: **Developer(Free), Paid**. The availability of each command, over plans are presented below.
+IP Geolocation offers two plans from billing point of view: **Developer (Free), Paid**. The availability of each command, over plans are presented below.
 
 | Sub Command              | Details                                                                                                                      | Developer (Free) | Paid |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------|:----:|:--------:|
