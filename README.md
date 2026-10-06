@@ -299,7 +299,7 @@ ipgeolocation config --apikey=<your-key>
 
 
 ### `ipgeo` Command
-Lookup geolocation information for a **single IP address or domain** from the `ipgeolocation.io` API.
+Look up geolocation information for a **single IP address or domain** from the `ipgeolocation.io` API.
 
 #### `ipgeo` Usage
 ```bash
@@ -326,7 +326,7 @@ ipgeolocation ipgeo
 ```
 
 ##### Get Default Fields in developer plan
-Lookup a specific IP:
+Look up a specific IP:
 ```bash
 ipgeolocation ipgeo --ip 8.8.8.8
 ```
@@ -440,7 +440,7 @@ Sample output:
 
 #### Paid Plan Examples
 ##### Get Default Fields in Paid Plan
-Lookup domain name with default fields
+Look up a domain name with default fields
 ```bash
 ipgeolocation ipgeo --ip google.com
 ```
@@ -917,12 +917,12 @@ ipgeolocation bulk-ip-geo [flags]
 
 For further information, please visit [IP Geolocation API Documentation](https://ipgeolocation.io/documentation/ip-location-api.html).
 
-Lookup 3 IP addresses:
+Look up 3 IP addresses:
 ```bash
 ipgeolocation bulk-ip-geo --ips 8.8.8.8,1.1.1.1,192.30.253.112
 ```
 
-Lookup from a file:
+Look up from a file:
 ```bash
 ipgeolocation bulk-ip-geo --file=ips.txt --output-file results
 ```
@@ -950,7 +950,7 @@ ipgeolocation bulk-ip-geo --ips=8.8.8.8,1.1.1.1 --output-file=output.json
 - **json file**: If `--output-file` is provided, results are saved to a `.json` file.  
 
 ### `ip-security` Command
-Lookup IP security information using the `ipgeolocation.io` API.
+Look up IP security information using the `ipgeolocation.io` API.
 
 #### `ip-security` Usage
 ```bash
@@ -1630,7 +1630,7 @@ Sample output:
 ```bash
 ipgeolocation timezone --lo DEBER
 ```
-Sample ouput:
+Sample output:
 ```json
 {
   "lo_code_details": {
