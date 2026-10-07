@@ -69,7 +69,7 @@ Based on:
       - [`abuse` Usage](#abuse-usage)
       - [Flags for `abuse`](#flags-for-abuse)
       - [Get abuse info about your current IP](#get-abuse-info-about-your-current-ip)
-      - [Lookup a specific IP](#lookup-a-specific-ip)
+      - [Look up a specific IP](#lookup-a-specific-ip)
       - [Exclude unnecessary fields](#exclude-unnecessary-fields)
       - [Lookup Abuse Contact with Specific Fields](#lookup-abuse-contact-with-specific-fields)
     - [`timezone` Command](#timezone-command)
@@ -894,7 +894,7 @@ location:
 Similarly, `raw`, `table` and `pretty` formats are also available. Or one can parse the simple response with `| jq`.
 
 ### `bulk-ip-geo` Command
-Lookup geolocation information for **multiple IP addresses** in one request.
+Look up geolocation information for **multiple IP addresses** in one request.
 
 #### `bulk-ip-geo` Usage
 ```bash
@@ -974,7 +974,7 @@ Get info about your current IP:
 ipgeolocation ip-security
 ```
 
-Lookup a specific IP:
+Look up a specific IP:
 ```bash
 ipgeolocation ip-security --ip 2.56.188.34
 ```
@@ -1033,7 +1033,7 @@ Sample output:
 
 ### `bulk-ip-security` Command
 
-Lookup IP security information for **multiple IP addresses** in one request. 
+Look up IP security information for **multiple IP addresses** in one request. 
 
 #### `bulk-ip-security` Usage
 ```bash
@@ -1050,12 +1050,12 @@ ipgeolocation bulk-ip-security [flags]
 | `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.               |
 | `--output-file` | string   | `""`     | Save output to JSON file. Example: `--output-file results`     |
 #### `bulk-ip-security` Examples
-Lookup 3 IP addresses:
+Look up 3 IP addresses:
 ```bash
 ipgeolocation bulk-ip-security --ips 8.8.8.8,1.1.1.1,192.30.253.112
 ```
 
-Lookup from a file:
+Look up from a file:
 ```bash
 ipgeolocation bulk-ip-security --file=ips.txt --output-file=output
 ```
@@ -1128,7 +1128,7 @@ Sample output:
 ```
 
 #### Combine All objects using Include
-Lookup a specific IP with including additional fields:
+Look up a specific IP with including additional fields:
 ```bash
 ipgeolocation asn --asn 12 --include routes,peers,upstreams,downstreams,whois_response
 ```
@@ -1253,7 +1253,7 @@ ipgeolocation abuse [flags]
 ipgeolocation abuse
 ```
 
-#### Lookup a specific IP
+#### Look up a specific IP
 ```bash
 ipgeolocation abuse --ip 8.8.8.8
 ```
