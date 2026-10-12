@@ -11,7 +11,7 @@ Using a single executable, you can query **IP location, security intelligence, A
 - [ASN API](https://ipgeolocation.io/asn-api.html): Get ASN details along with peers, upstreams, downstreams, routes, and raw WHOIS.
 - [Abuse Contact API](https://ipgeolocation.io/ip-abuse-contact-api.html): Get abuse emails, phone numbers, kind, organization, route/CIDR network and country.
 - [Astronomy API](https://ipgeolocation.io/astronomy-api.html): Get sunrise, sunset, moonrise, moonset, moon phases with precise twilight period times in combination with location information.
-- [Timezone API](https://ipgeolocation.io/timezone-api.html): Get timezone name, multiple time formats, daylight saving status and its details along with location information.
+- [Time Zone API](https://ipgeolocation.io/timezone-api.html): Get timezone name, multiple time formats, daylight saving status and its details along with location information.
 - [Timezone Convert API](https://ipgeolocation.io/timezone-api.html): Convert time between timezone names, geo coordinates, location addresses, IATA codes, ICAO codes, or UN/LOCODE.
 - [User Agent API](https://ipgeolocation.io/user-agent-api.html): Get browser, Operating System, and device info from single or multiple Useragent string parsing.
 
@@ -222,14 +222,14 @@ The documentation below corresponds to the available APIs:
 - [**IP Security API**](https://ipgeolocation.io/documentation/ip-security-api.html)
 - [**ASN API**](https://ipgeolocation.io/documentation/asn-api.html)
 - [**IP Abuse Contact API**](https://ipgeolocation.io/documentation/ip-abuse-contact-api.html)
-- [**Timezone API**](https://ipgeolocation.io/documentation/timezone-api.html)
+- [**Time Zone API**](https://ipgeolocation.io/documentation/timezone-api.html)
 - [**User-Agent API**](https://ipgeolocation.io/documentation/user-agent-api.html)
 - [**Astronomy API**](https://ipgeolocation.io/documentation/astronomy-api.html)
 
 For a detailed comparison of what each plan offers, visit the [Pricing Page](https://ipgeolocation.io/pricing.html).
 
 ## Fields and commands Availability
-IP Geolocation offers two plans from billing point of view: **Developer (Free), Paid**. The availability of each command, over plans are presented below.
+IP Geolocation offers two plans from a billing point of view: **Developer (Free), Paid**. The availability of each command across plans is presented below.
 
 | Sub Command              | Details                                                                                                                      | Developer (Free) | Paid |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------|:----:|:--------:|
@@ -1306,7 +1306,7 @@ For further information, please visit [Abuse API Documentation](https://ipgeoloc
 ### `timezone` Command
 Lookup timezone information using the `ipgeolocation.io` API using different query types like IP address, latitude/longitude, and timezone ID.
 
-For full API specifications, refer to the [Timezone API documentation](https://ipgeolocation.io/documentation/timezone-api.html).
+For full API specifications, refer to the [Time Zone API documentation](https://ipgeolocation.io/documentation/timezone-api.html).
 
 #### `timezone` Usage
 ```bash
