@@ -1738,7 +1738,7 @@ Sample output:
 }
 ```
 > [!NOTE]
-> You can convert time from any timezone to another timezone using location coordinates (Latitude and Longitude), location addresses, IATA codes, ICAO codes and UN/LUCODE.
+> You can convert time from any timezone to another timezone using location coordinates (Latitude and Longitude), location addresses, IATA codes, ICAO codes and UN/LOCODE.
 
 Convert from one location to another:
 ```bash
