@@ -7,7 +7,7 @@ The official `ipgeolocation` **Command Line Interface (CLI)** provides a fast, l
 Using a single executable, you can query **IP location, security intelligence, ASN details, timezone, astronomy, abuse contact information, and user agent parsing** for your own IP or for any IPv4, IPv6 address, or domain name. The CLI outputs structured, machine-readable data that integrates seamlessly into shell scripts, cron jobs, CI/CD pipelines, monitoring systems, and log-processing workflows.
 
 - [IP Location API](https://ipgeolocation.io/ip-location-api.html): Get all-in-one unified solution for **location** (city, locality, state, country, accuracy-radius, confidence etc.), **currency**, **ASN** (AS number, ASN name, organization, asn type, date of allocation, routes, upstreams, downstreams, peers), **company** (company/ISP name, company type, company domain), **timezone** , **user agent** string parsing, **security** (threat score, is_tor, is_bot, proxy_provider, cloud_provider, relay_provider, vpn_provider, proxy, relay, vpn), and **abuse contact** (route/CIDR network, country, address, email, phone numbers) information.
-- [IP Security API](https://ipgeolocation.io/ip-security-api.html): Get security, network, location, hostname, timezone and useragent parsing.
+- [IP Security API](https://ipgeolocation.io/ip-security-api.html): Get security intelligence (threat score, VPN, proxy, Tor, relay, bot, and cloud-provider detection) for an IP address.
 - [ASN API](https://ipgeolocation.io/asn-api.html): Get ASN details along with peers, upstreams, downstreams, routes, and raw WHOIS.
 - [Abuse Contact API](https://ipgeolocation.io/ip-abuse-contact-api.html): Get abuse emails, phone numbers, kind, organization, route/CIDR network and country.
 - [Astronomy API](https://ipgeolocation.io/astronomy-api.html): Get sunrise, sunset, moonrise, moonset, moon phases with precise twilight period times in combination with location information.
@@ -1104,7 +1104,7 @@ ipgeolocation asn
 ```
 
 #### Get ASN Information by ASN Number
-Lookup a specific ASN. The AS number can be prefixed with 'AS' or 'as':
+Look up a specific ASN. The AS number can be prefixed with 'AS' or 'as':
 ```bash
 ipgeolocation asn --asn 15169
 ```
@@ -1127,8 +1127,8 @@ Sample output:
 }
 ```
 
-#### Combine All objects using Include
-Look up a specific IP with including additional fields:
+#### Combine all objects using Include
+Look up a specific IP, including additional fields:
 ```bash
 ipgeolocation asn --asn 12 --include routes,peers,upstreams,downstreams,whois_response
 ```
