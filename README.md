@@ -1051,8 +1051,8 @@ ipgeolocation bulk-ip-security [flags]
 |-----------------|----------|----------|----------------------------------------------------------------|
 | `--ips`         | string[] | `[]`     | Comma-separated list of IPs. Example: `--ips 8.8.8.8,1.1.1.1` |
 | `--file`        | string   | `""`     | Path to a text file containing IPs (one per line).             |
-| `--excludes`    | string[] | `[]`     | Exclude fields (e.g. `currency`).                              |
-| `--fields`      | string[] | `[]`     | Return only specific fields (e.g. `location`).                 |
+| `--excludes`    | string[] | `[]`     | Exclude fields (e.g. `security.is_tor`).                              |
+| `--fields`      | string[] | `[]`     | Return only specific fields (e.g. `security.threat_score`).                 |
 | `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.               |
 | `--output-file` | string   | `""`     | Save output to JSON file. Example: `--output-file results`     |
 
