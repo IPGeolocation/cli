@@ -980,34 +980,40 @@ ipgeolocation ip-security --ip 2.56.188.34
 ```
 Sample output:
 ```json
+
 {
   "ip": "2.56.188.34",
   "security": {
-    "cloud_provider_name": "Packethub S.A.",
+    "bot_confidence_score": 0,
+    "bot_last_seen": "",
+    "bot_operator_name": "",
+    "bot_type": "",
+    "cloud_provider_name": "Clouvider Limited",
+    "corporate_gateway_provider_name": "",
+    "corporate_gateway_type": "",
     "is_anonymous": true,
     "is_bot": false,
     "is_cloud_provider": true,
+    "is_corporate_gateway": false,
     "is_known_attacker": true,
-    "is_proxy": true,
+    "is_known_good_bot": false,
+    "is_proxy": false,
     "is_relay": false,
-    "is_residential_proxy": true,
+    "is_residential_proxy": false,
     "is_spam": false,
     "is_tor": false,
     "is_vpn": true,
-    "proxy_confidence_score": 80,
-    "proxy_last_seen": "2025-12-12",
-    "proxy_provider_names": [
-      "Zyte Proxy"
-    ],
+    "proxy_confidence_score": 0,
+    "proxy_last_seen": "",
+    "proxy_provider_names": [],
     "relay_provider_name": "",
     "threat_score": 80,
-    "vpn_confidence_score": 80,
-    "vpn_last_seen": "2026-01-19",
-    "vpn_provider_names": [
-      "Nord VPN"
-    ]
+    "vpn_confidence_score": 70,
+    "vpn_last_seen": "",
+    "vpn_provider_names": []
   }
 }
+
 ```
 
 
@@ -1049,6 +1055,7 @@ ipgeolocation bulk-ip-security [flags]
 | `--fields`      | string[] | `[]`     | Return only specific fields (e.g. `location`).                 |
 | `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.               |
 | `--output-file` | string   | `""`     | Save output to JSON file. Example: `--output-file results`     |
+
 #### `bulk-ip-security` Examples
 Look up 3 IP addresses:
 ```bash
@@ -1060,17 +1067,12 @@ Look up from a file:
 ipgeolocation bulk-ip-security --file=ips.txt --output-file=output
 ```
 
-Include location and timezone:
-```bash
-ipgeolocation bulk-ip-security --file=ips.txt --include=location,network,time_zone
-```
-
 Output as YAML:
 ```bash
 ipgeolocation bulk-ip-security --ips=8.8.8.8 --output=yaml
 ```
 
-Save results to JSON file:
+Save results to a JSON file:
 ```bash
 ipgeolocation bulk-ip-security --ips=8.8.8.8,1.1.1.1 --output-file=output
 ```
@@ -1078,7 +1080,7 @@ ipgeolocation bulk-ip-security --ips=8.8.8.8,1.1.1.1 --output-file=output
 For further information, please visit [Bulk IP Security API Documentation](https://ipgeolocation.io/documentation/ip-security-api.html#bulk-ip-security-lookup-endpoint).
 
 ### `asn` Command
-Lookup ASN (Autonomous System Number) information using the `ipgeolocation.io` API.
+Look up ASN (Autonomous System Number) information using the `ipgeolocation.io` API.
 
 #### `asn` Usage
 ```bash
@@ -1230,7 +1232,7 @@ ipgeolocation asn --ip 8.8.8.8 --output=yaml
 For further information, please visit [ASN API Documentation](https://ipgeolocation.io/documentation/asn-api.html).
 
 ### `abuse` Command
-Lookup IP abuse contact information using the `ipgeolocation.io` API.
+Look up IP abuse contact information using the `ipgeolocation.io` API.
 
 #### `abuse` Usage
 ```bash
@@ -1304,7 +1306,7 @@ ip: 8.8.8.8
 For further information, please visit [Abuse API Documentation](https://ipgeolocation.io/documentation/ip-abuse-contact-api.html).
 
 ### `timezone` Command
-Lookup timezone information using the `ipgeolocation.io` API using different query types like IP address, latitude/longitude, and timezone ID.
+Look up timezone information using the `ipgeolocation.io` API with different query types like IP address, latitude/longitude, and timezone ID.
 
 For full API specifications, refer to the [Time Zone API documentation](https://ipgeolocation.io/documentation/timezone-api.html).
 
@@ -1320,7 +1322,7 @@ ipgeolocation timezone [flags]
 | `--tz`        | string  | `""`     | IANA Timezone identifier.                        |
 | `--location`  | string  | `""`     | Location name (e.g. New York)                    |
 | `--latitude`  | float64 | `0`      | Latitude (e.g. 37.7749).                         |
-| `--longitude` | float64 | `0`      | Longitude (e.g. -122.4194).                      |
+| `--longitude` | float64 | `0`      | Longitude (e.g., -122.4194).                      |
 | `--lang`      | string  | `""`     | Response language (if supported).                |
 | `--iata`      | string  | `""`     | IATA code (e.g. DXB).                            |
 | `--icao`      | string  | `""`     | ICAO code (e.g. KATL).                           |
@@ -1624,7 +1626,7 @@ Sample output:
 }
 ```
 > [!NOTE]
-> Similarly, you can fetch Airport Details and Timezone from using any ICAO code as well.
+> Similarly, you can fetch Airport Details and Timezone using any ICAO code as well.
 
 #### Get Timezone and City Details from UN/LOCODE
 ```bash
@@ -1697,7 +1699,7 @@ ipgeolocation timezone --ip 8.8.8.8 --output=yaml
 ### `time-conversion` Command
 Convert between timezones using the `ipgeolocation.io` API to convert a specific time from one timezone to another using timezone identifiers and optional date/time inputs.
 
-For more details, refer to official documentation: [Timezone Converter API](https://ipgeolocation.io/documentation/timezone-api.html#convert-time-between-time-zones).
+For more details, refer to the official documentation: [Timezone Converter API](https://ipgeolocation.io/documentation/timezone-api.html#convert-time-between-time-zones).
 
 #### `time-conversion` Usage
 ```bash
