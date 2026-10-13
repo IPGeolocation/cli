@@ -248,7 +248,7 @@ IP Geolocation offers two plans from a billing point of view: **Developer (Free)
 | `parse-bulk-user-agents` | Parse multiple User Agent String at once.                                                                                    |  ✖   |    ✔     |
 
 > [!TIP]
-> The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for IP Geolocation Api, please visit [IP Location API](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response).
+> The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for IP Geolocation API, please visit [IP Location API](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response).
 
 ## Authentication Setup
 To authenticate API requests, you need to get an API key from [ipgeolocation.io](https://ipgeolocation.io/).
