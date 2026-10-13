@@ -13,9 +13,9 @@ Using a single executable, you can query **IP location, security intelligence, A
 - [Astronomy API](https://ipgeolocation.io/astronomy-api.html): Get sunrise, sunset, moonrise, moonset, moon phases with precise twilight period times in combination with location information.
 - [Time Zone API](https://ipgeolocation.io/timezone-api.html): Get timezone name, multiple time formats, daylight saving status and its details along with location information.
 - [Timezone Convert API](https://ipgeolocation.io/timezone-api.html): Convert time between timezone names, geo coordinates, location addresses, IATA codes, ICAO codes, or UN/LOCODE.
-- [User Agent API](https://ipgeolocation.io/user-agent-api.html): Get browser, Operating System, and device info from single or multiple Useragent string parsing.
+- [User Agent API](https://ipgeolocation.io/user-agent-api.html): Parse one or more user-agent strings to get browser, operating system, and device details.
 
-The `ipgeolocation` CLI is built for speed and automation, making it easy to integrate IP intelligence into shell scripts, bash pipelines, cron jobs, and CI/CD workflows. It enriches server logs, firewall events, and SIEM data, supports on the fly lookups during incident response, and enables automated fraud detection, geo based routing, and access control without language specific dependencies. Designed for system administrators, DevOps engineers, and developers, the CLI delivers consistent and reliable insights directly from the terminal.
+The `ipgeolocation` CLI is built for speed and automation, making it easy to integrate IP intelligence into shell scripts, bash pipelines, cron jobs, and CI/CD workflows. It enriches server logs, firewall events, and SIEM data, supports on-the-fly lookups during incident response, and enables automated fraud detection, geo-based routing, and access control without language-specific dependencies. Designed for system administrators, DevOps engineers, and developers, the CLI delivers consistent and reliable insights directly from the terminal.
 
 Based on:
 - API version: 3.0.0
@@ -134,7 +134,7 @@ cd cli
 go build -o ipgeolocation ./cmd/ipgeolocation
 ./ipgeolocation --help
 ```
-Here you will need to add `$GOBIN` or `$GOPATH/bin` is in your `PATH` as well.
+Here, you will need to add `$GOBIN` or `$GOPATH/bin` to your `PATH` as well.
 
 ### Using Download Prebuilt Binaries
 
@@ -234,14 +234,14 @@ IP Geolocation offers two plans from a billing point of view: **Developer (Free)
 | Sub Command              | Details                                                                                                                      | Developer (Free) | Paid |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------|:----:|:--------:|
 | `config`                 | Set up and check API Key.                                                                                                    |  ✔   |    ✔     |
-| `ipgeo`                  | Get geolocation data for a single IP address, along with network, currency, abuse, timezone, security, asn, useragent, etc.  |  ✔   |    ✔     |
+| `ipgeo`                  | Get geolocation data for a single IP address, along with network, currency, abuse, timezone, security, asn, user-agent, etc.  |  ✔   |    ✔     |
 | `bulk-ip-geo`            | Get geolocation data for multiple IP addresses in a single API request, along with the same data as in `ipgeo`.                  |  ✖   |    ✔     |
-| `ip-security`            | Get security information (VPN, Tor, proxy, etc.) for a single IP, along with network, timezone, location, and currency, etc. |  ✖   |    ✔     |
+| `ip-security`            | Get security intelligence (threat score, VPN, proxy, Tor, relay, bot, and cloud-provider detection) for an IP address. |  ✖   |    ✔     |
 | `bulk-ip-security`       | Get security threat intelligence for multiple IP addresses, along with the same data as in `ip-security`.                        |  ✖   |    ✔     |
 | `asn`                    | Get details of any AS number or IP address associated with an ASN.                                                                   |  ✖   |    ✔     |
 | `abuse`                  | Get abuse reporting contact information for a given IP address.                                                              |  ✖   |    ✔     |
 | `astronomy`              | Get sunrise, sunset, moonrise, moonset, and related data for a location.                                                     |  ✔   |    ✔     |
-| `astronomy-timeseries`   | Get astronomy information for given date range at once.                                                                      |  ✔   |    ✔     |
+| `astronomy-timeseries`   | Get astronomy information for a given date range at once.                                                                      |  ✔   |    ✔     |
 | `timezone`               | Get timezone details using IP address, city, coordinates, IATA, ICAO, UNLOCODE, or timezone ID.                              |  ✔   |    ✔     |
 | `time-conversion`        | Convert time between two specified timezones using city, coordinates, IATA, ICAO, UNLOCODE, or timezone ID.                  |  ✔   |    ✔     |
 | `parse-user-agent`       | Parse single User Agent string.                                                                                              |  ✖   |    ✔     |
