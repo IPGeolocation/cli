@@ -2,11 +2,11 @@
 
 ## Overview
 
-The official `ipgeolocation` **Command Line Interface (CLI)** provides a fast, lightweight, and script-friendly way to access **[IPGeolocation.io](https://ipgeolocation.io)**'s set of APIs directly from your terminal. It enables developers, DevOps engineers, network operators, and security teams to retrieve IP intelligence without writing any code or handling raw HTTP requests.
+The official `ipgeolocation` **Command Line Interface (CLI)** provides a fast, lightweight, and script-friendly way to access **[IPGeolocation.io](https://ipgeolocation.io)**'s set of APIs directly from your terminal. It lets developers, DevOps engineers, network operators, and security teams retrieve IP intelligence without writing code or handling raw HTTP requests.
 
 Using a single executable, you can query **IP location, security intelligence, ASN details, timezone, astronomy, abuse contact information, and user agent parsing** for your own IP or for any IPv4, IPv6 address, or domain name. The CLI outputs structured, machine-readable data that integrates seamlessly into shell scripts, cron jobs, CI/CD pipelines, monitoring systems, and log-processing workflows.
 
-- [IP Location API](https://ipgeolocation.io/ip-location-api.html): Get all-in-one unified solution for **location** (city, locality, state, country, accuracy-radius, confidence etc.), **currency**, **ASN** (AS number, ASN name, organization, asn type, date of allocation, routes, upstreams, downstreams, peers), **company** (company/ISP name, company type, company domain), **timezone** , **user agent** string parsing, **security** (threat score, is_tor, is_bot, proxy_provider, cloud_provider, relay_provider, vpn_provider, proxy, relay, vpn), and **abuse contact** (route/CIDR network, country, address, email, phone numbers) information.
+- [IP Location API](https://ipgeolocation.io/ip-location-api.html): Get all-in-one unified solution for **location** (city, locality, state, country, accuracy-radius, confidence etc.), **currency**, **ASN** (AS number, ASN name, organization, asn type, date of allocation, routes, upstreams, downstreams, peers), **company** (company/ISP name, company type, company domain), **timezone**, **user agent** string parsing, **security** (threat score, is_tor, is_bot, proxy_provider, cloud_provider, relay_provider, vpn_provider, proxy, relay, vpn), and **abuse contact** (route/CIDR network, country, address, email, phone numbers) information.
 - [IP Security API](https://ipgeolocation.io/ip-security-api.html): Get security intelligence (threat score, VPN, proxy, Tor, relay, bot, and cloud-provider detection) for an IP address.
 - [ASN API](https://ipgeolocation.io/asn-api.html): Get ASN details along with peers, upstreams, downstreams, routes, and raw WHOIS.
 - [Abuse Contact API](https://ipgeolocation.io/ip-abuse-contact-api.html): Get abuse emails, phone numbers, kind, organization, route/CIDR network and country.
@@ -15,7 +15,7 @@ Using a single executable, you can query **IP location, security intelligence, A
 - [Timezone Convert API](https://ipgeolocation.io/timezone-api.html): Convert time between timezone names, geo coordinates, location addresses, IATA codes, ICAO codes, or UN/LOCODE.
 - [User Agent API](https://ipgeolocation.io/user-agent-api.html): Parse one or more user-agent strings to get browser, operating system, and device details.
 
-The `ipgeolocation` CLI is built for speed and automation, making it easy to integrate IP intelligence into shell scripts, bash pipelines, cron jobs, and CI/CD workflows. It enriches server logs, firewall events, and SIEM data, supports on-the-fly lookups during incident response, and enables automated fraud detection, geo-based routing, and access control without language-specific dependencies. Designed for system administrators, DevOps engineers, and developers, the CLI delivers consistent and reliable insights directly from the terminal.
+The `ipgeolocation` CLI is built for speed and automation, making it easy to integrate IP intelligence into shell scripts, bash pipelines, cron jobs, and CI/CD workflows. It enriches server logs, firewall events, and SIEM data, supports on-the-fly lookups during incident response, and enables automated fraud detection, geo-based routing, and access control without language-specific dependencies. Designed for system administrators, DevOps engineers, and developers, the CLI delivers consistent, reliable insights directly in the terminal.
 
 Based on:
 - API version: 3.0.0
@@ -205,7 +205,7 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 > [!NOTE]
 > - Ensure execution permissions on Linux/macOS.
 > - Recommended folder for binaries: `/usr/local/bin` or any folder in your PATH.
-> - Prebuilt binaries include version **2.0.0** in their filename. Rename them after extraction for easier usage.
+> - Prebuilt binaries include version **2.0.1** in their filename. Rename them after extraction for easier use.
 > - For updates, check GitHub Releases.
 
 ### Troubleshooting
@@ -720,7 +720,7 @@ Sample output:
 >
 > - `hostname`: Performs a quick lookup using the internal hostname database. If no match is found, the IP is returned as-is. This is fast but may produce incomplete results.
 > - `liveHostname`: Queries live sources for accurate hostname resolution. This may increase response time.
-> - `hostnameFallbackLive`: Attempts the internal database first, and falls back to live sources if no result is found. This option provides a balance of speed and reliability.
+> - `hostnameFallbackLive`: Attempts the internal database first, and falls back to live sources if no result is found. This option balances speed and reliability.
 
 ##### Include DMA, Abuse and Security
 ```bash
