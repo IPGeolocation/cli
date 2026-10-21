@@ -41,6 +41,10 @@ Based on:
     - [`config` Command](#config-command)
       - [`config` Usage](#config-usage)
       - [Flags for `config`](#flags-for-config)
+    - [`my-ip` Command](#my-ip-command)
+      - [`my-ip` Usage](#my-ip-usage)
+      - [Flags for `my-ip`](#flags-for-my-ip)
+      - [Get your public IP address](#get-your-public-ip-address)
     - [`ipgeo` Command](#ipgeo-command)
       - [`ipgeo` Usage](#ipgeo-usage)
       - [Flags for `ipgeo`](#flags-for-ipgeo)
@@ -139,7 +143,7 @@ Here, you will need to add `$GOBIN` or `$GOPATH/bin` to your `PATH` as well.
 ### Using Download Prebuilt Binaries
 
 #### Overview
-These are prebuilt binaries for the IPGeolocation CLI tool, version **2.0.1**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
+These are prebuilt binaries for the IPGeolocation CLI tool, version **2.1.0**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
 
 The CLI provides geolocation information, timezone, user-agent parsing, bulk IP lookups, and more.
 
@@ -147,11 +151,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 
 | Platform | Architecture | File Name / Download Link                                                                                                                             |
 |----------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Linux    | amd64        | [**ipgeolocation-2.0.1-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.1/ipgeolocation-2.0.1-linux-amd64.tar.gz)   |
-| Linux    | arm64        | [**ipgeolocation-2.0.1-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.1/ipgeolocation-2.0.1-linux-arm64.tar.gz)   |
-| macOS    | amd64        | [**ipgeolocation-2.0.1-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.1/ipgeolocation-2.0.1-darwin-amd64.tar.gz) |
-| macOS    | arm64        | [**ipgeolocation-2.0.1-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.0.1/ipgeolocation-2.0.1-darwin-arm64.tar.gz) |
-| Windows  | amd64        | [**ipgeolocation-2.0.1-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v2.0.1/ipgeolocation-2.0.1-windows-amd64.zip)     |
+| Linux    | amd64        | [**ipgeolocation-2.1.0-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.0/ipgeolocation-2.1.0-linux-amd64.tar.gz)   |
+| Linux    | arm64        | [**ipgeolocation-2.1.0-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.0/ipgeolocation-2.1.0-linux-arm64.tar.gz)   |
+| macOS    | amd64        | [**ipgeolocation-2.1.0-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.0/ipgeolocation-2.1.0-darwin-amd64.tar.gz) |
+| macOS    | arm64        | [**ipgeolocation-2.1.0-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.0/ipgeolocation-2.1.0-darwin-arm64.tar.gz) |
+| Windows  | amd64        | [**ipgeolocation-2.1.0-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v2.1.0/ipgeolocation-2.1.0-windows-amd64.zip)     |
 
 #### Installation Instructions
 
@@ -159,11 +163,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 1. Download the `.tar.gz` file for your architecture.
 2. Extract it to a folder in your PATH, e.g., `/usr/local/bin`:
    ```bash
-   tar -xzf ipgeolocation-2.0.1-linux-amd64.tar.gz -C /usr/local/bin
+   tar -xzf ipgeolocation-2.1.0-linux-amd64.tar.gz -C /usr/local/bin
    ```
 3. Rename the binary for simplicity:
    ```bash
-   mv /usr/local/bin/ipgeolocation-2.0.1-linux-amd64 /usr/local/bin/ipgeolocation
+   mv /usr/local/bin/ipgeolocation-2.1.0-linux-amd64 /usr/local/bin/ipgeolocation
    ```
 4. Make the binary executable:
    ```bash
@@ -178,11 +182,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 1. Download the `.tar.gz` file for your architecture (amd64 or arm64).
 2. Extract to a folder in your PATH, e.g., `/usr/local/bin`:
    ```bash
-   tar -xzf ipgeolocation-2.0.1-darwin-amd64.tar.gz -C /usr/local/bin
+   tar -xzf ipgeolocation-2.1.0-darwin-amd64.tar.gz -C /usr/local/bin
    ```
 3. Rename the binary:
    ```bash
-   mv /usr/local/bin/ipgeolocation-2.0.1-darwin-amd64 /usr/local/bin/ipgeolocation
+   mv /usr/local/bin/ipgeolocation-2.1.0-darwin-amd64 /usr/local/bin/ipgeolocation
    ```
 4. Make executable:
    ```bash
@@ -195,7 +199,7 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 
 **Windows:**
 1. Download the `.zip` file.
-2. Extract the `ipgeolocation-2.0.1-windows-amd64.exe` to a folder included in your system `PATH`.
+2. Extract the `ipgeolocation-2.1.0-windows-amd64.exe` to a folder included in your system `PATH`.
 3. Rename the binary to `ipgeolocation.exe` for convenience.
 4. Open Command Prompt and verify:
    ```cmd
@@ -205,7 +209,7 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 > [!NOTE]
 > - Ensure execution permissions on Linux/macOS.
 > - Recommended folder for binaries: `/usr/local/bin` or any folder in your PATH.
-> - Prebuilt binaries include version **2.0.1** in their filename. Rename them after extraction for easier use.
+> - Prebuilt binaries include version **2.1.0** in their filename. Rename them after extraction for easier use.
 > - For updates, check GitHub Releases.
 
 ### Troubleshooting
@@ -234,6 +238,7 @@ IP Geolocation offers two plans from a billing point of view: **Developer (Free)
 | Sub Command              | Details                                                                                                                      | Developer (Free) | Paid |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------|:----:|:--------:|
 | `config`                 | Set up and check API Key.                                                                                                    |  ✔   |    ✔     |
+| `my-ip`                  | Get the public IP address of the machine running the command. Does not require an API key.                                  |  ✔   |    ✔     |
 | `ipgeo`                  | Get geolocation data for a single IP address, along with network, currency, abuse, timezone, security, asn, user-agent, etc.  |  ✔   |    ✔     |
 | `bulk-ip-geo`            | Get geolocation data for multiple IP addresses in a single API request, along with the same data as in `ipgeo`.                  |  ✖   |    ✔     |
 | `ip-security`            | Get security intelligence (threat score, VPN, proxy, Tor, relay, bot, and cloud-provider detection) for an IP address. |  ✖   |    ✔     |
@@ -293,10 +298,58 @@ ipgeolocation config --apikey=<your-key>
 ```
 
 #### Flags for `config`
+
 | Flag       | Type   | Description                                                     |
 |------------|--------|-----------------------------------------------------------------|
 | `--apikey` | string | Your API key from [ipgeolocation.io](https://ipgeolocation.io). |
 
+### `my-ip` Command
+
+Get the public IP address of the machine running the command, as seen by the `ipgeolocation.io` API.
+
+#### `my-ip` Usage
+
+```bash
+ipgeolocation my-ip [flags]
+```
+
+#### Flags for `my-ip`
+
+| Flag       | Type   | Default  | Description                                              |
+|------------|--------|----------|----------------------------------------------------------|
+| `--output` | string | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `text`. |
+
+> [!NOTE]
+> - The `my-ip` command does not require an API key.
+> - `getip` can be used as an alias for `my-ip`.
+
+#### Get your public IP address
+
+```bash
+ipgeolocation my-ip
+```
+
+Sample output:
+
+```json
+{
+  "ip": "203.0.113.24"
+}
+```
+
+Print only the IP address, which is useful in shell scripts:
+
+```bash
+MY_IP=$(ipgeolocation my-ip --output text)
+
+echo "$MY_IP"
+```
+
+Sample output:
+
+```text
+203.0.113.24
+```
 
 ### `ipgeo` Command
 Look up geolocation information for a **single IP address or domain** from the `ipgeolocation.io` API.
@@ -312,7 +365,7 @@ ipgeolocation ipgeo [flags]
 | `--ip`       | string   | `""`     | IPv4, IPv6, or domain name (e.g. `8.8.8.8`, `google.com`).                      |
 | `--include`  | string[] | `[]`     | Include extra fields (e.g. `hostname,geo_accuracy,dma_code,security,abuse,user_agent`). |
 | `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `location,asn.organization`).         |
-| `--excludes` | string[] | `[]`     | Exclude fields from output.                                                     |
+| `--exclude`  | string[] | `[]`     | Exclude fields from output. `--excludes` is also accepted.                      |
 | `--lang`     | string   | `""`     | Response language.                                                              |
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.                                |
 
@@ -409,9 +462,9 @@ Sample output:
 }
 ```
 
-Filtering response with the use of `--fields` and `--excludes`:
+Filtering response with the use of `--fields` and `--exclude`:
 ```bash
-ipgeolocation ipgeo --ip 8.8.8.8 --fields=location --excludes location.continent_code,location.continent_name
+ipgeolocation ipgeo --ip 8.8.8.8 --fields=location --exclude location.continent_code,location.continent_name
 ```
 Sample output:
 ```json
@@ -908,7 +961,7 @@ ipgeolocation bulk-ip-geo [flags]
 | `--ips`         | string[] | `[]`     | Comma-separated list of IPs. Example: `--ips 8.8.8.8,1.1.1.1` |
 | `--file`        | string   | `""`     | Path to a text file containing IPs (one per line).            |
 | `--include`     | string[] | `[]`     | Include extra fields (e.g. `location,time_zone`).             |
-| `--excludes`    | string[] | `[]`     | Exclude fields (e.g. `currency`).                             |
+| `--exclude`     | string[] | `[]`     | Exclude fields (e.g. `currency`).                             |
 | `--fields`      | string[] | `[]`     | Return only specific fields (e.g. `location`).                |
 | `--lang`        | string   | `""`     | Response language (if supported).                             |
 | `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.              |
@@ -961,7 +1014,7 @@ ipgeolocation ip-security [flags]
 | Flag         | Type     | Default  | Description                                                    |
 |--------------|----------|----------|----------------------------------------------------------------|
 | `--ip`       | string   | `""`     | IPv4 or IPv6 address.                                          |
-| `--excludes` | string[] | `[]`     | Exclude fields from output.                                    |
+| `--exclude`  | string[] | `[]`     | Exclude fields from output.                                    |
 | `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `security.threat_score`). |
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.               |               
 
@@ -1051,7 +1104,7 @@ ipgeolocation bulk-ip-security [flags]
 |-----------------|----------|----------|----------------------------------------------------------------|
 | `--ips`         | string[] | `[]`     | Comma-separated list of IPs. Example: `--ips 8.8.8.8,1.1.1.1` |
 | `--file`        | string   | `""`     | Path to a text file containing IPs (one per line).             |
-| `--excludes`    | string[] | `[]`     | Exclude fields (e.g. `security.is_tor`).                              |
+| `--exclude`     | string[] | `[]`     | Exclude fields (e.g. `security.is_tor`).                              |
 | `--fields`      | string[] | `[]`     | Return only specific fields (e.g. `security.threat_score`).                 |
 | `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.               |
 | `--output-file` | string   | `""`     | Save output to JSON file. Example: `--output-file results`     |
@@ -1092,7 +1145,7 @@ ipgeolocation asn [flags]
 |--------------|----------|----------|-----------------------------------------------------------------------------------------|
 | `--ip`       | string   | `""`     | IPv4 or IPv6 address.                                                                   |
 | `--include`  | string[] | `[]`     | Include extra fields in output.(e.g., `peers, downstreams, upstreams, routes, whois_response`)  |
-| `--excludes` | string[] | `[]`     | Exclude fields from output.                                                             |
+| `--exclude`  | string[] | `[]`     | Exclude fields from output.                                                             |
 | `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `ip,organization`).                                   |
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.                                        |
 
@@ -1243,7 +1296,7 @@ ipgeolocation abuse [flags]
 | Flag         | Type     | Default  | Description                                           |
 |--------------|----------|----------|-------------------------------------------------------|
 | `--ip`       | string   | `""`     | IPv4 or IPv6 address.                                 |
-| `--excludes` | string[] | `[]`     | Exclude fields from output.                           |
+| `--exclude`  | string[] | `[]`     | Exclude fields from output.                           |
 | `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `ip,organization`). |
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.      |
 

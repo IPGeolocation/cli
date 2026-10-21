@@ -27,7 +27,7 @@ security-related details about a given IP address.
 The data includes threat intelligence such as proxy detection, Tor usage, VPN status, 
 threat types (malware, phishing), bot activity, and more.
 
-You can tailor the output using the --include, --exclude, --fields, and --lang flags.
+You can tailor the output using the --exclude, --fields, and --output flags.
 
 Examples:
 

@@ -12,6 +12,7 @@ import (
 	"github.com/IPGeolocation/cli/v2/internal/utils"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 	"gopkg.in/yaml.v3"
 )
 
@@ -44,7 +45,7 @@ Examples:
   ipgeolocation ipgeo --ip 1.1.1.1 --fields ip,organization --output yaml
 
   # Exclude unnecessary fields
-  ipgeolocation ipgeo --excludes currency,time_zone
+  ipgeolocation ipgeo --exclude currency,time_zone
 
 Notes:
   - You must have a valid API key configured using: ipgeolocation config --apikey=<your_key>
@@ -120,10 +121,18 @@ Notes:
 func init() {
 	ipgeoCmd.Flags().StringVar(&ipgeoFlags.IP, "ip", "", "IPv4 or IPv6 address or domain (e.g. 8.8.8.8, google.com)")
 	ipgeoCmd.Flags().StringSliceVar(&ipgeoFlags.Include, "include", []string{}, "To include additional values in the output")
-	ipgeoCmd.Flags().StringSliceVar(&ipgeoFlags.Excludes, "excludes", []string{}, "Fields to exclude from the output")
+	ipgeoCmd.Flags().StringSliceVar(&ipgeoFlags.Excludes, "exclude", []string{}, "Fields to exclude from the output")
 	ipgeoCmd.Flags().StringSliceVar(&ipgeoFlags.Fields, "fields", []string{}, "Get Specific Fields to include in the output")
 	ipgeoCmd.Flags().StringVar(&ipgeoFlags.Language, "lang", "", "Language for the output")
 	ipgeoCmd.Flags().StringVar(&ipgeoFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml")
+
+	// --excludes was the original name of --exclude; keep accepting it so existing scripts don't break.
+	ipgeoCmd.Flags().SetNormalizeFunc(func(f *pflag.FlagSet, name string) pflag.NormalizedName {
+		if name == "excludes" {
+			name = "exclude"
+		}
+		return pflag.NormalizedName(name)
+	})
 
 	rootCmd.AddCommand(ipgeoCmd)
 }

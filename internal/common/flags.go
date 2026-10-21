@@ -115,3 +115,7 @@ type ParseBulkUserAgentFlags struct {
 	UserAgents []string
 	Output     string
 }
+
+type MyIPFlags struct {
+	Output string
+}
