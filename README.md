@@ -29,7 +29,7 @@ Based on:
 2. [Installation](#installation)
     - [Go install](#go-install)
     - [Download and build from source](#download-and-build-from-source)
-    - [Using Download Prebuilt Binaries](#using-download-prebuilt-binaries)
+    - [Download Prebuilt Binaries](#download-prebuilt-binaries)
     - [Troubleshooting](#troubleshooting)
 3. [API Documentation Links](#api-documentations)
 4. [Fields and commands Availability](#fields-and-commands-availability)
@@ -140,7 +140,7 @@ go build -o ipgeolocation ./cmd/ipgeolocation
 ```
 Here, you will need to add `$GOBIN` or `$GOPATH/bin` to your `PATH` as well.
 
-### Using Download Prebuilt Binaries
+### Download Prebuilt Binaries
 
 #### Overview
 These are prebuilt binaries for the IPGeolocation CLI tool, version **2.1.0**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
@@ -249,8 +249,8 @@ IP Geolocation offers two plans from a billing point of view: **Developer (Free)
 | `astronomy-timeseries`   | Get astronomy information for a given date range at once.                                                                      |  ✔   |    ✔     |
 | `timezone`               | Get timezone details using IP address, city, coordinates, IATA, ICAO, UNLOCODE, or timezone ID.                              |  ✔   |    ✔     |
 | `time-conversion`        | Convert time between two specified timezones using city, coordinates, IATA, ICAO, UNLOCODE, or timezone ID.                  |  ✔   |    ✔     |
-| `parse-user-agent`       | Parse single User Agent string.                                                                                              |  ✖   |    ✔     |
-| `parse-bulk-user-agents` | Parse multiple User Agent String at once.                                                                                    |  ✖   |    ✔     |
+| `parse-user-agent`       | Parse a single user-agent string.                                                                                              |  ✖   |    ✔     |
+| `parse-bulk-user-agents` | Parse multiple user-agent strings at once.                                                                                    |  ✖   |    ✔     |
 
 > [!TIP]
 > The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for the IP Geolocation API, please visit [IP Location API](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response).
