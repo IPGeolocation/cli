@@ -48,7 +48,7 @@ Based on:
     - [`ipgeo` Command](#ipgeo-command)
       - [`ipgeo` Usage](#ipgeo-usage)
       - [Flags for `ipgeo`](#flags-for-ipgeo)
-      - [Developer Plan Examples](#developer-plan-examples)
+      - [Free Plan Examples](#free-plan-examples)
       - [Paid Plan Examples](#paid-plan-examples)
     - [`bulk-ip-geo` Command](#bulk-ip-geo-command)
       - [`bulk-ip-geo` Usage](#bulk-ip-geo-usage)
@@ -233,9 +233,9 @@ The documentation below corresponds to the available APIs:
 For a detailed comparison of what each plan offers, visit the [Pricing Page](https://ipgeolocation.io/pricing.html).
 
 ## Fields and commands Availability
-IP Geolocation offers two plans from a billing point of view: **Developer (Free), Paid**. The availability of each command across plans is presented below.
+IPGeolocation.io offers a **free Developer plan** and **paid plans**. The availability of each command across plans is presented below.
 
-| Sub Command              | Details                                                                                                                      | Developer (Free) | Paid |
+| Sub Command              | Details                                                                                                                      | Free             | Paid |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------|:----:|:--------:|
 | `config`                 | Set up and check API Key.                                                                                                    |  ✔   |    ✔     |
 | `my-ip`                  | Get the public IP address of the machine running the command. Does not require an API key.                                  |  ✔   |    ✔     |
@@ -372,13 +372,13 @@ ipgeolocation ipgeo [flags]
 > [!NOTE]
 > Available language options can be found [here](https://ipgeolocation.io/documentation/ip-location-api.html#response-in-multiple-languages)
 
-#### Developer Plan Examples
+#### Free Plan Examples
 Get info about your current IP:
 ```bash
 ipgeolocation ipgeo
 ```
 
-##### Get Default Fields in developer plan
+##### Get Default Fields in Free Plan
 Look up a specific IP:
 ```bash
 ipgeolocation ipgeo --ip 8.8.8.8
