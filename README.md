@@ -1797,7 +1797,7 @@ Sample output:
 
 Convert from one location to another:
 ```bash
-ipgeolocation time-conversion --location_from New York --location_to London
+ipgeolocation time-conversion --location_from "New York" --location_to London
 ```
 
 Convert from one latitude and longitude to another:
@@ -1810,14 +1810,14 @@ Convert from one IATA code to another:
 ipgeolocation time-conversion --iata_from DXB --iata_to JFK
 ```
 
-Convert from one ICAO code to another:
+Convert from one ICAO code to another (Atlanta to Newark):
 ```bash
-ipgeolocation time-conversion --icao_from KATL --icao_to EWR
+ipgeolocation time-conversion --icao_from KATL --icao_to KEWR
 ```
 
-Convert from one LO code to another:
+Convert from one UN/LOCODE to another (Berlin to New York):
 ```bash
-ipgeolocation time-conversion --lo_from DEBER --lo_to JFK
+ipgeolocation time-conversion --lo_from DEBER --lo_to USNYC
 ```
 
 Output as YAML:
