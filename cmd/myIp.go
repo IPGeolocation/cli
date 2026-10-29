@@ -3,8 +3,6 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
 
 	"github.com/IPGeolocation/cli/v2/internal/common"
 	"github.com/IPGeolocation/cli/v2/internal/utils"
@@ -37,17 +35,9 @@ Notes:
   - This command does not require an API key.
   `,
 	Run: func(cmd *cobra.Command, args []string) {
-		resp, err := http.Get("https://api.ipgeolocation.io/getip")
+		body, err := utils.Get("https://api.ipgeolocation.io/getip")
 		if err != nil {
 			fmt.Println("Error fetching your IP address:", err)
-			return
-		}
-		defer resp.Body.Close()
-
-		body, _ := io.ReadAll(resp.Body)
-
-		if resp.StatusCode != 200 {
-			fmt.Printf("Error: %s\n", string(body))
 			return
 		}
 

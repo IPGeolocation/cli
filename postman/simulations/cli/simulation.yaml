@@ -1,0 +1,10 @@
+id: 8e1b3eef-dc59-4214-87bd-e7697e1affa0
+simulation: cli
+routing: path
+mocks:
+  - name: ipgeolocation
+    id: 51ed6b5a-fbde-4888-886f-8de8f4225503
+    routeKey: ipgeolocation
+    origin:
+      - api.ipgeolocation.io
+    path: ../../mocks/ipgeolocation/config.yaml

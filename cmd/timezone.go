@@ -3,14 +3,11 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
+	neturl "net/url"
 
 	"github.com/IPGeolocation/cli/v2/internal/common"
 	"github.com/IPGeolocation/cli/v2/internal/config"
 	"github.com/IPGeolocation/cli/v2/internal/utils"
-
-	encoding "net/url"
 
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
@@ -62,33 +59,33 @@ Note:
 		}
 
 		baseURL := "https://api.ipgeolocation.io/v3/timezone"
-		url := baseURL + "?apiKey=" + cfg.ApiKey
+		url := baseURL + "?apiKey=" + neturl.QueryEscape(cfg.ApiKey)
 		if timezoneFlags.IP != "" {
-			url += "&ip=" + timezoneFlags.IP
+			url += "&ip=" + neturl.QueryEscape(timezoneFlags.IP)
 		}
 
 		if timezoneFlags.IataCode != "" {
-			url += "&iata_code=" + timezoneFlags.IataCode
+			url += "&iata_code=" + neturl.QueryEscape(timezoneFlags.IataCode)
 		}
 
 		if timezoneFlags.IcaoCode != "" {
-			url += "&icao_code=" + timezoneFlags.IcaoCode
+			url += "&icao_code=" + neturl.QueryEscape(timezoneFlags.IcaoCode)
 		}
 
 		if timezoneFlags.LoCode != "" {
-			url += "&lo_code=" + timezoneFlags.LoCode
+			url += "&lo_code=" + neturl.QueryEscape(timezoneFlags.LoCode)
 		}
 
 		if timezoneFlags.Language != "" {
-			url += "&lang=" + timezoneFlags.Language
+			url += "&lang=" + neturl.QueryEscape(timezoneFlags.Language)
 		}
 
 		if timezoneFlags.Tz != "" {
-			url += "&tz=" + timezoneFlags.Tz
+			url += "&tz=" + neturl.QueryEscape(timezoneFlags.Tz)
 		}
 
 		if timezoneFlags.Location != "" {
-			url += "&location=" + encoding.QueryEscape(timezoneFlags.Location)
+			url += "&location=" + neturl.QueryEscape(timezoneFlags.Location)
 		}
 
 		if timezoneFlags.Latitude != 0 {
@@ -99,17 +96,9 @@ Note:
 			url += "&long=" + fmt.Sprintf("%f", timezoneFlags.Longitude)
 		}
 
-		resp, err := http.Get(url)
+		body, err := utils.Get(url)
 		if err != nil {
 			fmt.Println("Error fetching timezone info:", err)
-			return
-		}
-		defer resp.Body.Close()
-
-		body, _ := io.ReadAll(resp.Body)
-
-		if resp.StatusCode != 200 {
-			fmt.Printf("Error: %s\n", string(body))
 			return
 		}
 

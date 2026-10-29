@@ -3,8 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
+	neturl "net/url"
 	"strings"
 
 	"github.com/IPGeolocation/cli/v2/internal/common"
@@ -47,30 +46,22 @@ Notes:
 		}
 
 		baseURL := "https://api.ipgeolocation.io/v3/security"
-		url := baseURL + "?apiKey=" + cfg.ApiKey
+		url := baseURL + "?apiKey=" + neturl.QueryEscape(cfg.ApiKey)
 		if securityFlags.IP != "" {
-			url += "&ip=" + securityFlags.IP
+			url += "&ip=" + neturl.QueryEscape(securityFlags.IP)
 		}
 
 		if len(securityFlags.Excludes) > 0 {
-			url += "&excludes=" + strings.Join(securityFlags.Excludes, ",")
+			url += "&excludes=" + neturl.QueryEscape(strings.Join(securityFlags.Excludes, ","))
 		}
 
 		if len(securityFlags.Fields) > 0 {
-			url += "&fields=" + strings.Join(securityFlags.Fields, ",")
+			url += "&fields=" + neturl.QueryEscape(strings.Join(securityFlags.Fields, ","))
 		}
 
-		resp, err := http.Get(url)
+		body, err := utils.Get(url)
 		if err != nil {
 			fmt.Println("Error fetching ip security info:", err)
-			return
-		}
-		defer resp.Body.Close()
-
-		body, _ := io.ReadAll(resp.Body)
-
-		if resp.StatusCode != 200 {
-			fmt.Printf("Error: %s\n", string(body))
 			return
 		}
 

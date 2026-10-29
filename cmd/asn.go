@@ -3,8 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
+	neturl "net/url"
 	"strings"
 
 	"github.com/IPGeolocation/cli/v2/internal/common"
@@ -39,38 +38,30 @@ Getting peering relationships for an ASN number: ipgeolocation asn --asn 12345 -
 		}
 
 		baseURL := "https://api.ipgeolocation.io/v3/asn"
-		url := baseURL + "?apiKey=" + cfg.ApiKey
+		url := baseURL + "?apiKey=" + neturl.QueryEscape(cfg.ApiKey)
 		if asnFlags.IP != "" {
-			url += "&ip=" + asnFlags.IP
+			url += "&ip=" + neturl.QueryEscape(asnFlags.IP)
 		}
 
 		if asnFlags.ASN != "" {
-			url += "&asn=" + asnFlags.ASN
+			url += "&asn=" + neturl.QueryEscape(asnFlags.ASN)
 		}
 
 		if len(asnFlags.Include) > 0 {
-			url += "&include=" + strings.Join(asnFlags.Include, ",")
+			url += "&include=" + neturl.QueryEscape(strings.Join(asnFlags.Include, ","))
 		}
 
 		if len(asnFlags.Excludes) > 0 {
-			url += "&excludes=" + strings.Join(asnFlags.Excludes, ",")
+			url += "&excludes=" + neturl.QueryEscape(strings.Join(asnFlags.Excludes, ","))
 		}
 
 		if len(asnFlags.Fields) > 0 {
-			url += "&fields=" + strings.Join(asnFlags.Fields, ",")
+			url += "&fields=" + neturl.QueryEscape(strings.Join(asnFlags.Fields, ","))
 		}
 
-		resp, err := http.Get(url)
+		body, err := utils.Get(url)
 		if err != nil {
 			fmt.Println("Error fetching ASN info:", err)
-			return
-		}
-		defer resp.Body.Close()
-
-		body, _ := io.ReadAll(resp.Body)
-
-		if resp.StatusCode != 200 {
-			fmt.Printf("Error: %s\n", string(body))
 			return
 		}
 

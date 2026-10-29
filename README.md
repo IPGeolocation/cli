@@ -114,7 +114,7 @@ Based on:
 
 ## Requirements
 
-- Go 1.18+
+- Go 1.26.10 or Go 1.27.3, or a newer patched stable version (only for building from source)
 - API Key from [IPGeolocation.io](https://ipgeolocation.io)
 
 ## Installation
@@ -140,10 +140,21 @@ go build -o ipgeolocation ./cmd/ipgeolocation
 ```
 Here, you will need to add `$GOBIN` or `$GOPATH/bin` to your `PATH` as well.
 
+To build release archives for all supported platforms, install `govulncheck` and run:
+
+```bash
+go install golang.org/x/vuln/cmd/govulncheck@v1.9.0
+bash build-release.sh
+```
+
+The script runs tests, checks the source and each binary, and writes archives and `SHA256SUMS` to `dist/`. Tagged releases run the same checks before publishing.
+
+For local HTTPS regression checks, install Node.js and Postman CLI 1.73.0, then run `node scripts/test-http.cjs`.
+
 ### Download Prebuilt Binaries
 
 #### Overview
-These are prebuilt binaries for the IPGeolocation CLI tool, version **2.1.0**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
+These are prebuilt binaries for the IPGeolocation CLI tool, version **2.1.1**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
 
 The CLI provides geolocation information, timezone, user-agent parsing, bulk IP lookups, and more.
 
@@ -151,11 +162,13 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 
 | Platform | Architecture | File Name / Download Link                                                                                                                             |
 |----------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Linux    | amd64        | [**ipgeolocation-2.1.0-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.0/ipgeolocation-2.1.0-linux-amd64.tar.gz)   |
-| Linux    | arm64        | [**ipgeolocation-2.1.0-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.0/ipgeolocation-2.1.0-linux-arm64.tar.gz)   |
-| macOS    | amd64        | [**ipgeolocation-2.1.0-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.0/ipgeolocation-2.1.0-darwin-amd64.tar.gz) |
-| macOS    | arm64        | [**ipgeolocation-2.1.0-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.0/ipgeolocation-2.1.0-darwin-arm64.tar.gz) |
-| Windows  | amd64        | [**ipgeolocation-2.1.0-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v2.1.0/ipgeolocation-2.1.0-windows-amd64.zip)     |
+| Linux    | amd64        | [**ipgeolocation-2.1.1-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.1/ipgeolocation-2.1.1-linux-amd64.tar.gz)   |
+| Linux    | arm64        | [**ipgeolocation-2.1.1-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.1/ipgeolocation-2.1.1-linux-arm64.tar.gz)   |
+| macOS    | amd64        | [**ipgeolocation-2.1.1-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.1/ipgeolocation-2.1.1-darwin-amd64.tar.gz) |
+| macOS    | arm64        | [**ipgeolocation-2.1.1-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.1/ipgeolocation-2.1.1-darwin-arm64.tar.gz) |
+| Windows  | amd64        | [**ipgeolocation-2.1.1-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v2.1.1/ipgeolocation-2.1.1-windows-amd64.zip)     |
+
+Archives include [SHA256SUMS](https://github.com/IPGeolocation/cli/releases/download/v2.1.1/SHA256SUMS) for download verification.
 
 #### Installation Instructions
 
@@ -163,11 +176,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 1. Download the `.tar.gz` file for your architecture.
 2. Extract it to a folder in your PATH, e.g., `/usr/local/bin`:
    ```bash
-   tar -xzf ipgeolocation-2.1.0-linux-amd64.tar.gz -C /usr/local/bin
+   tar -xzf ipgeolocation-2.1.1-linux-amd64.tar.gz -C /usr/local/bin
    ```
 3. Rename the binary for simplicity:
    ```bash
-   mv /usr/local/bin/ipgeolocation-2.1.0-linux-amd64 /usr/local/bin/ipgeolocation
+   mv /usr/local/bin/ipgeolocation-2.1.1-linux-amd64 /usr/local/bin/ipgeolocation
    ```
 4. Make the binary executable:
    ```bash
@@ -182,11 +195,11 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 1. Download the `.tar.gz` file for your architecture (amd64 or arm64).
 2. Extract to a folder in your PATH, e.g., `/usr/local/bin`:
    ```bash
-   tar -xzf ipgeolocation-2.1.0-darwin-amd64.tar.gz -C /usr/local/bin
+   tar -xzf ipgeolocation-2.1.1-darwin-amd64.tar.gz -C /usr/local/bin
    ```
 3. Rename the binary:
    ```bash
-   mv /usr/local/bin/ipgeolocation-2.1.0-darwin-amd64 /usr/local/bin/ipgeolocation
+   mv /usr/local/bin/ipgeolocation-2.1.1-darwin-amd64 /usr/local/bin/ipgeolocation
    ```
 4. Make executable:
    ```bash
@@ -199,7 +212,7 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 
 **Windows:**
 1. Download the `.zip` file.
-2. Extract the `ipgeolocation-2.1.0-windows-amd64.exe` to a folder included in your system `PATH`.
+2. Extract the `ipgeolocation-2.1.1-windows-amd64.exe` to a folder included in your system `PATH`.
 3. Rename the binary to `ipgeolocation.exe` for convenience.
 4. Open Command Prompt and verify:
    ```cmd
@@ -209,7 +222,7 @@ The CLI provides geolocation information, timezone, user-agent parsing, bulk IP 
 > [!NOTE]
 > - Ensure execution permissions on Linux/macOS.
 > - Recommended folder for binaries: `/usr/local/bin` or any folder in your PATH.
-> - Prebuilt binaries include version **2.1.0** in their filename. Rename them after extraction for easier use.
+> - Prebuilt binaries include version **2.1.1** in their filename. Rename them after extraction for easier use.
 > - For updates, check GitHub Releases.
 
 ### Troubleshooting

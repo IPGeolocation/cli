@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
+	neturl "net/url"
 	"os"
 	"strings"
 
@@ -64,14 +65,14 @@ Retrieving security information for IP addresses from a file: ipgeolocation bulk
 		}
 
 		baseURL := "https://api.ipgeolocation.io/v3/security-bulk"
-		url := baseURL + "?apiKey=" + cfg.ApiKey
+		url := baseURL + "?apiKey=" + neturl.QueryEscape(cfg.ApiKey)
 
 		if len(bulkSecurityFlags.Excludes) > 0 {
-			url += "&excludes=" + strings.Join(bulkSecurityFlags.Excludes, ",")
+			url += "&excludes=" + neturl.QueryEscape(strings.Join(bulkSecurityFlags.Excludes, ","))
 		}
 
 		if len(bulkSecurityFlags.Fields) > 0 {
-			url += "&fields=" + strings.Join(bulkSecurityFlags.Fields, ",")
+			url += "&fields=" + neturl.QueryEscape(strings.Join(bulkSecurityFlags.Fields, ","))
 		}
 
 		payload := map[string]interface{}{

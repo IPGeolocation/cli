@@ -1,0 +1,30 @@
+purpose:
+  stands_in_for: The IPGeolocation endpoints used by the CLI, including bulk and user-agent POST requests.
+  unblocks: Command, query encoding, JSON payload, output format and error regression checks over HTTPS.
+assumptions:
+  - id: command-compatibility
+    status: supported
+    claim: Commands preserve endpoint paths, decoded parameters, payloads and supported output formats.
+    reason: The fixture echoes the received request so command tests can check actual HTTPS traffic.
+    verification: On 2026-10-29, all 61 command and format cases plus 10 HTTP error requests passed. Proxy logs confirm 71 HTTPS requests across all 13 endpoints. Another 57 comparisons against the previous CLI matched, including bulk output files and encrypted-key compatibility in both directions.
+    source: cmd/commands_test.go; postman/mocks/ipgeolocation/default.js
+    updated_at: '2026-10-29'
+  - id: live-provider-contract
+    status: unknown
+    claim: The simulation establishes live service behavior or account permissions.
+    reason: No published mock was listed in the official IPGeolocation.io API Hub workspace; Orbit discovery returned HTTP 403. The fixture models the existing CLI contract.
+    verification: No live API key or provider requests are used.
+    source: cmd; postman/mocks/ipgeolocation/default.js
+    updated_at: '2026-10-29'
+  - id: proxy-certificate-serials
+    status: supported
+    claim: Postman CLI 1.73.0 can issue negative-serial test certificates.
+    reason: The simulation process alone enables the Go compatibility flag for these fixture certificates. Normal TLS tests and production executables keep strict defaults.
+    verification: Reproduced during the preceding Go integration checks with this installed CLI version.
+    source: scripts/test-http.cjs; internal/utils/request_test.go
+    updated_at: '2026-10-29'
+fingerprints:
+  - id: cli-v2.1.1
+    date: '2026-10-29'
+    commit: df51101 plus the CLI request and release changes in this branch.
+    cli: Postman CLI 1.73.0; Go 1.26.10 and 1.27.3.

@@ -12,20 +12,50 @@ type Config struct {
 	ApiKey string `json:"apikey"`
 }
 
-func configPath() string {
-	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".ipgeolocation", "config.json")
+func configPath() (string, error) {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return "", err
+	}
+	return filepath.Join(home, ".ipgeolocation", "config.json"), nil
 }
 
 func Save(cfg Config) error {
-	path := configPath()
-	os.MkdirAll(filepath.Dir(path), 0755)
-	data, _ := json.MarshalIndent(cfg, "", "  ")
-	return os.WriteFile(path, data, 0600)
+	path, err := configPath()
+	if err != nil {
+		return err
+	}
+	dir := filepath.Dir(path)
+	if err := os.MkdirAll(dir, 0700); err != nil {
+		return err
+	}
+	if err := os.Chmod(dir, 0700); err != nil {
+		return err
+	}
+	data, err := json.MarshalIndent(cfg, "", "  ")
+	if err != nil {
+		return err
+	}
+	file, err := os.CreateTemp(dir, ".config-*")
+	if err != nil {
+		return err
+	}
+	defer os.Remove(file.Name())
+	if _, err := file.Write(data); err != nil {
+		file.Close()
+		return err
+	}
+	if err := file.Close(); err != nil {
+		return err
+	}
+	return os.Rename(file.Name(), path)
 }
 
 func Load() (Config, error) {
-	path := configPath()
+	path, err := configPath()
+	if err != nil {
+		return Config{}, err
+	}
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return Config{}, err

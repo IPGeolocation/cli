@@ -1,0 +1,7 @@
+version: 1
+name: ipgeolocation
+origin: https://api.ipgeolocation.io
+interceptRequests: true
+scenarios:
+  - name: default
+    path: default.js
