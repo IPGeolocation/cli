@@ -6,7 +6,7 @@ The official `ipgeolocation` **Command Line Interface (CLI)** provides a fast, l
 
 Using a single executable, you can query **IP location, security intelligence, ASN details, timezone, astronomy, abuse contact information, and user agent parsing** for your own IP or for any IPv4, IPv6 address, or domain name. The CLI outputs structured, machine-readable data that integrates seamlessly into shell scripts, cron jobs, CI/CD pipelines, monitoring systems, and log-processing workflows.
 
-- [IP Location API](https://ipgeolocation.io/ip-location-api.html): Get all-in-one unified solution for **location** (city, locality, state, country, accuracy-radius, confidence etc.), **currency**, **ASN** (AS number, ASN name, organization, asn type, date of allocation, routes, upstreams, downstreams, peers), **company** (company/ISP name, company type, company domain), **timezone**, **user agent** string parsing, **security** (threat_score, is_tor, is_bot, proxy_provider_names, cloud_provider_name, relay_provider_name, vpn_provider_names, is_proxy, is_relay, is_vpn), and **abuse contact** (route/CIDR network, country, address, email, phone numbers) information.
+- [IP Geolocation API](https://ipgeolocation.io/ip-location-api.html): Get all-in-one unified solution for **location** (city, locality, state, country, accuracy-radius, confidence etc.), **currency**, **ASN** (AS number, ASN name, organization, asn type, date of allocation, routes, upstreams, downstreams, peers), **company** (company/ISP name, company type, company domain), **timezone**, **user agent** string parsing, **security** (threat_score, is_tor, is_bot, proxy_provider_names, cloud_provider_name, relay_provider_name, vpn_provider_names, is_proxy, is_relay, is_vpn), and **abuse contact** (route/CIDR network, country, address, email, phone numbers) information.
 - [IP Security API](https://ipgeolocation.io/ip-security-api.html): Get security intelligence (threat score, VPN, proxy, Tor, relay, bot, and cloud-provider detection) for an IP address.
 - [ASN API](https://ipgeolocation.io/asn-api.html): Get ASN details along with peers, upstreams, downstreams, routes, and raw WHOIS.
 - [Abuse Contact API](https://ipgeolocation.io/ip-abuse-contact-api.html): Get abuse emails, phone numbers, kind, organization, route/CIDR network and country.
@@ -266,7 +266,7 @@ IPGeolocation.io offers a **free Developer plan** and **paid plans**. The availa
 | `parse-bulk-user-agents` | Parse multiple user-agent strings at once.                                                                                    |  ✖   |    ✔     |
 
 > [!TIP]
-> The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for the IP Geolocation API, please visit [IP Location API](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response).
+> The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for the IP Geolocation API, please visit [IP Geolocation API](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response).
 
 ## Authentication Setup
 To authenticate API requests, you need to get an API key from [ipgeolocation.io](https://ipgeolocation.io/).
