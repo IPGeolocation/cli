@@ -3,9 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
-	encoding "net/url"
+	neturl "net/url"
 
 	"github.com/IPGeolocation/cli/v2/internal/common"
 	"github.com/IPGeolocation/cli/v2/internal/config"
@@ -55,21 +53,21 @@ API Reference: https://ipgeolocation.io/astronomy-api.html
 		}
 
 		baseURL := "https://api.ipgeolocation.io/v3/astronomy"
-		url := baseURL + "?apiKey=" + cfg.ApiKey
+		url := baseURL + "?apiKey=" + neturl.QueryEscape(cfg.ApiKey)
 		if astronomyFlags.IP != "" {
-			url += "&ip=" + astronomyFlags.IP
+			url += "&ip=" + neturl.QueryEscape(astronomyFlags.IP)
 		}
 
 		if astronomyFlags.Tz != "" {
-			url += "&time_zone=" + astronomyFlags.Tz
+			url += "&time_zone=" + neturl.QueryEscape(astronomyFlags.Tz)
 		}
 
 		if astronomyFlags.Language != "" {
-			url += "&lang=" + astronomyFlags.Language
+			url += "&lang=" + neturl.QueryEscape(astronomyFlags.Language)
 		}
 
 		if astronomyFlags.Location != "" {
-			url += "&location=" + encoding.QueryEscape(astronomyFlags.Location)
+			url += "&location=" + neturl.QueryEscape(astronomyFlags.Location)
 		}
 
 		if astronomyFlags.Latitude != 0 {
@@ -84,17 +82,9 @@ API Reference: https://ipgeolocation.io/astronomy-api.html
 			url += "&elevation=" + fmt.Sprintf("%f", astronomyFlags.Elevation)
 		}
 
-		resp, err := http.Get(url)
+		body, err := utils.Get(url)
 		if err != nil {
 			fmt.Println("Error fetching astronomy info:", err)
-			return
-		}
-		defer resp.Body.Close()
-
-		body, _ := io.ReadAll(resp.Body)
-
-		if resp.StatusCode != 200 {
-			fmt.Printf("Error: %s\n", string(body))
 			return
 		}
 

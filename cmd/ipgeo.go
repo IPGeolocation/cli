@@ -3,8 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
+	neturl "net/url"
 	"strings"
 
 	"github.com/IPGeolocation/cli/v2/internal/common"
@@ -58,38 +57,30 @@ Notes:
 		}
 
 		baseURL := "https://api.ipgeolocation.io/v3/ipgeo"
-		url := baseURL + "?apiKey=" + cfg.ApiKey
+		url := baseURL + "?apiKey=" + neturl.QueryEscape(cfg.ApiKey)
 		if ipgeoFlags.IP != "" {
-			url += "&ip=" + ipgeoFlags.IP
+			url += "&ip=" + neturl.QueryEscape(ipgeoFlags.IP)
 		}
 
 		if len(ipgeoFlags.Include) > 0 {
-			url += "&include=" + strings.Join(ipgeoFlags.Include, ",")
+			url += "&include=" + neturl.QueryEscape(strings.Join(ipgeoFlags.Include, ","))
 		}
 
 		if len(ipgeoFlags.Excludes) > 0 {
-			url += "&excludes=" + strings.Join(ipgeoFlags.Excludes, ",")
+			url += "&excludes=" + neturl.QueryEscape(strings.Join(ipgeoFlags.Excludes, ","))
 		}
 
 		if len(ipgeoFlags.Fields) > 0 {
-			url += "&fields=" + strings.Join(ipgeoFlags.Fields, ",")
+			url += "&fields=" + neturl.QueryEscape(strings.Join(ipgeoFlags.Fields, ","))
 		}
 
 		if ipgeoFlags.Language != "" {
-			url += "&lang=" + ipgeoFlags.Language
+			url += "&lang=" + neturl.QueryEscape(ipgeoFlags.Language)
 		}
 
-		resp, err := http.Get(url)
+		body, err := utils.Get(url)
 		if err != nil {
 			fmt.Println("Error fetching IP Geolocation info:", err)
-			return
-		}
-		defer resp.Body.Close()
-
-		body, _ := io.ReadAll(resp.Body)
-
-		if resp.StatusCode != 200 {
-			fmt.Printf("Error: %s\n", string(body))
 			return
 		}
 

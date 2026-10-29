@@ -46,8 +46,6 @@ If no flag is passed, the currently stored API key will be displayed.`,
 			masked := "********"
 			if len(cfg.ApiKey) > 5 {
 				masked += cfg.ApiKey[len(cfg.ApiKey)-5:]
-			} else {
-				masked += cfg.ApiKey
 			}
 
 			fmt.Println("🔐 Current API key:", masked)

@@ -6,6 +6,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	neturl "net/url"
 
 	"github.com/IPGeolocation/cli/v2/internal/common"
 	"github.com/IPGeolocation/cli/v2/internal/config"
@@ -41,7 +42,7 @@ Examples:
 			return
 		}
 		baseURL := "https://api.ipgeolocation.io/v3/user-agent"
-		url := baseURL + "?apiKey=" + cfg.ApiKey
+		url := baseURL + "?apiKey=" + neturl.QueryEscape(cfg.ApiKey)
 
 		payload := map[string]interface{}{
 			"uaString": userAgentFlags.UserAgent,

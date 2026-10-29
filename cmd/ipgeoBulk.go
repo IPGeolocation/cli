@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
+	neturl "net/url"
 	"os"
 	"strings"
 
@@ -72,19 +73,19 @@ Examples:
 		}
 
 		baseURL := "https://api.ipgeolocation.io/v3/ipgeo-bulk"
-		url := baseURL + "?apiKey=" + cfg.ApiKey
+		url := baseURL + "?apiKey=" + neturl.QueryEscape(cfg.ApiKey)
 
 		if len(bulkIpgeoFlags.Include) > 0 {
-			url += "&include=" + strings.Join(bulkIpgeoFlags.Include, ",")
+			url += "&include=" + neturl.QueryEscape(strings.Join(bulkIpgeoFlags.Include, ","))
 		}
 		if len(bulkIpgeoFlags.Excludes) > 0 {
-			url += "&excludes=" + strings.Join(bulkIpgeoFlags.Excludes, ",")
+			url += "&excludes=" + neturl.QueryEscape(strings.Join(bulkIpgeoFlags.Excludes, ","))
 		}
 		if len(bulkIpgeoFlags.Fields) > 0 {
-			url += "&fields=" + strings.Join(bulkIpgeoFlags.Fields, ",")
+			url += "&fields=" + neturl.QueryEscape(strings.Join(bulkIpgeoFlags.Fields, ","))
 		}
 		if bulkIpgeoFlags.Language != "" {
-			url += "&lang=" + bulkIpgeoFlags.Language
+			url += "&lang=" + neturl.QueryEscape(bulkIpgeoFlags.Language)
 		}
 
 		payload := map[string]interface{}{

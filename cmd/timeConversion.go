@@ -3,14 +3,11 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
+	neturl "net/url"
 
 	"github.com/IPGeolocation/cli/v2/internal/common"
 	"github.com/IPGeolocation/cli/v2/internal/config"
 	"github.com/IPGeolocation/cli/v2/internal/utils"
-
-	encoding "net/url"
 
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
@@ -60,22 +57,22 @@ Notes:
 		}
 
 		baseURL := "https://api.ipgeolocation.io/v3/timezone/convert"
-		url := baseURL + "?apiKey=" + cfg.ApiKey
+		url := baseURL + "?apiKey=" + neturl.QueryEscape(cfg.ApiKey)
 
 		if timeConversionFlags.TimezoneFrom != "" {
-			url += "&tz_from=" + timeConversionFlags.TimezoneFrom
+			url += "&tz_from=" + neturl.QueryEscape(timeConversionFlags.TimezoneFrom)
 		}
 
 		if timeConversionFlags.TimezoneTo != "" {
-			url += "&tz_to=" + timeConversionFlags.TimezoneTo
+			url += "&tz_to=" + neturl.QueryEscape(timeConversionFlags.TimezoneTo)
 		}
 
 		if timeConversionFlags.LocationFrom != "" {
-			url += "&location_from=" + encoding.QueryEscape(timeConversionFlags.LocationFrom)
+			url += "&location_from=" + neturl.QueryEscape(timeConversionFlags.LocationFrom)
 		}
 
 		if timeConversionFlags.LocationTo != "" {
-			url += "&location_to=" + encoding.QueryEscape(timeConversionFlags.LocationTo)
+			url += "&location_to=" + neturl.QueryEscape(timeConversionFlags.LocationTo)
 		}
 
 		if timeConversionFlags.LatitudeFrom != 0 {
@@ -95,44 +92,36 @@ Notes:
 		}
 
 		if timeConversionFlags.IataCodeFrom != "" {
-			url += "&iata_from=" + timeConversionFlags.IataCodeFrom
+			url += "&iata_from=" + neturl.QueryEscape(timeConversionFlags.IataCodeFrom)
 		}
 
 		if timeConversionFlags.IataCodeTo != "" {
-			url += "&iata_to=" + timeConversionFlags.IataCodeTo
+			url += "&iata_to=" + neturl.QueryEscape(timeConversionFlags.IataCodeTo)
 		}
 
 		if timeConversionFlags.IcaoCodeFrom != "" {
-			url += "&icao_from=" + timeConversionFlags.IcaoCodeFrom
+			url += "&icao_from=" + neturl.QueryEscape(timeConversionFlags.IcaoCodeFrom)
 		}
 
 		if timeConversionFlags.IcaoCodeTo != "" {
-			url += "&icao_to=" + timeConversionFlags.IcaoCodeTo
+			url += "&icao_to=" + neturl.QueryEscape(timeConversionFlags.IcaoCodeTo)
 		}
 
 		if timeConversionFlags.LoCodeFrom != "" {
-			url += "&locode_from=" + timeConversionFlags.LoCodeFrom
+			url += "&locode_from=" + neturl.QueryEscape(timeConversionFlags.LoCodeFrom)
 		}
 
 		if timeConversionFlags.LoCodeTo != "" {
-			url += "&locode_to=" + timeConversionFlags.LoCodeTo
+			url += "&locode_to=" + neturl.QueryEscape(timeConversionFlags.LoCodeTo)
 		}
 
 		if timeConversionFlags.Time != "" {
-			url += "&time=" + timeConversionFlags.Time
+			url += "&time=" + neturl.QueryEscape(timeConversionFlags.Time)
 		}
 
-		resp, err := http.Get(url)
+		body, err := utils.Get(url)
 		if err != nil {
 			fmt.Println("Error fetching time info:", err)
-			return
-		}
-		defer resp.Body.Close()
-
-		body, _ := io.ReadAll(resp.Body)
-
-		if resp.StatusCode != 200 {
-			fmt.Printf("Error: %s\n", string(body))
 			return
 		}
 

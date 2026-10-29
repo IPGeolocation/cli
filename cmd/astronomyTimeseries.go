@@ -3,9 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
-	encoding "net/url"
+	neturl "net/url"
 
 	"github.com/IPGeolocation/cli/v2/internal/common"
 	"github.com/IPGeolocation/cli/v2/internal/config"
@@ -44,7 +42,7 @@ Examples:
 		}
 
 		baseURL := "https://api.ipgeolocation.io/v3/astronomy/timeSeries"
-		url := baseURL + "?apiKey=" + cfg.ApiKey
+		url := baseURL + "?apiKey=" + neturl.QueryEscape(cfg.ApiKey)
 
 		if astronomyTimeseriesFlags.DateStart == "" || astronomyTimeseriesFlags.DateEnd == "" {
 			fmt.Println("Please provide both start and end dates.")
@@ -52,23 +50,23 @@ Examples:
 		}
 
 		if astronomyTimeseriesFlags.DateStart != "" {
-			url += "&dateStart=" + astronomyTimeseriesFlags.DateStart
+			url += "&dateStart=" + neturl.QueryEscape(astronomyTimeseriesFlags.DateStart)
 		}
 
 		if astronomyTimeseriesFlags.DateEnd != "" {
-			url += "&dateEnd=" + astronomyTimeseriesFlags.DateEnd
+			url += "&dateEnd=" + neturl.QueryEscape(astronomyTimeseriesFlags.DateEnd)
 		}
 
 		if astronomyTimeseriesFlags.IP != "" {
-			url += "&ip=" + astronomyTimeseriesFlags.IP
+			url += "&ip=" + neturl.QueryEscape(astronomyTimeseriesFlags.IP)
 		}
 
 		if astronomyTimeseriesFlags.Language != "" {
-			url += "&lang=" + astronomyTimeseriesFlags.Language
+			url += "&lang=" + neturl.QueryEscape(astronomyTimeseriesFlags.Language)
 		}
 
 		if astronomyTimeseriesFlags.Location != "" {
-			url += "&location=" + encoding.QueryEscape(astronomyTimeseriesFlags.Location)
+			url += "&location=" + neturl.QueryEscape(astronomyTimeseriesFlags.Location)
 		}
 
 		if astronomyTimeseriesFlags.Latitude != 0 {
@@ -79,17 +77,9 @@ Examples:
 			url += "&long=" + fmt.Sprintf("%f", astronomyTimeseriesFlags.Longitude)
 		}
 
-		resp, err := http.Get(url)
+		body, err := utils.Get(url)
 		if err != nil {
 			fmt.Println("Error fetching astronomy time-series info:", err)
-			return
-		}
-		defer resp.Body.Close()
-
-		body, _ := io.ReadAll(resp.Body)
-
-		if resp.StatusCode != 200 {
-			fmt.Printf("Error: %s\n", string(body))
 			return
 		}
 
