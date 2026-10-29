@@ -227,7 +227,7 @@ The documentation below corresponds to the available APIs:
 - [**ASN API**](https://ipgeolocation.io/documentation/asn-api.html)
 - [**IP Abuse Contact API**](https://ipgeolocation.io/documentation/ip-abuse-contact-api.html)
 - [**Time Zone API**](https://ipgeolocation.io/documentation/timezone-api.html)
-- [**User-Agent API**](https://ipgeolocation.io/documentation/user-agent-api.html)
+- [**User Agent API**](https://ipgeolocation.io/documentation/user-agent-api.html)
 - [**Astronomy API**](https://ipgeolocation.io/documentation/astronomy-api.html)
 
 For a detailed comparison of what each plan offers, visit the [Pricing Page](https://ipgeolocation.io/pricing.html).
@@ -2223,7 +2223,7 @@ Sample output:
 ```
 
 ### `parse-user-agent` Command
-The `parse-user-agent` command uses the ipgeolocation.io User Agent Parser API to parse user agent strings and extract relevant information such as:
+The `parse-user-agent` command uses the IPGeolocation.io User Agent API to parse user agent strings and extract relevant information such as:
 
 - Device type
 - Operating system
@@ -2243,7 +2243,7 @@ ipgeolocation parse-user-agent [flags]
 | `--user-agent` | string | `""`     | User agent string.                               |
 | `--output`     | string | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`. |
 
-For further information, please visit [User Agent Parser API Documentation](https://ipgeolocation.io/documentation/user-agent-api.html).
+For further information, please visit [User Agent API Documentation](https://ipgeolocation.io/documentation/user-agent-api.html).
 
 #### Parse a user agent string
 ```bash
@@ -2280,7 +2280,7 @@ Sample output:
 ```
 
 ### `parse-bulk-user-agents` Command
-The `parse-bulk-user-agents` command uses the ipgeolocation.io Bulk User-Agent Parser API to parse multiple user agent strings and extract relevant information such as:
+The `parse-bulk-user-agents` command uses the bulk endpoint of the IPGeolocation.io User Agent API to parse multiple user agent strings and extract relevant information such as:
 
 - Device type
 - Operating system
@@ -2300,7 +2300,7 @@ ipgeolocation parse-bulk-user-agents [flags]
 | `--user-agents` | string[] | `[]`     | User agent strings.                              |
 | `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`. |
 
-For further information, please visit [Bulk User Agent Parser API Documentation](https://ipgeolocation.io/documentation/user-agent-api.html#parse-bulk-user-agent-strings).
+For further information, please visit [User Agent API bulk parsing documentation](https://ipgeolocation.io/documentation/user-agent-api.html#parse-bulk-user-agent-strings).
 
 > [!NOTE] 
 > - The `user-agents` flag is required.
