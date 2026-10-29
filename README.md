@@ -154,7 +154,7 @@ For local HTTPS regression checks, install Node.js and Postman CLI 1.73.0, then 
 ### Download Prebuilt Binaries
 
 #### Overview
-These are prebuilt binaries for the IPGeolocation CLI tool, version **2.1.1**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
+These are prebuilt binaries for the IPGeolocation.io CLI tool, version **2.1.1**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
 
 The CLI provides geolocation information, timezone, user-agent parsing, bulk IP lookups, and more.
 
@@ -269,7 +269,7 @@ IPGeolocation.io offers a **free Developer plan** and **paid plans**. The availa
 > The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for the IP Geolocation API, please visit [IP Geolocation API](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response).
 
 ## Authentication Setup
-To authenticate API requests, you need to get an API key from [ipgeolocation.io](https://ipgeolocation.io/).
+To authenticate API requests, you need to get an API key from [IPGeolocation.io](https://ipgeolocation.io/).
 
 ### How to Get Your API Key
 
@@ -303,7 +303,7 @@ ipgeolocation --version
 ## Commands
 
 ### `config` Command
-Configure your API key for **[ipgeolocation.io](https://ipgeolocation.io/)**.
+Configure your API key for **[IPGeolocation.io](https://ipgeolocation.io/)**.
 
 #### `config` Usage
 ```bash
@@ -314,7 +314,7 @@ ipgeolocation config --apikey=<your-key>
 
 | Flag       | Type   | Description                                                     |
 |------------|--------|-----------------------------------------------------------------|
-| `--apikey` | string | Your API key from [ipgeolocation.io](https://ipgeolocation.io). |
+| `--apikey` | string | Your API key from [IPGeolocation.io](https://ipgeolocation.io). |
 
 ### `my-ip` Command
 
@@ -1839,7 +1839,7 @@ ipgeolocation time-conversion --tz_from America/New_York --tz_to Europe/London -
 ```
 
 ### `astronomy` Command
-The `astronomy` command uses the ipgeolocation.io Astronomy API to fetch astronomy-related data such as:
+The `astronomy` command uses the IPGeolocation.io Astronomy API to fetch astronomy-related data such as:
 
 - Sunrise and sunset
 - Solar noon
@@ -2091,7 +2091,7 @@ Sample output:
 ```
 
 ### `astronomy-timeseries` Command
-The `astronomy-timeseries` command uses the ipgeolocation.io Astronomy API to fetch astronomy-related data such as:
+The `astronomy-timeseries` command uses the IPGeolocation.io Astronomy API to fetch astronomy-related data such as:
 
 - Sunrise and sunset
 - Solar noon
