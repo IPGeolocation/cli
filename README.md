@@ -31,7 +31,7 @@ Based on:
     - [Download and build from source](#download-and-build-from-source)
     - [Download Prebuilt Binaries](#download-prebuilt-binaries)
     - [Troubleshooting](#troubleshooting)
-3. [API Documentation Links](#api-documentations)
+3. [API Documentation Links](#apis-documentation)
 4. [Fields and commands Availability](#fields-and-commands-availability)
 5. [Authentication Setup](#authentication-setup)
    - [How to Get Your API Key](#how-to-get-your-api-key)
@@ -73,7 +73,7 @@ Based on:
       - [`abuse` Usage](#abuse-usage)
       - [Flags for `abuse`](#flags-for-abuse)
       - [Get abuse info about your current IP](#get-abuse-info-about-your-current-ip)
-      - [Look up a specific IP](#lookup-a-specific-ip)
+      - [Look up a specific IP](#look-up-a-specific-ip)
       - [Exclude unnecessary fields](#exclude-unnecessary-fields)
       - [Lookup Abuse Contact with Specific Fields](#lookup-abuse-contact-with-specific-fields)
     - [`timezone` Command](#timezone-command)
@@ -266,7 +266,7 @@ IPGeolocation.io offers a **free Developer plan** and **paid plans**. The availa
 | `parse-bulk-user-agents` | Parse multiple user-agent strings at once.                                                                                    |  ✖   |    ✔     |
 
 > [!TIP]
-> The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for the IP Geolocation API, please visit [IP Geolocation API](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ipgeolocation-api-response).
+> The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for the IP Geolocation API, please visit [IP Geolocation API](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ip-geolocation-api-response).
 
 ## Authentication Setup
 To authenticate API requests, you need to get an API key from [IPGeolocation.io](https://ipgeolocation.io/).
@@ -973,9 +973,9 @@ ipgeolocation bulk-ip-geo [flags]
 |-----------------|----------|----------|---------------------------------------------------------------|
 | `--ips`         | string[] | `[]`     | Comma-separated list of IPs. Example: `--ips 8.8.8.8,1.1.1.1` |
 | `--file`        | string   | `""`     | Path to a text file containing IPs (one per line).            |
-| `--include`     | string[] | `[]`     | Include extra fields (e.g. `location,time_zone`).             |
+| `--include`     | string[] | `[]`     | Include modules not returned by default (e.g. `security,abuse`). |
 | `--exclude`     | string[] | `[]`     | Exclude fields (e.g. `currency`).                             |
-| `--fields`      | string[] | `[]`     | Return only specific fields (e.g. `location`).                |
+| `--fields`      | string[] | `[]`     | Return only specific fields (e.g. `location,time_zone`).      |
 | `--lang`        | string   | `""`     | Response language (if supported).                             |
 | `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.              |
 | `--output-file` | string   | `""`     | Save output to JSON file. Example: `--output-file results`    |
@@ -1846,9 +1846,8 @@ The `astronomy` command uses the IPGeolocation.io Astronomy API to fetch astrono
 - Moonrise and moonset
 - Moon phase
 - Day length
-- Timezone-based or coordinate-based location support
 
-You can specify the location using IP, city name, coordinates, or timezone.
+Choose the calculation location with an IP address, location name, or latitude/longitude. Use `--tz` to display the event times in another IANA time zone; it does not select a location.
 
 For further information, please visit [Astronomy API Documentation](https://ipgeolocation.io/documentation/astronomy-api.html).
 
@@ -1865,7 +1864,7 @@ ipgeolocation astronomy [flags]
 | `--latitude`  | float64 | `0`      | Latitude.                                        |
 | `--longitude` | float64 | `0`      | Longitude.                                       |
 | `--lang`      | string  | `""`     | Response language (if supported).                |
-| `--tz`        | string  | `""`     | Timezone.                                        |
+| `--tz`        | string  | `""`     | IANA time zone for output timestamps.            |
 | `--elevation` | float64 | `0`      | Elevation.                                       |
 | `--output`    | string  | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`. |
 
@@ -2098,7 +2097,8 @@ The `astronomy-timeseries` command uses the IPGeolocation.io Astronomy API to fe
 - Moonrise and moonset
 - Moon phase
 - Day length
-- Timezone-based or coordinate-based location support
+
+Choose the calculation location with an IP address, location name, or latitude/longitude.
 
 For further information, please visit [Astronomy Timeseries API Documentation](https://ipgeolocation.io/documentation/astronomy-api.html#time-series-lookup).
 
