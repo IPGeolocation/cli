@@ -4,15 +4,15 @@
 
 The official `ipgeolocation` **Command Line Interface (CLI)** provides a fast, lightweight, and script-friendly way to access **[IPGeolocation.io](https://ipgeolocation.io)**'s set of APIs directly from your terminal. It lets developers, DevOps engineers, network operators, and security teams retrieve IP intelligence without writing code or handling raw HTTP requests.
 
-Using a single executable, you can query **IP location, security intelligence, ASN details, timezone, astronomy, abuse contact information, and user agent parsing** for your own IP or for any IPv4, IPv6 address, or domain name. The CLI outputs structured, machine-readable data that integrates seamlessly into shell scripts, cron jobs, CI/CD pipelines, monitoring systems, and log-processing workflows.
+Using a single executable, you can query **IP location, security intelligence, ASN details, time zone, astronomy, abuse contact information, and user agent parsing** for your own IP or for any IPv4, IPv6 address, or domain name. The CLI outputs structured, machine-readable data that integrates seamlessly into shell scripts, cron jobs, CI/CD pipelines, monitoring systems, and log-processing workflows.
 
-- [IP Geolocation API](https://ipgeolocation.io/ip-location-api.html): Get all-in-one unified solution for **location** (city, locality, state, country, accuracy-radius, confidence etc.), **currency**, **ASN** (AS number, ASN name, organization, asn type, date of allocation, routes, upstreams, downstreams, peers), **company** (company/ISP name, company type, company domain), **timezone**, **user agent** string parsing, **security** (threat_score, is_tor, is_bot, proxy_provider_names, cloud_provider_name, relay_provider_name, vpn_provider_names, is_proxy, is_relay, is_vpn), and **abuse contact** (route/CIDR network, country, address, email, phone numbers) information.
+- [IP Geolocation API](https://ipgeolocation.io/ip-location-api.html): Get all-in-one unified solution for **location** (city, locality, state, country, accuracy-radius, confidence etc.), **currency**, **ASN** (AS number, ASN name, organization, ASN type, date of allocation, routes, upstreams, downstreams, peers), **company** (company/ISP name, company type, company domain), **timezone**, **user agent** string parsing, **security** (threat_score, is_tor, is_bot, proxy_provider_names, cloud_provider_name, relay_provider_name, vpn_provider_names, is_proxy, is_relay, is_vpn), and **abuse contact** (route/CIDR network, country, address, email, phone numbers) information.
 - [IP Security API](https://ipgeolocation.io/ip-security-api.html): Get security intelligence (threat score, VPN, proxy, Tor, relay, bot, and cloud-provider detection) for an IP address.
 - [ASN API](https://ipgeolocation.io/asn-api.html): Get ASN details along with peers, upstreams, downstreams, routes, and raw WHOIS.
 - [Abuse Contact API](https://ipgeolocation.io/ip-abuse-contact-api.html): Get abuse emails, phone numbers, kind, organization, route/CIDR network and country.
 - [Astronomy API](https://ipgeolocation.io/astronomy-api.html): Get sunrise, sunset, moonrise, moonset, moon phases with precise twilight period times in combination with location information.
-- [Time Zone API](https://ipgeolocation.io/timezone-api.html): Get timezone name, multiple time formats, daylight saving status and its details along with location information.
-- [Timezone Convert API](https://ipgeolocation.io/timezone-api.html): Convert time between timezone names, geo coordinates, location addresses, IATA codes, ICAO codes, or UN/LOCODE.
+- [Time Zone API](https://ipgeolocation.io/timezone-api.html): Get time zone name, multiple time formats, daylight saving status and its details along with location information.
+- [Timezone Convert API](https://ipgeolocation.io/timezone-api.html): Convert time between time zone names, geo coordinates, location addresses, IATA codes, ICAO codes, or UN/LOCODE.
 - [User Agent API](https://ipgeolocation.io/user-agent-api.html): Parse one or more user-agent strings to get browser, operating system, and device details.
 
 The `ipgeolocation` CLI is built for speed and automation, making it easy to integrate IP intelligence into shell scripts, bash pipelines, cron jobs, and CI/CD workflows. It enriches server logs, firewall events, and SIEM data, supports on-the-fly lookups during incident response, and enables automated fraud detection, geo-based routing, and access control without language-specific dependencies. Designed for system administrators, DevOps engineers, and developers, the CLI delivers consistent, reliable insights directly in the terminal.
@@ -79,7 +79,7 @@ Based on:
     - [`timezone` Command](#timezone-command)
       - [`timezone` Usage](#timezone-usage)
       - [Flags for `timezone`](#flags-for-timezone)
-      - [Get timezone info about your current IP](#get-timezone-info-about-your-current-ip)
+      - [Get time zone info about your current IP](#get-time-zone-info-about-your-current-ip)
       - [Get Timezone for a specific IP Address](#get-timezone-for-a-specific-ip-address)
       - [Get Timezone by Timezone Name](#get-timezone-by-timezone-name)
       - [Get Timezone from Any Address](#get-timezone-from-any-address)
@@ -156,7 +156,7 @@ For local HTTPS regression checks, install Node.js and Postman CLI 1.73.0, then 
 #### Overview
 These are prebuilt binaries for the IPGeolocation.io CLI tool, version **2.1.1**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
 
-The CLI provides geolocation information, timezone, user-agent parsing, bulk IP lookups, and more.
+The CLI provides geolocation information, time zone, user-agent parsing, bulk IP lookups, and more.
 
 #### Prebuilt Binaries
 
@@ -252,7 +252,7 @@ IPGeolocation.io offers a **free Developer plan** and **paid plans**. The availa
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------|:----:|:--------:|
 | `config`                 | Set up and check API Key.                                                                                                    |  ✔   |    ✔     |
 | `my-ip`                  | Get the public IP address of the machine running the command. Does not require an API key.                                  |  ✔   |    ✔     |
-| `ipgeo`                  | Get geolocation data for a single IP address, along with network, currency, abuse, timezone, security, asn, user-agent, etc.  |  ✔   |    ✔     |
+| `ipgeo`                  | Get geolocation data for a single IP address, along with network, currency, abuse, time zone, security, asn, user-agent, etc.  |  ✔   |    ✔     |
 | `bulk-ip-geo`            | Get geolocation data for multiple IP addresses in a single API request, along with the same data as in `ipgeo`.                  |  ✖   |    ✔     |
 | `ip-security`            | Get security intelligence (threat score, VPN, proxy, Tor, relay, bot, and cloud-provider detection) for an IP address. |  ✖   |    ✔     |
 | `bulk-ip-security`       | Get security threat intelligence for multiple IP addresses, along with the same data as in `ip-security`.                        |  ✖   |    ✔     |
@@ -260,8 +260,8 @@ IPGeolocation.io offers a **free Developer plan** and **paid plans**. The availa
 | `abuse`                  | Get abuse reporting contact information for a given IP address.                                                              |  ✖   |    ✔     |
 | `astronomy`              | Get sunrise, sunset, moonrise, moonset, and related data for a location.                                                     |  ✔   |    ✔     |
 | `astronomy-timeseries`   | Get astronomy information for a given date range at once.                                                                      |  ✔   |    ✔     |
-| `timezone`               | Get timezone details using IP address, city, coordinates, IATA, ICAO, UNLOCODE, or timezone ID.                              |  ✔   |    ✔     |
-| `time-conversion`        | Convert time between two specified timezones using city, coordinates, IATA, ICAO, UNLOCODE, or timezone ID.                  |  ✔   |    ✔     |
+| `timezone`               | Get time zone details using IP address, city, coordinates, IATA, ICAO, UNLOCODE, or time zone ID.                              |  ✔   |    ✔     |
+| `time-conversion`        | Convert time between two specified time zones using city, coordinates, IATA, ICAO, UNLOCODE, or time zone ID.                  |  ✔   |    ✔     |
 | `parse-user-agent`       | Parse a single user-agent string.                                                                                              |  ✖   |    ✔     |
 | `parse-bulk-user-agents` | Parse multiple user-agent strings at once.                                                                                    |  ✖   |    ✔     |
 
@@ -1372,7 +1372,7 @@ ip: 8.8.8.8
 For further information, please visit [Abuse API Documentation](https://ipgeolocation.io/documentation/ip-abuse-contact-api.html).
 
 ### `timezone` Command
-Look up timezone information using the `ipgeolocation.io` API with different query types like IP address, latitude/longitude, and timezone ID.
+Look up time zone information using the `ipgeolocation.io` API with different query types like IP address, latitude/longitude, and time zone ID.
 
 For full API specifications, refer to the [Time Zone API documentation](https://ipgeolocation.io/documentation/timezone-api.html).
 
@@ -1395,7 +1395,7 @@ ipgeolocation timezone [flags]
 | `--lo`        | string  | `""`     | LO code (e.g. DEBER).                            |
 | `--output`    | string  | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`. |
 
-#### Get timezone info about your current IP
+#### Get time zone info about your current IP
 ```bash
 ipgeolocation timezone
 ```
@@ -1763,7 +1763,7 @@ ipgeolocation timezone --ip 8.8.8.8 --output=yaml
 ```
 
 ### `time-conversion` Command
-Convert between timezones using the `ipgeolocation.io` API to convert a specific time from one timezone to another using timezone identifiers and optional date/time inputs.
+Convert between time zones using the `ipgeolocation.io` API to convert a specific time from one time zone to another using time zone identifiers and optional date/time inputs.
 
 For more details, refer to the official documentation: [Timezone Converter API](https://ipgeolocation.io/documentation/timezone-api.html#convert-time-between-time-zones).
 
@@ -1806,7 +1806,7 @@ Sample output:
 }
 ```
 > [!NOTE]
-> You can convert time from any timezone to another timezone using location coordinates (Latitude and Longitude), location addresses, IATA codes, ICAO codes and UN/LOCODE.
+> You can convert time from any time zone to another time zone using location coordinates (Latitude and Longitude), location addresses, IATA codes, ICAO codes and UN/LOCODE.
 
 Convert from one location to another:
 ```bash
