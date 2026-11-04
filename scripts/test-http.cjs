@@ -43,7 +43,7 @@ async function main() {
       const [code] = await once(build, 'exit');
       if (code !== 0) throw new Error('CLI build failed');
     }
-    const checks = spawn('go', ['test', './cmd', '-run', '^TestCLI(Commands|HTTPErrors)$', '-count=1', '-v'], {
+    const checks = spawn('go', ['test', './cmd', '-run', '^TestCLI(Commands|HTTPErrors|Arabic|RequestLimitsHTTP|LargeBulkHTTP)$', '-count=1', '-v'], {
       cwd: path.resolve(__dirname, '..'), stdio: 'inherit',
       env: {
         ...process.env,

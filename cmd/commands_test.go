@@ -40,6 +40,9 @@ func (fixtureTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 			"ip": "2001:db8::1", "location": map[string]string{"city": "Test City"},
 			"_request": map[string]interface{}{"method": r.Method, "path": r.URL.Path, "query": r.URL.Query(), "payload": payload},
 		}
+		if r.URL.Query().Get("lang") == "ar" {
+			result["location"] = map[string]string{"city": "مدينة"}
+		}
 		var response interface{} = result
 		if strings.HasSuffix(r.URL.Path, "-bulk") {
 			response = []interface{}{result}
@@ -85,19 +88,80 @@ func TestCLIProcess(t *testing.T) {
 	t.Fatal("missing CLI arguments")
 }
 
-func runCLI(t *testing.T, home string, args ...string) string {
-	t.Helper()
+func newCLIProcess(home string, args ...string) *exec.Cmd {
 	process := exec.Command(os.Args[0], append([]string{"-test.run=^TestCLIProcess$", "--"}, args...)...)
 	if binary := os.Getenv("CLI_TEST_BINARY"); binary != "" {
 		process = exec.Command(binary, args...)
 	}
 	process.Dir = home
 	process.Env = append(os.Environ(), "CLI_TEST_PROCESS=1", "HOME="+home, "USERPROFILE="+home, "GORACE=atexit_sleep_ms=0")
+	return process
+}
+
+func runCLI(t *testing.T, home string, args ...string) string {
+	t.Helper()
+	process := newCLIProcess(home, args...)
 	output, err := process.CombinedOutput()
 	if err != nil {
 		t.Fatalf("CLI %v failed: %v\n%s", args, err, output)
 	}
 	return strings.TrimSpace(string(output))
+}
+
+func TestCLIArabic(t *testing.T) {
+	home := configuredHome(t, testKey)
+	for _, args := range [][]string{
+		{"ipgeo", "--ip", "8.8.8.8"},
+		{"bulk-ip-geo", "--ips", "8.8.8.8,1.1.1.1"},
+		{"timezone", "--ip", "8.8.8.8"},
+		{"astronomy", "--ip", "8.8.8.8"},
+		{"astronomy-timeseries", "--ip", "8.8.8.8", "--start-date", "2026-11-01", "--end-date", "2026-11-02"},
+	} {
+		t.Run(args[0], func(t *testing.T) {
+			output := runCLI(t, home, append(args, "--lang", "ar", "--output", "raw")...)
+			var response interface{}
+			if err := json.Unmarshal([]byte(output), &response); err != nil {
+				t.Fatalf("Arabic response invalid: %v", err)
+			}
+			if args[0] == "bulk-ip-geo" {
+				response = response.([]interface{})[0]
+			}
+			result := response.(map[string]interface{})
+			query := result["_request"].(map[string]interface{})["query"].(map[string]interface{})
+			if !reflect.DeepEqual(query["lang"], []interface{}{"ar"}) || result["location"].(map[string]interface{})["city"] != "مدينة" {
+				t.Fatal("Arabic request or response changed")
+			}
+		})
+	}
+}
+
+func TestCLIRequestLimitFlags(t *testing.T) {
+	home := configuredHome(t, testKey)
+	if output := runCLI(t, home, "my-ip", "--timeout", "10m", "--max-response-mb", "512", "--output", "raw"); !strings.Contains(output, "2001:db8::1") {
+		t.Fatalf("limit overrides failed: %s", output)
+	}
+	for _, args := range [][]string{
+		{"ipgeo", "--timeout", "0s"},
+		{"ipgeo", "--timeout=-1s"},
+		{"ipgeo", "--timeout", "not-a-duration"},
+		{"ipgeo", "--timeout", "999999999999999h"},
+		{"ipgeo", "--max-response-mb", "0"},
+		{"ipgeo", "--max-response-mb=-1"},
+		{"ipgeo", "--max-response-mb", "1.5"},
+		{"ipgeo", "--max-response-mb", "9223372036855"},
+	} {
+		process := newCLIProcess(home, args...)
+		output, err := process.CombinedOutput()
+		if err == nil || !strings.Contains(string(output), "Error") || strings.Contains(string(output), `"_request"`) || strings.Contains(string(output), testKey) {
+			t.Fatalf("invalid limits not rejected: args=%v err=%v output=%s", args, err, output)
+		}
+	}
+	for _, command := range []string{"ipgeo", "bulk-ip-geo", "my-ip", "config"} {
+		output := runCLI(t, home, command, "--help")
+		if !strings.Contains(output, "--timeout") || !strings.Contains(output, "--max-response-mb") || !strings.Contains(output, "default 5m0s") || !strings.Contains(output, "default 256") {
+			t.Fatalf("request controls absent from help for %s", command)
+		}
+	}
 }
 
 func configuredHome(t *testing.T, key string) string {
@@ -203,7 +267,7 @@ func TestCLIConfigAndBulkFiles(t *testing.T) {
 	if output := runCLI(t, home, "config"); strings.Contains(output, "short") || !strings.Contains(output, "********") {
 		t.Fatalf("short key exposed: %s", output)
 	}
-	if output := runCLI(t, home, "--version"); output != "ipgeolocation version 2.1.1" {
+	if output := runCLI(t, home, "--version"); output != "ipgeolocation version 2.1.2" {
 		t.Fatalf("incorrect version: %s", output)
 	}
 	if output := runCLI(t, home, "--help"); !strings.Contains(output, "time-conversion") {

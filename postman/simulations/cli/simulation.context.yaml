@@ -23,8 +23,19 @@ assumptions:
     verification: Reproduced during the preceding Go integration checks with this installed CLI version.
     source: scripts/test-http.cjs; internal/utils/request_test.go
     updated_at: '2026-10-29'
+  - id: request-limits-and-large-bulk
+    status: supported
+    claim: The CLI stops requests that exceed the time or size limit. Bulk results within those limits remain complete.
+    reason: Local HTTPS tests used delayed responses, oversized responses and large bulk responses.
+    verification: On November 4, 2026, both bulk commands returned all 50,000 records in order, with responses over 203 MB under the default limits. Arabic text was preserved. Failed requests did not print partial results or create or overwrite output files. Longer time and larger size settings also passed. These tests used local fixtures, not the live API.
+    source: cmd/request_limits_http_test.go; internal/utils/request_limits_test.go
+    updated_at: '2026-11-04'
 fingerprints:
   - id: cli-v2.1.1
     date: '2026-10-29'
     commit: df51101 plus the CLI request and release changes in this branch.
     cli: Postman CLI 1.73.0; Go 1.26.10 and 1.27.3.
+  - id: cli-v2.1.2
+    date: '2026-11-04'
+    commit: The 2.1.2 changes based on 7e33066.
+    cli: Go 1.27.3 and Postman CLI 1.73.0.

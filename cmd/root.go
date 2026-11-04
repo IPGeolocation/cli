@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/IPGeolocation/cli/v2/ascii"
+	"github.com/IPGeolocation/cli/v2/internal/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -17,7 +18,10 @@ import (
 var rootCmd = &cobra.Command{
 	Use:     "ipgeolocation",
 	Short:   "CLI for accessing IPGeolocation.io API endpoints",
-	Version: "2.1.1",
+	Version: "2.1.2",
+	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+		return utils.ValidateRequestLimits()
+	},
 	Long: `ipgeolocation is a command-line interface (CLI) tool for accessing all major endpoints of the IPGeolocation.io API. 
 It allows you to retrieve IP geolocation data, timezone information, currency details, user-agent parsing, and more, directly from your terminal.
 
@@ -53,4 +57,6 @@ func Execute() {
 // init sets up the root command with flags.
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.PersistentFlags().DurationVar(&utils.RequestTimeout, "timeout", utils.RequestTimeout, "Maximum time for one API request (e.g. 30s or 5m)")
+	rootCmd.PersistentFlags().Int64Var(&utils.MaxResponseMB, "max-response-mb", utils.MaxResponseMB, "Maximum response size in MB")
 }
