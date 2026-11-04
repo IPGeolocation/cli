@@ -1159,7 +1159,7 @@ ipgeolocation asn [flags]
 | Flag         | Type     | Default  | Description                                                                             |
 |--------------|----------|----------|-----------------------------------------------------------------------------------------|
 | `--ip`       | string   | `""`     | IPv4 or IPv6 address.                                                                   |
-| `--include`  | string[] | `[]`     | Include extra fields in output.(e.g., `peers, downstreams, upstreams, routes, whois_response`)  |
+| `--include`  | string[] | `[]`     | Include extra fields in output.(e.g., `peers,downstreams,upstreams,routes,whois_response`)      |
 | `--exclude`  | string[] | `[]`     | Exclude fields from output.                                                             |
 | `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `ip,organization`).                                   |
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.                                        |
