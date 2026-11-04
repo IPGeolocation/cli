@@ -154,7 +154,7 @@ For local HTTPS regression checks, install Node.js and Postman CLI 1.73.0, then 
 ### Download Prebuilt Binaries
 
 #### Overview
-These are prebuilt binaries for the IPGeolocation.io CLI tool, version **2.1.1**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
+These are prebuilt binaries for the IPGeolocation.io CLI tool, version **2.1.2**. Users can download these files directly from [GitHub Releases](https://github.com/IPGeolocation/cli/releases) or from the table below without needing to build from source.
 
 The CLI provides geolocation information, time zone, user-agent parsing, bulk IP lookups, and more.
 
@@ -162,13 +162,13 @@ The CLI provides geolocation information, time zone, user-agent parsing, bulk IP
 
 | Platform | Architecture | File Name / Download Link                                                                                                                             |
 |----------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Linux    | amd64        | [**ipgeolocation-2.1.1-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.1/ipgeolocation-2.1.1-linux-amd64.tar.gz)   |
-| Linux    | arm64        | [**ipgeolocation-2.1.1-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.1/ipgeolocation-2.1.1-linux-arm64.tar.gz)   |
-| macOS    | amd64        | [**ipgeolocation-2.1.1-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.1/ipgeolocation-2.1.1-darwin-amd64.tar.gz) |
-| macOS    | arm64        | [**ipgeolocation-2.1.1-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.1/ipgeolocation-2.1.1-darwin-arm64.tar.gz) |
-| Windows  | amd64        | [**ipgeolocation-2.1.1-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v2.1.1/ipgeolocation-2.1.1-windows-amd64.zip)     |
+| Linux    | amd64        | [**ipgeolocation-2.1.2-linux-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.2/ipgeolocation-2.1.2-linux-amd64.tar.gz)   |
+| Linux    | arm64        | [**ipgeolocation-2.1.2-linux-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.2/ipgeolocation-2.1.2-linux-arm64.tar.gz)   |
+| macOS    | amd64        | [**ipgeolocation-2.1.2-darwin-amd64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.2/ipgeolocation-2.1.2-darwin-amd64.tar.gz) |
+| macOS    | arm64        | [**ipgeolocation-2.1.2-darwin-arm64.tar.gz**](https://github.com/IPGeolocation/cli/releases/download/v2.1.2/ipgeolocation-2.1.2-darwin-arm64.tar.gz) |
+| Windows  | amd64        | [**ipgeolocation-2.1.2-windows-amd64.zip**](https://github.com/IPGeolocation/cli/releases/download/v2.1.2/ipgeolocation-2.1.2-windows-amd64.zip)     |
 
-Archives include [SHA256SUMS](https://github.com/IPGeolocation/cli/releases/download/v2.1.1/SHA256SUMS) for download verification.
+Archives include [SHA256SUMS](https://github.com/IPGeolocation/cli/releases/download/v2.1.2/SHA256SUMS) for download verification.
 
 #### Installation Instructions
 
@@ -176,11 +176,11 @@ Archives include [SHA256SUMS](https://github.com/IPGeolocation/cli/releases/down
 1. Download the `.tar.gz` file for your architecture.
 2. Extract it to a folder in your PATH, e.g., `/usr/local/bin`:
    ```bash
-   tar -xzf ipgeolocation-2.1.1-linux-amd64.tar.gz -C /usr/local/bin
+   tar -xzf ipgeolocation-2.1.2-linux-amd64.tar.gz -C /usr/local/bin
    ```
 3. Rename the binary for simplicity:
    ```bash
-   mv /usr/local/bin/ipgeolocation-2.1.1-linux-amd64 /usr/local/bin/ipgeolocation
+   mv /usr/local/bin/ipgeolocation-2.1.2-linux-amd64 /usr/local/bin/ipgeolocation
    ```
 4. Make the binary executable:
    ```bash
@@ -195,11 +195,11 @@ Archives include [SHA256SUMS](https://github.com/IPGeolocation/cli/releases/down
 1. Download the `.tar.gz` file for your architecture (amd64 or arm64).
 2. Extract to a folder in your PATH, e.g., `/usr/local/bin`:
    ```bash
-   tar -xzf ipgeolocation-2.1.1-darwin-amd64.tar.gz -C /usr/local/bin
+   tar -xzf ipgeolocation-2.1.2-darwin-amd64.tar.gz -C /usr/local/bin
    ```
 3. Rename the binary:
    ```bash
-   mv /usr/local/bin/ipgeolocation-2.1.1-darwin-amd64 /usr/local/bin/ipgeolocation
+   mv /usr/local/bin/ipgeolocation-2.1.2-darwin-amd64 /usr/local/bin/ipgeolocation
    ```
 4. Make executable:
    ```bash
@@ -212,7 +212,7 @@ Archives include [SHA256SUMS](https://github.com/IPGeolocation/cli/releases/down
 
 **Windows:**
 1. Download the `.zip` file.
-2. Extract the `ipgeolocation-2.1.1-windows-amd64.exe` to a folder included in your system `PATH`.
+2. Extract the `ipgeolocation-2.1.2-windows-amd64.exe` to a folder included in your system `PATH`.
 3. Rename the binary to `ipgeolocation.exe` for convenience.
 4. Open Command Prompt and verify:
    ```cmd
@@ -222,7 +222,7 @@ Archives include [SHA256SUMS](https://github.com/IPGeolocation/cli/releases/down
 > [!NOTE]
 > - Ensure execution permissions on Linux/macOS.
 > - Recommended folder for binaries: `/usr/local/bin` or any folder in your PATH.
-> - Prebuilt binaries include version **2.1.1** in their filename. Rename them after extraction for easier use.
+> - Prebuilt binaries include version **2.1.2** in their filename. Rename them after extraction for easier use.
 > - For updates, check GitHub Releases.
 
 ### Troubleshooting
@@ -292,6 +292,8 @@ These flags are available for all commands:
 | Flag         | Description                |
 |--------------|----------------------------|
 | `-h, --help` | Show help for the command. |
+| `--timeout` | Maximum time for one API request. Default: `5m` (5 minutes). For a longer request, use `--timeout 10m`. |
+| `--max-response-mb` | Maximum response size in MB. Default: `256`. For larger bulk results, use `--max-response-mb 512` or another positive whole number. |
 
 > [!TIP]
 > You can also check the version for `ipgeolocation` using the `--version` flag:
