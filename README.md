@@ -6,7 +6,7 @@ The official `ipgeolocation` **Command Line Interface (CLI)** provides a fast, l
 
 Using a single executable, you can query **IP location, security intelligence, ASN details, time zone, astronomy, abuse contact information, and user agent parsing** for your own IP or for any IPv4, IPv6 address, or domain name. The CLI outputs structured, machine-readable data that integrates seamlessly into shell scripts, cron jobs, CI/CD pipelines, monitoring systems, and log-processing workflows.
 
-- [IP Geolocation API](https://ipgeolocation.io/ip-location-api.html): Get all-in-one unified solution for **location** (city, locality, state, country, accuracy-radius, confidence etc.), **currency**, **ASN** (AS number, ASN name, organization, ASN type, date of allocation, routes, upstreams, downstreams, peers), **company** (company/ISP name, company type, company domain), **timezone**, **user agent** string parsing, **security** (threat_score, is_tor, is_bot, proxy_provider_names, cloud_provider_name, relay_provider_name, vpn_provider_names, is_proxy, is_relay, is_vpn), and **abuse contact** (route/CIDR network, country, address, email, phone numbers) information.
+- [IP Geolocation API](https://ipgeolocation.io/ip-location-api.html): Get all-in-one unified solution for **location** (city, locality, state, country, accuracy-radius, confidence etc.), **currency**, **ASN** (AS number, ASN name, organization, ASN type, date of allocation, routes, upstreams, downstreams, peers), **company** (company/ISP name, company type, company domain), **time zone**, **user agent** string parsing, **security** (threat_score, is_tor, is_bot, proxy_provider_names, cloud_provider_name, relay_provider_name, vpn_provider_names, is_proxy, is_relay, is_vpn), and **abuse contact** (route/CIDR network, country, address, email, phone numbers) information.
 - [IP Security API](https://ipgeolocation.io/ip-security-api.html): Get security intelligence (threat score, VPN, proxy, Tor, relay, bot, and cloud-provider detection) for an IP address.
 - [ASN API](https://ipgeolocation.io/asn-api.html): Get ASN details along with peers, upstreams, downstreams, routes, and raw WHOIS.
 - [Abuse Contact API](https://ipgeolocation.io/ip-abuse-contact-api.html): Get abuse emails, phone numbers, kind, organization, route/CIDR network and country.
@@ -252,7 +252,7 @@ IPGeolocation.io offers a **free Developer plan** and **paid plans**. The availa
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------|:----:|:--------:|
 | `config`                 | Set up and check API Key.                                                                                                    |  ✔   |    ✔     |
 | `my-ip`                  | Get the public IP address of the machine running the command. Does not require an API key.                                  |  ✔   |    ✔     |
-| `ipgeo`                  | Get geolocation data for a single IP address, along with network, currency, abuse, time zone, security, asn, user-agent, etc.  |  ✔   |    ✔     |
+| `ipgeo`                  | Get geolocation data for a single IP address, along with network, currency, abuse, time zone, security, ASN, user-agent, etc.  |  ✔   |    ✔     |
 | `bulk-ip-geo`            | Get geolocation data for multiple IP addresses in a single API request, along with the same data as in `ipgeo`.                  |  ✖   |    ✔     |
 | `ip-security`            | Get security intelligence (threat score, VPN, proxy, Tor, relay, bot, and cloud-provider detection) for an IP address. |  ✖   |    ✔     |
 | `bulk-ip-security`       | Get security threat intelligence for multiple IP addresses, along with the same data as in `ip-security`.                        |  ✖   |    ✔     |
@@ -1385,7 +1385,7 @@ ipgeolocation timezone [flags]
 | Flag          | Type    | Default  | Description                                      |
 |---------------|---------|----------|--------------------------------------------------|
 | `--ip`        | string  | `""`     | IPv4 or IPv6 address.                            |
-| `--tz`        | string  | `""`     | IANA Timezone identifier.                        |
+| `--tz`        | string  | `""`     | IANA time zone identifier.                       |
 | `--location`  | string  | `""`     | Location name (e.g. New York)                    |
 | `--latitude`  | float64 | `0`      | Latitude (e.g. 37.7749).                         |
 | `--longitude` | float64 | `0`      | Longitude (e.g., -122.4194).                      |
@@ -1692,7 +1692,7 @@ Sample output:
 }
 ```
 > [!NOTE]
-> Similarly, you can fetch Airport Details and Timezone using any ICAO code as well.
+> Similarly, you can fetch airport details and time zone using any ICAO code as well.
 
 #### Get Timezone and City Details from UN/LOCODE
 ```bash
@@ -1775,8 +1775,8 @@ ipgeolocation time-conversion [flags]
 #### Flags for `time-conversion`
 | Flag              | Type    | Default  | Description                                      |
 |-------------------|---------|----------|--------------------------------------------------|
-| `--tz_from`       | string  | `""`     | Timezone to convert from.                        |
-| `--tz_to`         | string  | `""`     | Timezone to convert to.                          |
+| `--tz_from`       | string  | `""`     | Time zone to convert from.                       |
+| `--tz_to`         | string  | `""`     | Time zone to convert to.                         |
 | `--location_from` | string  | `""`     | Location to convert from.                        |
 | `--location_to`   | string  | `""`     | Location to convert to.                          |
 | `--lat_from`      | float64 | `0`      | Latitude to convert from.                        |
