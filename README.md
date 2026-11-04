@@ -383,7 +383,7 @@ ipgeolocation ipgeo [flags]
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.                                |
 
 > [!NOTE]
-> Available language options can be found [here](https://ipgeolocation.io/documentation/ip-location-api.html#response-in-multiple-languages)
+> Available language options are listed in [Response in multiple languages](https://ipgeolocation.io/documentation/ip-location-api.html#response-in-multiple-languages)
 
 #### Free Plan Examples
 Get info about your current IP:
