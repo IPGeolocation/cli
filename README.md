@@ -260,8 +260,8 @@ IPGeolocation.io offers a **free Developer plan** and **paid plans**. The availa
 | `abuse`                  | Get abuse reporting contact information for a given IP address.                                                              |  ✖   |    ✔     |
 | `astronomy`              | Get sunrise, sunset, moonrise, moonset, and related data for a location.                                                     |  ✔   |    ✔     |
 | `astronomy-timeseries`   | Get astronomy information for a given date range at once.                                                                      |  ✔   |    ✔     |
-| `timezone`               | Get time zone details using IP address, city, coordinates, IATA, ICAO, UNLOCODE, or time zone ID.                              |  ✔   |    ✔     |
-| `time-conversion`        | Convert time between two specified time zones using city, coordinates, IATA, ICAO, UNLOCODE, or time zone ID.                  |  ✔   |    ✔     |
+| `timezone`               | Get time zone details using IP address, city, coordinates, IATA, ICAO, UN/LOCODE, or time zone ID.                             |  ✔   |    ✔     |
+| `time-conversion`        | Convert time between two specified time zones using city, coordinates, IATA, ICAO, UN/LOCODE, or time zone ID.                 |  ✔   |    ✔     |
 | `parse-user-agent`       | Parse a single user-agent string.                                                                                              |  ✖   |    ✔     |
 | `parse-bulk-user-agents` | Parse multiple user-agent strings at once.                                                                                    |  ✖   |    ✔     |
 
