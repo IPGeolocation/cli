@@ -21,7 +21,7 @@ Based on:
 - API version: 3.0.0
 
 **Official Release:**
-- Available on [**pkg.go.dev**](https://pkg.go.dev/github.com/IPGeolocation/cli) and [**GitHub Releases**](https://github.com/IPGeolocation/cli/releases)
+- Available on [**pkg.go.dev**](https://pkg.go.dev/github.com/IPGeolocation/cli/v2) and [**GitHub Releases**](https://github.com/IPGeolocation/cli/releases)
 - Source Code: [**GitHub Repository**](https://github.com/IPGeolocation/cli)
 
 ## Table of Contents
