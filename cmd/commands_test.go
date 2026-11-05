@@ -282,7 +282,7 @@ func TestCLIConfigAndBulkFiles(t *testing.T) {
 	if output := runCLI(t, home, "config"); strings.Contains(output, "short") || !strings.Contains(output, "********") {
 		t.Fatalf("short key exposed: %s", output)
 	}
-	if output := runCLI(t, home, "--version"); output != "ipgeolocation version 2.1.2" {
+	if output := runCLI(t, home, "--version"); output != "ipgeolocation version 2.2.0" {
 		t.Fatalf("incorrect version: %s", output)
 	}
 	if output := runCLI(t, home, "--help"); !strings.Contains(output, "time-conversion") {
