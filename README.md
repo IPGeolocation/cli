@@ -54,6 +54,7 @@ Based on:
       - [`bulk-ip-geo` Usage](#bulk-ip-geo-usage)
       - [Flags for `bulk-ip-geo`](#flags-for-bulk-ip-geo)
     - [Output Formats](#output-formats)
+    - [CSV Output](#csv-output)
     - [`ip-security` Command](#ip-security-command)
       - [`ip-security` Usage](#ip-security-usage)
       - [Flags for `ip-security`](#flags-for-ip-security)
@@ -332,7 +333,7 @@ ipgeolocation my-ip [flags]
 
 | Flag       | Type   | Default  | Description                                              |
 |------------|--------|----------|----------------------------------------------------------|
-| `--output` | string | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `text`. |
+| `--output` | string | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`, `text`. |
 
 > [!NOTE]
 > - The `my-ip` command does not require an API key.
@@ -382,7 +383,7 @@ ipgeolocation ipgeo [flags]
 | `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `location,asn.organization`).         |
 | `--exclude`  | string[] | `[]`     | Exclude fields from output. `--excludes` is also accepted.                      |
 | `--lang`     | string   | `""`     | Response language.                                                              |
-| `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.                                |
+| `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`.                                |
 
 > [!NOTE]
 > Available language options are listed in [Response in multiple languages](https://ipgeolocation.io/documentation/ip-location-api.html#response-in-multiple-languages)
@@ -979,8 +980,8 @@ ipgeolocation bulk-ip-geo [flags]
 | `--exclude`     | string[] | `[]`     | Exclude fields (e.g. `currency`).                             |
 | `--fields`      | string[] | `[]`     | Return only specific fields (e.g. `location,time_zone`).      |
 | `--lang`        | string   | `""`     | Response language (if supported).                             |
-| `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.              |
-| `--output-file` | string   | `""`     | Save output to JSON file. Example: `--output-file results`    |
+| `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`.              |
+| `--output-file` | string   | `""`     | Save output to a file. Writes `.csv` with `--output csv`, otherwise `.json`; the extension is added only if the name lacks it. Example: `--output-file results` or `--output-file results.csv`    |
 
 
 For further information, please visit [IP Geolocation API Documentation](https://ipgeolocation.io/documentation/ip-location-api.html).
@@ -1010,12 +1011,56 @@ Save results to JSON file:
 ipgeolocation bulk-ip-geo --ips=8.8.8.8,1.1.1.1 --output-file=output.json
 ```
 
+Results will be written to the `output.json` file. The `.json` is not added twice, because the name already ends in it.
+
 #### Output Formats
 - **pretty** (default): Human-readable formatted JSON.  
 - **raw**: Raw API response.  
 - **table**: Tabular display of common fields.  
 - **yaml**: YAML-formatted output.  
-- **json file**: If `--output-file` is provided, results are saved to a `.json` file.  
+- **csv**: Spreadsheet-friendly CSV. See [CSV Output](#csv-output).  
+- **file**: If `--output-file` is provided, results are saved to a file. With `--output csv` the file is `.csv`; otherwise it is `.json`. The extension is appended only when the name does not already end in it, so `results` and `results.csv` both save to `results.csv`.  
+
+### CSV Output
+Every command accepts `--output csv`, which renders the response as CSV for spreadsheets, `awk`, `cut`, or a database import.
+
+```bash
+ipgeolocation ipgeo --ip 8.8.8.8 --output csv
+```
+Sample output:
+```csv
+asn.as_number,asn.country,asn.organization,country_metadata.calling_code,country_metadata.languages,currency.code,ip,location.city,location.is_eu,location.latitude,time_zone.name,time_zone.offset
+AS15169,US,Google LLC,+1,en-US|es-US|haw|fr,USD,8.8.8.8,Mountain View,false,37.42240,America/Los_Angeles,-8
+```
+
+How a response becomes CSV:
+
+| Response shape | CSV result |
+|---|---|
+| A top-level array, as the bulk commands return | One row per record |
+| Anything else | A single row |
+| A nested object | Dotted column names, e.g. `location.city` |
+| An array of scalars | Joined into one cell with `\|`, e.g. `en-US\|es-US\|haw` |
+| An array of objects | A column per element, e.g. `routes.0.prefix` |
+| `null`, `[]` or `{}` | An empty cell |
+
+Notes:
+- Columns are the union of the fields of every row, sorted by name, so the same response always produces the same file. Where one record lacks a field another has, its cell is empty.
+- Numbers are written exactly as the API returned them, so Unix timestamps and long identifiers keep every digit.
+- Values containing a comma, quote, or newline are quoted per RFC 4180. A value that itself contains `|` is indistinguishable from the array separator.
+- A value beginning with `=`, `@`, a tab, or a carriage return is prefixed with `'` so a spreadsheet does not run it as a formula, as is a `+` or `-` followed by a non-digit, such as `+SUM(A1)`. A sign followed by a digit, and a sign on its own, are data and are left alone, so a `-122.08421` coordinate, a `-8` offset, a `+1` calling code, the `+1.00H` and `-1.00H` DST durations, and the lone `-` the astronomy endpoint reports for an absent `sun_status` or `moon_status` all stay exactly as the API sent them.
+
+Save CSV straight to a file with `--output-file` on the bulk commands:
+```bash
+ipgeolocation bulk-ip-geo --file=ips.txt --output csv --output-file results
+```
+This writes `results.csv`. Passing `--output-file results.csv` writes the same file — the extension is added only when it is missing. Without `--output csv` the same flag writes `results.json`.
+
+For the other commands, redirect the output:
+```bash
+ipgeolocation ipgeo --ip 8.8.8.8 --output csv > ipgeo.csv
+```
+
 
 ### `ip-security` Command
 Look up IP security information using the `ipgeolocation.io` API.
@@ -1031,7 +1076,7 @@ ipgeolocation ip-security [flags]
 | `--ip`       | string   | `""`     | IPv4 or IPv6 address.                                          |
 | `--exclude`  | string[] | `[]`     | Exclude fields from output.                                    |
 | `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `security.threat_score`). |
-| `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.               |               
+| `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`.               |               
 
 > [!NOTE]
 > IP Security API is only available in the Paid Plan
@@ -1121,8 +1166,8 @@ ipgeolocation bulk-ip-security [flags]
 | `--file`        | string   | `""`     | Path to a text file containing IPs (one per line).             |
 | `--exclude`     | string[] | `[]`     | Exclude fields (e.g. `security.is_tor`).                              |
 | `--fields`      | string[] | `[]`     | Return only specific fields (e.g. `security.threat_score`).                 |
-| `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.               |
-| `--output-file` | string   | `""`     | Save output to JSON file. Example: `--output-file results`     |
+| `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`.               |
+| `--output-file` | string   | `""`     | Save output to a file. Writes `.csv` with `--output csv`, otherwise `.json`; the extension is added only if the name lacks it. Example: `--output-file results` or `--output-file results.csv`     |
 
 #### `bulk-ip-security` Examples
 Look up 3 IP addresses:
@@ -1134,6 +1179,8 @@ Look up from a file:
 ```bash
 ipgeolocation bulk-ip-security --file=ips.txt --output-file=output
 ```
+
+Results will be written to the `output.json` file.
 
 Output as YAML:
 ```bash
@@ -1162,7 +1209,7 @@ ipgeolocation asn [flags]
 | `--include`  | string[] | `[]`     | Include extra fields in output.(e.g., `peers,downstreams,upstreams,routes,whois_response`)      |
 | `--exclude`  | string[] | `[]`     | Exclude fields from output.                                                             |
 | `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `ip,organization`).                                   |
-| `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.                                        |
+| `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`.                                        |
 
 > [!NOTE]
 > ASN API is only available in the Paid Plan
@@ -1313,7 +1360,7 @@ ipgeolocation abuse [flags]
 | `--ip`       | string   | `""`     | IPv4 or IPv6 address.                                 |
 | `--exclude`  | string[] | `[]`     | Exclude fields from output.                           |
 | `--fields`   | string[] | `[]`     | Return only specific fields (e.g. `ip,organization`). |
-| `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`.      |
+| `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`.      |
 
 > [!NOTE]
 > Abuse Contact API is only available in the Paid Plan
@@ -1395,7 +1442,7 @@ ipgeolocation timezone [flags]
 | `--iata`      | string  | `""`     | IATA code (e.g. DXB).                            |
 | `--icao`      | string  | `""`     | ICAO code (e.g. KATL).                           |
 | `--lo`        | string  | `""`     | LO code (e.g. DEBER).                            |
-| `--output`    | string  | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`. |
+| `--output`    | string  | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`. |
 
 #### Get time zone info about your current IP
 ```bash
@@ -1792,7 +1839,7 @@ ipgeolocation time-conversion [flags]
 | `--lo_from`       | string  | `""`     | LO code to convert from.                         |
 | `--lo_to`         | string  | `""`     | LO code to convert to.                           |
 | `--time`          | string  | `""`     | Time to convert.                                 |
-| `--output`        | string  | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`. |
+| `--output`        | string  | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`. |
 
 #### Convert Current Time from One Timezone to Another
 ```bash
@@ -1868,7 +1915,7 @@ ipgeolocation astronomy [flags]
 | `--lang`      | string  | `""`     | Response language (if supported).                |
 | `--tz`        | string  | `""`     | IANA time zone for output timestamps.            |
 | `--elevation` | float64 | `0`      | Elevation.                                       |
-| `--output`    | string  | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`. |
+| `--output`    | string  | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`. |
 
 #### Lookup Astronomy API by Coordinates
 Get astronomy info about a specific latitude and longitude:
@@ -2119,7 +2166,7 @@ ipgeolocation astronomy-timeseries [flags]
 | `--lang`       | string  | `""`     | Response language (if supported).                |
 | `--start-date` | string  | `""`     | Start date (e.g. 2023-01-01) Only YYYY-MM-DD.    |
 | `--end-date`   | string  | `""`     | End date (e.g. 2023-12-31) Only YYYY-MM-DD       |
-| `--output`     | string  | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`. |
+| `--output`     | string  | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`. |
 
 > [!NOTE] 
 > - The `start-date` and `end-date` flags are required.
@@ -2256,7 +2303,7 @@ ipgeolocation parse-user-agent [flags]
 | Flag           | Type   | Default  | Description                                      |
 |----------------|--------|----------|--------------------------------------------------|
 | `--user-agent` | string | `""`     | User agent string.                               |
-| `--output`     | string | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`. |
+| `--output`     | string | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`. |
 
 For further information, please visit [User Agent API Documentation](https://ipgeolocation.io/documentation/user-agent-api.html).
 
@@ -2313,7 +2360,7 @@ ipgeolocation parse-bulk-user-agents [flags]
 | Flag            | Type     | Default  | Description                                      |
 |-----------------|----------|----------|--------------------------------------------------|
 | `--user-agents` | string[] | `[]`     | User agent strings.                              |
-| `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`. |
+| `--output`      | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`. |
 
 For further information, please visit [User Agent API bulk parsing documentation](https://ipgeolocation.io/documentation/user-agent-api.html#parse-bulk-user-agent-strings).
 

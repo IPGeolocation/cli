@@ -76,6 +76,13 @@ Getting peering relationships for an ASN number: ipgeolocation asn --asn 12345 -
 			fmt.Println(string(body))
 		case "table":
 			utils.PrintAsTable(result, 0)
+		case "csv":
+			csvData, err := utils.ConvertToCSV(body)
+			if err != nil {
+				fmt.Println("Error converting to CSV:", err)
+				return
+			}
+			fmt.Print(csvData)
 		case "yaml":
 			yamlData, err := yaml.Marshal(result)
 			if err != nil {
@@ -96,7 +103,7 @@ func init() {
 	asnCmd.Flags().StringSliceVar(&asnFlags.Include, "include", []string{}, "To include additional values in the output")
 	asnCmd.Flags().StringSliceVar(&asnFlags.Excludes, "exclude", []string{}, "Fields to exclude from the output")
 	asnCmd.Flags().StringSliceVar(&asnFlags.Fields, "fields", []string{}, "Get Specific Fields to include in the output")
-	asnCmd.Flags().StringVar(&asnFlags.Output, "output", "pretty", "Output format: pretty, raw, table")
+	asnCmd.Flags().StringVar(&asnFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml, csv")
 
 	rootCmd.AddCommand(asnCmd)
 }

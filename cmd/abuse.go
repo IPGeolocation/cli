@@ -66,6 +66,13 @@ Example:
 			fmt.Println(string(body))
 		case "table":
 			utils.PrintAsTable(result, 0)
+		case "csv":
+			csvData, err := utils.ConvertToCSV(body)
+			if err != nil {
+				fmt.Println("Error converting to CSV:", err)
+				return
+			}
+			fmt.Print(csvData)
 		case "yaml":
 			yamlData, err := yaml.Marshal(result)
 			if err != nil {
@@ -84,7 +91,7 @@ func init() {
 	abuseCmd.Flags().StringVar(&abuseFlags.IP, "ip", "", "IPv4 or IPv6 address (e.g. 8.8.8.8)")
 	abuseCmd.Flags().StringSliceVar(&abuseFlags.Excludes, "exclude", []string{}, "Fields to exclude from the output")
 	abuseCmd.Flags().StringSliceVar(&abuseFlags.Fields, "fields", []string{}, "Get Specific Fields to include in the output")
-	abuseCmd.Flags().StringVar(&abuseFlags.Output, "output", "", "Output format: yaml, raw, table, yaml")
+	abuseCmd.Flags().StringVar(&abuseFlags.Output, "output", "", "Output format: pretty, raw, table, yaml, csv")
 
 	rootCmd.AddCommand(abuseCmd)
 }

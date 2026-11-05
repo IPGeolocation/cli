@@ -3,6 +3,7 @@ package cmd
 import (
 	"crypto/tls"
 	"crypto/x509"
+	"encoding/csv"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -201,13 +202,27 @@ func TestCLICommands(t *testing.T) {
 		if tc.path != "/getip" {
 			tc.query.Set("apiKey", testKey)
 		}
-		for _, format := range []string{"raw", "pretty", "yaml", "table"} {
+		for _, format := range []string{"raw", "pretty", "yaml", "table", "csv"} {
 			t.Run(tc.name+"/"+format, func(t *testing.T) {
 				args := append([]string{tc.name}, tc.flags...)
 				output := runCLI(t, home, append(args, "--output", format)...)
 				if format == "table" {
 					if !strings.Contains(output, "2001:db8::1") || !strings.Contains(output, "Test City") {
 						t.Fatalf("table lost result fields: %s", output)
+					}
+					return
+				}
+				if format == "csv" {
+					rows := parseCSV(t, output)
+					if len(rows) != 1 {
+						t.Fatalf("expected one CSV row, got %d:\n%s", len(rows), output)
+					}
+					// Nested fields keep their path, so location.city survives flattening.
+					if rows[0]["ip"] != "2001:db8::1" || rows[0]["location.city"] != "Test City" {
+						t.Fatalf("CSV lost result fields: %s", output)
+					}
+					if _, charted := rows[0]["_request.path"]; !charted {
+						t.Fatalf("CSV lost the echoed request: %s", output)
 					}
 					return
 				}
@@ -299,5 +314,202 @@ func TestCLIConfigAndBulkFiles(t *testing.T) {
 		if !reflect.DeepEqual(payload["ips"], []interface{}{"8.8.8.8", "2001:db8::1", "1.1.1.1"}) {
 			t.Fatalf("bulk inputs changed: %v", payload)
 		}
+	}
+}
+
+func parseCSV(t *testing.T, output string) []map[string]string {
+	t.Helper()
+	records, err := csv.NewReader(strings.NewReader(output)).ReadAll()
+	if err != nil {
+		t.Fatalf("invalid CSV: %v\n%s", err, output)
+	}
+	if len(records) == 0 {
+		return nil
+	}
+	rows := make([]map[string]string, 0, len(records)-1)
+	for _, record := range records[1:] {
+		row := map[string]string{}
+		for i, header := range records[0] {
+			row[header] = record[i]
+		}
+		rows = append(rows, row)
+	}
+	return rows
+}
+
+// --output-file follows --output: csv saves .csv, everything else still saves
+// the .json it always did.
+func TestCLICSVOutputFile(t *testing.T) {
+	home := configuredHome(t, testKey)
+	for _, command := range []string{"bulk-ip-geo", "bulk-ip-security"} {
+		t.Run(command, func(t *testing.T) {
+			name := command + "-csv"
+			output := runCLI(t, home, command, "--ips", "8.8.8.8,1.1.1.1", "--output", "csv", "--output-file", name)
+			if !strings.Contains(output, "Output saved to file: "+name+".csv") {
+				t.Fatalf("csv file not reported: %s", output)
+			}
+			if _, err := os.Stat(filepath.Join(home, name+".json")); !os.IsNotExist(err) {
+				t.Fatalf("csv run also wrote a .json file: %v", err)
+			}
+
+			saved, err := os.ReadFile(filepath.Join(home, name+".csv"))
+			if err != nil {
+				t.Fatal(err)
+			}
+			rows := parseCSV(t, string(saved))
+			if len(rows) != 1 || rows[0]["ip"] != "2001:db8::1" || rows[0]["location.city"] != "Test City" {
+				t.Fatalf("saved CSV lost fields: %s", saved)
+			}
+			// Both requested addresses ride in one cell, joined by the separator.
+			if rows[0]["_request.payload.ips"] != "8.8.8.8|1.1.1.1" {
+				t.Fatalf("array cell changed: %q", rows[0]["_request.payload.ips"])
+			}
+			// The file and stdout must agree.
+			if strings.TrimSpace(strings.TrimSuffix(output, "Output saved to file: "+name+".csv")) != strings.TrimSpace(string(saved)) {
+				t.Fatalf("file and stdout disagree:\n%s\n---\n%s", output, saved)
+			}
+
+			// Without --output csv the JSON file is unchanged.
+			plain := command + "-plain"
+			if output := runCLI(t, home, command, "--ips", "8.8.8.8", "--output-file", plain); !strings.Contains(output, "Output saved to file: "+plain+".json") {
+				t.Fatalf("json file regressed: %s", output)
+			}
+			data, err := os.ReadFile(filepath.Join(home, plain+".json"))
+			if err != nil {
+				t.Fatal(err)
+			}
+			var results []map[string]interface{}
+			if err := json.Unmarshal(data, &results); err != nil {
+				t.Fatalf("json file is no longer JSON: %v", err)
+			}
+			if _, err := os.Stat(filepath.Join(home, plain+".csv")); !os.IsNotExist(err) {
+				t.Fatalf("plain run wrote a .csv file: %v", err)
+			}
+		})
+	}
+}
+
+// A request that fails must leave no file behind and must not overwrite one,
+// for CSV exactly as for JSON.
+func TestCLICSVOutputFileNotWrittenOnFailure(t *testing.T) {
+	for _, key := range []string{"BAD_KEY", "SERVER_ERROR", "BAD_JSON"} {
+		t.Run(key, func(t *testing.T) {
+			home := configuredHome(t, key)
+			for _, command := range []string{"bulk-ip-geo", "bulk-ip-security"} {
+				for _, exists := range []bool{false, true} {
+					name := fmt.Sprintf("%s-%v", command, exists)
+					file := filepath.Join(home, name+".csv")
+					if exists {
+						if err := os.WriteFile(file, []byte("keep existing results"), 0600); err != nil {
+							t.Fatal(err)
+						}
+					}
+					output := runCLI(t, home, command, "--ips", "8.8.8.8", "--output", "csv", "--output-file", name)
+					if strings.Contains(output, "Output saved") || strings.Contains(output, key) {
+						t.Fatalf("failed request reported a saved file: %s", output)
+					}
+					data, err := os.ReadFile(file)
+					if exists {
+						if err != nil || string(data) != "keep existing results" {
+							t.Fatalf("failed request changed the output file: %v", err)
+						}
+					} else if !os.IsNotExist(err) {
+						t.Fatalf("failed request created an output file: %v", err)
+					}
+				}
+			}
+		})
+	}
+}
+
+// --output-file adds .csv or .json only when the given name lacks it, so a
+// name the user already suffixed is used as it stands and never doubles up.
+func TestCLIOutputFileExtension(t *testing.T) {
+	for _, tc := range []struct {
+		given, format, want string
+	}{
+		// A bare name gains the extension that matches --output.
+		{"plain", "", "plain.json"},
+		{"plain-csv", "csv", "plain-csv.csv"},
+
+		// A name that already carries it is used as given.
+		{"suffixed.json", "", "suffixed.json"},
+		{"suffixed.csv", "csv", "suffixed.csv"},
+
+		// Matching ignores case.
+		{"upper.JSON", "", "upper.JSON"},
+		{"upper.CSV", "csv", "upper.CSV"},
+
+		// A non-matching extension is kept, not swapped.
+		{"mixed.json", "csv", "mixed.json.csv"},
+		{"mixed.csv", "", "mixed.csv.json"},
+
+		// A dot that is not the extension is left alone.
+		{"2026.report", "", "2026.report.json"},
+	} {
+		for _, command := range []string{"bulk-ip-geo", "bulk-ip-security"} {
+			name := tc.given
+			label := command + "/" + name + "/" + tc.format
+			t.Run(label, func(t *testing.T) {
+				directory := t.TempDir()
+				// A fresh HOME per case so leftover files cannot mask a mistake.
+				if output := runCLI(t, directory, "config", "--apikey", testKey); !strings.Contains(output, "saved") {
+					t.Fatalf("config failed: %s", output)
+				}
+				args := []string{command, "--ips", "8.8.8.8", "--output-file", name}
+				if tc.format != "" {
+					args = append(args, "--output", tc.format)
+				}
+				output := runCLI(t, directory, args...)
+				if !strings.Contains(output, "Output saved to file: "+tc.want) {
+					t.Fatalf("expected %q, got: %s", tc.want, output)
+				}
+
+				// Exactly one result file exists, and it is the expected one.
+				entries, err := os.ReadDir(directory)
+				if err != nil {
+					t.Fatal(err)
+				}
+				var produced []string
+				for _, entry := range entries {
+					if !entry.IsDir() && !strings.HasPrefix(entry.Name(), ".") {
+						produced = append(produced, entry.Name())
+					}
+				}
+				if len(produced) != 1 || produced[0] != tc.want {
+					t.Fatalf("expected only %q, found %v", tc.want, produced)
+				}
+
+				// And it holds the format that was asked for.
+				data, err := os.ReadFile(filepath.Join(directory, tc.want))
+				if err != nil {
+					t.Fatal(err)
+				}
+				if tc.format == "csv" {
+					if rows := parseCSV(t, string(data)); len(rows) != 1 || rows[0]["ip"] != "2001:db8::1" {
+						t.Fatalf("saved file is not the expected CSV: %s", data)
+					}
+				} else {
+					var results []map[string]interface{}
+					if err := json.Unmarshal(data, &results); err != nil {
+						t.Fatalf("saved file is not JSON: %v\n%s", err, data)
+					}
+				}
+			})
+		}
+	}
+}
+
+func TestCLICSVHelpAndFallback(t *testing.T) {
+	home := configuredHome(t, testKey)
+	for _, command := range []string{"ipgeo", "bulk-ip-geo", "my-ip", "timezone", "asn", "abuse", "parse-user-agent"} {
+		if output := runCLI(t, home, command, "--help"); !strings.Contains(output, "csv") {
+			t.Fatalf("csv missing from %s help: %s", command, output)
+		}
+	}
+	// An unrecognised format still falls back to pretty JSON, as it always has.
+	output := runCLI(t, home, "ipgeo", "--output", "csvv")
+	if !json.Valid([]byte(output)) {
+		t.Fatalf("unknown format no longer falls back to pretty: %s", output)
 	}
 }

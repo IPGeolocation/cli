@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"path/filepath"
 	"strings"
 )
 
@@ -41,4 +42,19 @@ func ToTitle(s string) string {
 
 func ConvertToXML(data interface{}) string {
 	return ""
+}
+
+// OutputFilePath works out the file an --output-file value should write to.
+// The extension is appended only when the name does not already end in it, so
+// "results" and "results.csv" both save to results.csv and neither doubles up.
+//
+// An extension that does not match is left in place rather than swapped, so
+// --output-file results.json with --output csv writes results.json.csv. That
+// keeps the name the caller gave and never silently retargets a different file.
+// The comparison ignores case, so results.CSV is accepted as it stands.
+func OutputFilePath(name, extension string) string {
+	if strings.EqualFold(filepath.Ext(name), extension) {
+		return name
+	}
+	return name + extension
 }

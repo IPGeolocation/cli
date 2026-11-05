@@ -76,6 +76,13 @@ Notes:
 			fmt.Println(string(body))
 		case "table":
 			utils.PrintAsTable(result, 0)
+		case "csv":
+			csvData, err := utils.ConvertToCSV(body)
+			if err != nil {
+				fmt.Println("Error converting to CSV:", err)
+				return
+			}
+			fmt.Print(csvData)
 		case "yaml":
 			yamlData, err := yaml.Marshal(result)
 			if err != nil {
@@ -94,7 +101,7 @@ func init() {
 	ipSecurityCmd.Flags().StringVar(&securityFlags.IP, "ip", "", "IPv4 or IPv6 address (e.g. 8.8.8.8)")
 	ipSecurityCmd.Flags().StringSliceVar(&securityFlags.Excludes, "exclude", []string{}, "Fields to exclude from the output")
 	ipSecurityCmd.Flags().StringSliceVar(&securityFlags.Fields, "fields", []string{}, "Get Specific Fields to include in the output")
-	ipSecurityCmd.Flags().StringVar(&securityFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml")
+	ipSecurityCmd.Flags().StringVar(&securityFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml, csv")
 
 	rootCmd.AddCommand(ipSecurityCmd)
 }

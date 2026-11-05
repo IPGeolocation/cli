@@ -136,6 +136,13 @@ Notes:
 			fmt.Println(string(body))
 		case "table":
 			utils.PrintAsTable(result, 0)
+		case "csv":
+			csvData, err := utils.ConvertToCSV(body)
+			if err != nil {
+				fmt.Println("Error converting to CSV:", err)
+				return
+			}
+			fmt.Print(csvData)
 		case "yaml":
 			yamlData, err := yaml.Marshal(result)
 			if err != nil {
@@ -166,7 +173,7 @@ func init() {
 	timeConversionCmd.Flags().StringVar(&timeConversionFlags.LoCodeFrom, "lo_from", "", "LO code from")
 	timeConversionCmd.Flags().StringVar(&timeConversionFlags.LoCodeTo, "lo_to", "", "LO code to")
 	timeConversionCmd.Flags().StringVar(&timeConversionFlags.Time, "time", "", "Time")
-	timeConversionCmd.Flags().StringVar(&timeConversionFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml")
+	timeConversionCmd.Flags().StringVar(&timeConversionFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml, csv")
 
 	rootCmd.AddCommand(timeConversionCmd)
 }
