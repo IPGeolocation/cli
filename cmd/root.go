@@ -18,7 +18,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:     "ipgeolocation",
 	Short:   "CLI for accessing IPGeolocation.io API endpoints",
-	Version: "2.1.2",
+	Version: "2.2.0",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		return utils.ValidateRequestLimits()
 	},
