@@ -66,6 +66,13 @@ Examples:
 			fmt.Println(string(body))
 		case "table":
 			utils.PrintAsTable(result, 0)
+		case "csv":
+			csvData, err := utils.ConvertToCSV(body)
+			if err != nil {
+				fmt.Println("Error converting to CSV:", err)
+				return
+			}
+			fmt.Print(csvData)
 		case "yaml":
 			yamlData, err := yaml.Marshal(result)
 			if err != nil {
@@ -83,7 +90,7 @@ Examples:
 
 func init() {
 	userAgentCmd.Flags().StringVar(&userAgentFlags.UserAgent, "user-agent", "", "User Agent")
-	userAgentCmd.Flags().StringVar(&userAgentFlags.Output, "output", "", "Output format:  raw, table, yaml")
+	userAgentCmd.Flags().StringVar(&userAgentFlags.Output, "output", "", "Output format: pretty, raw, table, yaml, csv")
 	rootCmd.AddCommand(userAgentCmd)
 
 }

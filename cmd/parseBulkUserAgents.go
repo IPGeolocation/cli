@@ -80,6 +80,13 @@ Note:
 			fmt.Println(string(body))
 		case "table":
 			utils.PrintAsTable(result, 0)
+		case "csv":
+			csvData, err := utils.ConvertToCSV(body)
+			if err != nil {
+				fmt.Println("Error converting to CSV:", err)
+				return
+			}
+			fmt.Print(csvData)
 		case "yaml":
 			yamlData, err := yaml.Marshal(result)
 			if err != nil {
@@ -97,7 +104,7 @@ Note:
 
 func init() {
 	parseBulkUserAgentsCmd.Flags().StringSliceVar(&bulkUserAgentsFlags.UserAgents, "user-agents", []string{}, "User Agents")
-	parseBulkUserAgentsCmd.Flags().StringVar(&bulkUserAgentsFlags.Output, "output", "", "Output format:  raw, table, yaml")
+	parseBulkUserAgentsCmd.Flags().StringVar(&bulkUserAgentsFlags.Output, "output", "", "Output format: pretty, raw, table, yaml, csv")
 	rootCmd.AddCommand(parseBulkUserAgentsCmd)
 
 }

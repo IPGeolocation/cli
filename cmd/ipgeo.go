@@ -27,7 +27,7 @@ and coordinates using the ipgeolocation.io IPGeo API (v2).
 You can query any public IP address or domain name, and customize the output using include/exclude/fields 
 parameters as supported by the API.
 
-Available output formats include: pretty (default), raw (JSON), table, and YAML.
+Available output formats include: pretty (default), raw (JSON), table, YAML, and CSV.
 
 Examples:
 
@@ -45,6 +45,9 @@ Examples:
 
   # Exclude unnecessary fields
   ipgeolocation ipgeo --exclude currency,time_zone
+
+  # Save a spreadsheet-friendly CSV
+  ipgeolocation ipgeo --ip 8.8.8.8 --output csv > ipgeo.csv
 
 Notes:
   - You must have a valid API key configured using: ipgeolocation config --apikey=<your_key>
@@ -95,6 +98,13 @@ Notes:
 			fmt.Println(string(body))
 		case "table":
 			utils.PrintAsTable(result, 0)
+		case "csv":
+			csvData, err := utils.ConvertToCSV(body)
+			if err != nil {
+				fmt.Println("Error converting to CSV:", err)
+				return
+			}
+			fmt.Print(csvData)
 		case "yaml":
 			yamlData, err := yaml.Marshal(result)
 			if err != nil {
@@ -115,7 +125,7 @@ func init() {
 	ipgeoCmd.Flags().StringSliceVar(&ipgeoFlags.Excludes, "exclude", []string{}, "Fields to exclude from the output")
 	ipgeoCmd.Flags().StringSliceVar(&ipgeoFlags.Fields, "fields", []string{}, "Get Specific Fields to include in the output")
 	ipgeoCmd.Flags().StringVar(&ipgeoFlags.Language, "lang", "", "Language for the output")
-	ipgeoCmd.Flags().StringVar(&ipgeoFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml")
+	ipgeoCmd.Flags().StringVar(&ipgeoFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml, csv")
 
 	// --excludes was the original name of --exclude; keep accepting it so existing scripts don't break.
 	ipgeoCmd.Flags().SetNormalizeFunc(func(f *pflag.FlagSet, name string) pflag.NormalizedName {

@@ -99,6 +99,13 @@ API Reference: https://ipgeolocation.io/astronomy-api.html
 			fmt.Println(string(body))
 		case "table":
 			utils.PrintAsTable(result, 0)
+		case "csv":
+			csvData, err := utils.ConvertToCSV(body)
+			if err != nil {
+				fmt.Println("Error converting to CSV:", err)
+				return
+			}
+			fmt.Print(csvData)
 		case "yaml":
 			yamlData, err := yaml.Marshal(result)
 			if err != nil {
@@ -122,7 +129,7 @@ func init() {
 	astronomyCmd.Flags().Float64Var(&astronomyFlags.Longitude, "longitude", 0, "Longitude (e.g. -122.4194)")
 	astronomyCmd.Flags().StringVar(&astronomyFlags.Language, "lang", "", "Language code (e.g. en)")
 	astronomyCmd.Flags().Float64Var(&astronomyFlags.Elevation, "elevation", 0, "Elevation (e.g. 1000)")
-	astronomyCmd.Flags().StringVar(&astronomyFlags.Output, "output", "pretty", "Output format: pretty, raw, table")
+	astronomyCmd.Flags().StringVar(&astronomyFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml, csv")
 
 	rootCmd.AddCommand(astronomyCmd)
 }

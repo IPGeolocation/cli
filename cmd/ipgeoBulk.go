@@ -109,6 +109,13 @@ Examples:
 			fmt.Println(string(body))
 		case "table":
 			utils.PrintAsTable(result, 0)
+		case "csv":
+			csvData, err := utils.ConvertToCSV(body)
+			if err != nil {
+				fmt.Println("Error converting to CSV:", err)
+				return
+			}
+			fmt.Print(csvData)
 		case "yaml":
 			yamlData, err := yaml.Marshal(result)
 			if err != nil {
@@ -122,13 +129,26 @@ Examples:
 			fmt.Println(string(pretty))
 		}
 		if bulkIpgeoFlags.OutputFile != "" {
-			pretty, _ := json.MarshalIndent(result, "", "  ")
-			err := os.WriteFile(bulkIpgeoFlags.OutputFile+".json", pretty, 0644)
-			if err != nil {
-				fmt.Println("Error writing JSON to file:", err)
+			// The saved file matches --output, so --output csv saves .csv and
+			// every other format keeps saving the .json it always has. The
+			// extension is only appended when the given name lacks it.
+			extension := ".json"
+			data, _ := json.MarshalIndent(result, "", "  ")
+			if bulkIpgeoFlags.Output == "csv" {
+				csvData, err := utils.ConvertToCSV(body)
+				if err != nil {
+					fmt.Println("Error converting to CSV:", err)
+					return
+				}
+				extension = ".csv"
+				data = []byte(csvData)
+			}
+			path := utils.OutputFilePath(bulkIpgeoFlags.OutputFile, extension)
+			if err := os.WriteFile(path, data, 0644); err != nil {
+				fmt.Println("Error writing output to file:", err)
 				return
 			}
-			fmt.Println("Output saved to file:", bulkIpgeoFlags.OutputFile+".json")
+			fmt.Println("Output saved to file:", path)
 		}
 	},
 }
@@ -139,9 +159,9 @@ func init() {
 	bulkIpgeoCmd.Flags().StringSliceVar(&bulkIpgeoFlags.Excludes, "exclude", []string{}, "Fields to exclude from the output")
 	bulkIpgeoCmd.Flags().StringSliceVar(&bulkIpgeoFlags.Fields, "fields", []string{}, "Get Specific Fields to include in the output")
 	bulkIpgeoCmd.Flags().StringVar(&bulkIpgeoFlags.Language, "lang", "", "Language for the output")
-	bulkIpgeoCmd.Flags().StringVar(&bulkIpgeoFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml")
+	bulkIpgeoCmd.Flags().StringVar(&bulkIpgeoFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml, csv")
 	bulkIpgeoCmd.Flags().StringVar(&bulkIpgeoFlags.File, "file", "", "Path to a text file containing IPs (one per line)")
-	bulkIpgeoCmd.Flags().StringVar(&bulkIpgeoFlags.OutputFile, "output-file", "", "Save output to a file (JSON only)")
+	bulkIpgeoCmd.Flags().StringVar(&bulkIpgeoFlags.OutputFile, "output-file", "", "Save output to a file; the .csv or .json extension is added only if missing")
 
 	rootCmd.AddCommand(bulkIpgeoCmd)
 }

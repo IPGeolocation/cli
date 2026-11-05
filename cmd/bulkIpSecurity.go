@@ -96,6 +96,13 @@ Retrieving security information for IP addresses from a file: ipgeolocation bulk
 			fmt.Println(string(body))
 		case "table":
 			utils.PrintAsTable(result, 0)
+		case "csv":
+			csvData, err := utils.ConvertToCSV(body)
+			if err != nil {
+				fmt.Println("Error converting to CSV:", err)
+				return
+			}
+			fmt.Print(csvData)
 		case "yaml":
 			yamlData, err := yaml.Marshal(result)
 			if err != nil {
@@ -108,13 +115,26 @@ Retrieving security information for IP addresses from a file: ipgeolocation bulk
 			fmt.Println(string(pretty))
 		}
 		if bulkSecurityFlags.OutputFile != "" {
-			pretty, _ := json.MarshalIndent(result, "", "  ")
-			err := os.WriteFile(bulkSecurityFlags.OutputFile+".json", pretty, 0644)
-			if err != nil {
-				fmt.Println("Error writing JSON to file:", err)
+			// The saved file matches --output, so --output csv saves .csv and
+			// every other format keeps saving the .json it always has. The
+			// extension is only appended when the given name lacks it.
+			extension := ".json"
+			data, _ := json.MarshalIndent(result, "", "  ")
+			if bulkSecurityFlags.Output == "csv" {
+				csvData, err := utils.ConvertToCSV(body)
+				if err != nil {
+					fmt.Println("Error converting to CSV:", err)
+					return
+				}
+				extension = ".csv"
+				data = []byte(csvData)
+			}
+			path := utils.OutputFilePath(bulkSecurityFlags.OutputFile, extension)
+			if err := os.WriteFile(path, data, 0644); err != nil {
+				fmt.Println("Error writing output to file:", err)
 				return
 			}
-			fmt.Println("Output saved to file:", bulkSecurityFlags.OutputFile+".json")
+			fmt.Println("Output saved to file:", path)
 		}
 	},
 }
@@ -123,9 +143,9 @@ func init() {
 	bulkIpSecurityCmd.Flags().StringSliceVar(&bulkSecurityFlags.IPs, "ips", []string{}, "IPs")
 	bulkIpSecurityCmd.Flags().StringSliceVar(&bulkSecurityFlags.Excludes, "exclude", []string{}, "Fields to exclude from the output")
 	bulkIpSecurityCmd.Flags().StringSliceVar(&bulkSecurityFlags.Fields, "fields", []string{}, "Get Specific Fields to include in the output")
-	bulkIpSecurityCmd.Flags().StringVar(&bulkSecurityFlags.Output, "output", "pretty", "Output format: pretty, raw, table")
+	bulkIpSecurityCmd.Flags().StringVar(&bulkSecurityFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml, csv")
 	bulkIpSecurityCmd.Flags().StringVar(&bulkSecurityFlags.File, "file", "", "Path to a text file containing IPs (one per line)")
-	bulkIpSecurityCmd.Flags().StringVar(&bulkSecurityFlags.OutputFile, "output-file", "", "Save output to a file (JSON only)")
+	bulkIpSecurityCmd.Flags().StringVar(&bulkSecurityFlags.OutputFile, "output-file", "", "Save output to a file; the .csv or .json extension is added only if missing")
 
 	rootCmd.AddCommand(bulkIpSecurityCmd)
 }

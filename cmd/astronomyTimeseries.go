@@ -94,6 +94,13 @@ Examples:
 			fmt.Println(string(body))
 		case "table":
 			utils.PrintAsTable(result, 0)
+		case "csv":
+			csvData, err := utils.ConvertToCSV(body)
+			if err != nil {
+				fmt.Println("Error converting to CSV:", err)
+				return
+			}
+			fmt.Print(csvData)
 		case "yaml":
 			yamlData, err := yaml.Marshal(result)
 			if err != nil {
@@ -117,7 +124,7 @@ func init() {
 	astronomyTimeseriesCmd.Flags().Float64Var(&astronomyTimeseriesFlags.Latitude, "latitude", 0, "Latitude (e.g. 37.7749)")
 	astronomyTimeseriesCmd.Flags().Float64Var(&astronomyTimeseriesFlags.Longitude, "longitude", 0, "Longitude (e.g. -122.4194)")
 	astronomyTimeseriesCmd.Flags().StringVar(&astronomyTimeseriesFlags.Language, "lang", "", "Language code (e.g. en)")
-	astronomyTimeseriesCmd.Flags().StringVar(&astronomyTimeseriesFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml")
+	astronomyTimeseriesCmd.Flags().StringVar(&astronomyTimeseriesFlags.Output, "output", "pretty", "Output format: pretty, raw, table, yaml, csv")
 
 	rootCmd.AddCommand(astronomyTimeseriesCmd)
 }
