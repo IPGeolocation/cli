@@ -18,9 +18,9 @@ func TestReleaseGuardsKeepExistingArtifacts(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, tc := range []struct{ compiler, tag, want string }{
-		{"go1.24.5", "", "Use Go"}, {"go1.26.9", "", "Use Go"}, {"go1.27.2", "", "Use Go"},
-		{"go1.28rc1", "", "Use Go"}, {"go1.26.10", "v2.1.0", "Release tag must match"},
-		{"go1.26.10", "v2.1.2", "checks-started"}, {"go1.27.3", "", "checks-started"}, {"go1.28.0", "", "checks-started"},
+		{"go1.24.5", "", "Use Go"}, {"go1.26.10", "", "Use Go"}, {"go1.27.3", "", "Use Go"},
+		{"go1.28rc1", "", "Use Go"}, {"go1.26.11", "v2.1.0", "Release tag must match"},
+		{"go1.26.11", "v2.1.2", "checks-started"}, {"go1.27.4", "", "checks-started"}, {"go1.28.0", "", "checks-started"},
 	} {
 		t.Run(tc.compiler+tc.tag, func(t *testing.T) {
 			dir := t.TempDir()
