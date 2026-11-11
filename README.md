@@ -115,7 +115,7 @@ Based on:
 
 ## Requirements
 
-- Go 1.26.10 or Go 1.27.3, or a newer patched stable version (only for building from source)
+- Go 1.26.11 or Go 1.27.4, or a newer patched stable version (only for building from source)
 - API Key from [IPGeolocation.io](https://ipgeolocation.io)
 
 ## Installation

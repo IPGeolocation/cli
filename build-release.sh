@@ -6,8 +6,8 @@ APP_NAME="ipgeolocation"
 
 compiler=$(go env GOVERSION)
 if [[ ! "$compiler" =~ ^go1\.([0-9]+)\.([0-9]+)$ ]] ||
-   (( BASH_REMATCH[1] < 26 || (BASH_REMATCH[1] == 26 && BASH_REMATCH[2] < 10) || (BASH_REMATCH[1] == 27 && BASH_REMATCH[2] < 3) )); then
-  echo "Use Go 1.26.10, Go 1.27.3, or a newer patched stable version." >&2
+   (( BASH_REMATCH[1] < 26 || (BASH_REMATCH[1] == 26 && BASH_REMATCH[2] < 11) || (BASH_REMATCH[1] == 27 && BASH_REMATCH[2] < 4) )); then
+  echo "Use Go 1.26.11, Go 1.27.4, or a newer patched stable version." >&2
   exit 1
 fi
 command -v govulncheck >/dev/null || { echo "Install govulncheck: go install golang.org/x/vuln/cmd/govulncheck@v1.9.0" >&2; exit 1; }
