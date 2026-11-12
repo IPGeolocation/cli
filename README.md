@@ -999,7 +999,7 @@ ipgeolocation bulk-ip-geo --file=ips.txt --output-file results
 Results will be written to the `results.json` file.
 
 > [!NOTE]
-> All the `include`, `exclude`, `fields` parameters can be used just like `ipgeo` command.
+> Use the `--include`, `--exclude`, and `--fields` flags the same way as with `ipgeo`.
 
 Output as YAML:
 ```bash
@@ -1022,7 +1022,7 @@ Results will be written to the `output.json` file. The `.json` is not added twic
 - **file**: If `--output-file` is provided, results are saved to a file. With `--output csv` the file is `.csv`; otherwise it is `.json`. The extension is appended only when the name does not already end in it, so `results` and `results.csv` both save to `results.csv`.  
 
 ### CSV Output
-Every command accepts `--output csv`, which renders the response as CSV for spreadsheets, `awk`, `cut`, or a database import.
+Lookup and parsing commands accept `--output csv`, which renders the response as CSV for spreadsheets, `awk`, `cut`, or a database import. The `config` command manages your API key and prints a status message.
 
 ```bash
 ipgeolocation ipgeo --ip 8.8.8.8 --output csv
