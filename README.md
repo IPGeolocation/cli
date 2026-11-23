@@ -27,12 +27,12 @@ Based on:
 ## Table of Contents
 1. [Requirements](#requirements)
 2. [Installation](#installation)
-    - [Go install](#go-install)
-    - [Download and build from source](#download-and-build-from-source)
+    - [Go Install](#go-install)
+    - [Download and Build from Source](#download-and-build-from-source)
     - [Download Prebuilt Binaries](#download-prebuilt-binaries)
     - [Troubleshooting](#troubleshooting)
 3. [API Documentation Links](#apis-documentation)
-4. [Fields and commands Availability](#fields-and-commands-availability)
+4. [Fields and Commands Availability](#fields-and-commands-availability)
 5. [Authentication Setup](#authentication-setup)
    - [How to Get Your API Key](#how-to-get-your-api-key)
    - [ApiKeyAuth](#apikeyauth)
@@ -44,7 +44,7 @@ Based on:
     - [`my-ip` Command](#my-ip-command)
       - [`my-ip` Usage](#my-ip-usage)
       - [Flags for `my-ip`](#flags-for-my-ip)
-      - [Get your public IP address](#get-your-public-ip-address)
+      - [Get Your Public IP Address](#get-your-public-ip-address)
     - [`ipgeo` Command](#ipgeo-command)
       - [`ipgeo` Usage](#ipgeo-usage)
       - [Flags for `ipgeo`](#flags-for-ipgeo)
@@ -67,21 +67,21 @@ Based on:
     - [`asn` Command](#asn-command)
       - [`asn` Usage](#asn-usage)
       - [Flags for `asn`](#flags-for-asn)
-      - [Get ASN Information of your IP](#get-asn-information-of-your-ip)
-      - [Get ASN Information by ASN Number](#get-asn-information-by-asn-number)
-      - [Combine All objects using Include](#combine-all-objects-using-include)
+      - [Get ASN Information of Your IP](#get-asn-information-of-your-ip)
+      - [Get ASN Information by AS Number](#get-asn-information-by-as-number)
+      - [Combine All Objects Using Include](#combine-all-objects-using-include)
     - [`abuse` Command](#abuse-command)
       - [`abuse` Usage](#abuse-usage)
       - [Flags for `abuse`](#flags-for-abuse)
-      - [Get abuse info about your current IP](#get-abuse-info-about-your-current-ip)
-      - [Look up a specific IP](#look-up-a-specific-ip)
-      - [Exclude unnecessary fields](#exclude-unnecessary-fields)
-      - [Lookup Abuse Contact with Specific Fields](#lookup-abuse-contact-with-specific-fields)
+      - [Get Abuse Info about Your Current IP](#get-abuse-info-about-your-current-ip)
+      - [Look Up a Specific IP](#look-up-a-specific-ip)
+      - [Exclude Unnecessary Fields](#exclude-unnecessary-fields)
+      - [Look Up Abuse Contact with Specific Fields](#look-up-abuse-contact-with-specific-fields)
     - [`timezone` Command](#timezone-command)
       - [`timezone` Usage](#timezone-usage)
       - [Flags for `timezone`](#flags-for-timezone)
-      - [Get time zone info about your current IP](#get-time-zone-info-about-your-current-ip)
-      - [Get Timezone for a specific IP Address](#get-timezone-for-a-specific-ip-address)
+      - [Get Time Zone Info about Your Current IP](#get-time-zone-info-about-your-current-ip)
+      - [Get Timezone for a Specific IP Address](#get-timezone-for-a-specific-ip-address)
       - [Get Timezone by Timezone Name](#get-timezone-by-timezone-name)
       - [Get Timezone from Any Address](#get-timezone-from-any-address)
       - [Get Timezone from Location Coordinates](#get-timezone-from-location-coordinates)
@@ -94,23 +94,23 @@ Based on:
     - [`astronomy` Command](#astronomy-command)
       - [`astronomy` Usage](#astronomy-usage)
       - [Flags for `astronomy`](#flags-for-astronomy)
-      - [Lookup Astronomy API by Coordinates](#lookup-astronomy-api-by-coordinates)
-      - [Lookup Astronomy API by IP Address](#lookup-astronomy-api-by-ip-address)
-      - [Lookup Astronomy API by Location String](#lookup-astronomy-api-by-location-string)
+      - [Look Up Astronomy API by Coordinates](#look-up-astronomy-api-by-coordinates)
+      - [Look Up Astronomy API by IP Address](#look-up-astronomy-api-by-ip-address)
+      - [Look Up Astronomy API by Location String](#look-up-astronomy-api-by-location-string)
     - [`astronomy-timeseries` Command](#astronomy-timeseries-command)
       - [`astronomy-timeseries` Usage](#astronomy-timeseries-usage)
       - [Flags for `astronomy-timeseries`](#flags-for-astronomy-timeseries)
-      - [Get astronomy timeseries info for an IP address](#get-astronomy-timeseries-info-for-an-ip-address)
-      - [Get astronomy timeseries about a specific lat and lon](#get-astronomy-timeseries-about-a-specific-lat-and-lon)
-      - [Get astronomy timeseries about a specific location](#get-astronomy-timeseries-about-a-specific-location)
+      - [Get Astronomy Timeseries Info for an IP Address](#get-astronomy-timeseries-info-for-an-ip-address)
+      - [Get Astronomy Timeseries about a Specific Lat and Lon](#get-astronomy-timeseries-about-a-specific-lat-and-lon)
+      - [Get Astronomy Timeseries about a Specific Location](#get-astronomy-timeseries-about-a-specific-location)
     - [`parse-user-agent` Command](#parse-user-agent-command)
       - [`parse-user-agent` Usage](#parse-user-agent-usage)
       - [Flags for `parse-user-agent`](#flags-for-parse-user-agent)
-      - [Parse a user agent string](#parse-a-user-agent-string)
+      - [Parse a User Agent String](#parse-a-user-agent-string)
     - [`parse-bulk-user-agents` Command](#parse-bulk-user-agents-command)
       - [`parse-bulk-user-agents` Usage](#parse-bulk-user-agents-usage)
       - [Flags for `parse-bulk-user-agents`](#flags-for-parse-bulk-user-agents)
-      - [Parse multiple user agent strings](#parse-multiple-user-agent-strings)
+      - [Parse Multiple User Agent Strings](#parse-multiple-user-agent-strings)
 - [License](#license)
 
 ## Requirements
@@ -119,7 +119,7 @@ Based on:
 - API Key from [IPGeolocation.io](https://ipgeolocation.io)
 
 ## Installation
-### Go install
+### Go Install
 
 To install `ipgeolocation` using `go install`, run:
 ```bash
@@ -132,7 +132,7 @@ Make sure `$GOBIN` or `$GOPATH/bin` is in your `PATH`, then run:
 ipgeolocation --help
 ```
 
-### Download and build from source
+### Download and Build from Source
 ```bash
 git clone https://github.com/IPGeolocation/cli.git
 cd cli
@@ -246,7 +246,7 @@ The documentation below corresponds to the available APIs:
 
 For a detailed comparison of what each plan offers, visit the [Pricing Page](https://ipgeolocation.io/pricing.html).
 
-## Fields and commands Availability
+## Fields and Commands Availability
 IPGeolocation.io offers a **free Developer plan** and **paid plans**. The availability of each command across plans is presented below.
 
 | Sub Command              | Details                                                                                                                      | Free             | Paid |
@@ -267,7 +267,7 @@ IPGeolocation.io offers a **free Developer plan** and **paid plans**. The availa
 | `parse-bulk-user-agents` | Parse multiple user-agent strings at once.                                                                                    |  ✖   |    ✔     |
 
 > [!TIP]
-> The availability of fields in every API endpoint across Free and Paid plans is provided in the **_Reference Table_** within each respective API Documentation. e.g., for the IP Geolocation API, please visit [IP Geolocation API](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ip-geolocation-api-response).
+> The availability of fields in every API endpoint across free and paid plans is provided in the **_Reference Table_** within each respective API documentation. e.g., for the IP Geolocation API, please visit [IP Geolocation API](https://ipgeolocation.io/documentation/ip-location-api.html#reference-to-ip-geolocation-api-response).
 
 ## Authentication Setup
 To authenticate API requests, you need to get an API key from [IPGeolocation.io](https://ipgeolocation.io/).
@@ -339,7 +339,7 @@ ipgeolocation my-ip [flags]
 > - The `my-ip` command does not require an API key.
 > - `getip` can be used as an alias for `my-ip`.
 
-#### Get your public IP address
+#### Get Your Public IP Address
 
 ```bash
 ipgeolocation my-ip
@@ -677,7 +677,7 @@ Sample output:
 }
 ```
 
-##### Include HostName and User-Agent
+##### Include Hostname and User Agent
 ```bash
 ipgeolocation ipgeo --ip 219.100.37.207 --include hostname,user_agent
 ```
@@ -926,9 +926,9 @@ Sample output:
 ```
 
 > [!NOTE]
-> All features available in the Free plan are also included in the Paid Plan.
+> All features available on the free plan are also included in paid plans.
 
-##### Get only specific fields in YAML:
+##### Get Only Specific Fields in YAML
 ```bash
 ipgeolocation ipgeo --ip 1.1.1.1 --fields location --include dma_code,geo_accuracy --output yaml
 ```
@@ -1079,7 +1079,7 @@ ipgeolocation ip-security [flags]
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`.               |               
 
 > [!NOTE]
-> IP Security API is only available in the Paid Plan
+> The IP Security API is only available on paid plans.
 
 #### Get Default Fields in `ip-security`
 Get info about your current IP:
@@ -1212,15 +1212,15 @@ ipgeolocation asn [flags]
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`.                                        |
 
 > [!NOTE]
-> ASN API is only available in the Paid Plan
+> The ASN API is only available on paid plans.
 
-#### Get ASN Information of your IP
+#### Get ASN Information of Your IP
 Get ASN information about your current IP address:
 ```bash
 ipgeolocation asn
 ```
 
-#### Get ASN Information by ASN Number
+#### Get ASN Information by AS Number
 Look up a specific ASN. The AS number can be prefixed with 'AS' or 'as':
 ```bash
 ipgeolocation asn --asn 15169
@@ -1244,7 +1244,7 @@ Sample output:
 }
 ```
 
-#### Combine all objects using Include
+#### Combine All Objects Using Include
 Look up a specific IP, including additional fields:
 ```bash
 ipgeolocation asn --asn 12 --include routes,peers,upstreams,downstreams,whois_response
@@ -1363,24 +1363,24 @@ ipgeolocation abuse [flags]
 | `--output`   | string   | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`.      |
 
 > [!NOTE]
-> Abuse Contact API is only available in the Paid Plan
+> The Abuse Contact API is only available on paid plans.
 
-#### Get abuse info about your current IP
+#### Get Abuse Info about Your Current IP
 ```bash
 ipgeolocation abuse
 ```
 
-#### Look up a specific IP
+#### Look Up a Specific IP
 ```bash
 ipgeolocation abuse --ip 8.8.8.8
 ```
 
-#### Exclude unnecessary fields
+#### Exclude Unnecessary Fields
 ```bash
 ipgeolocation abuse --ip 8.8.8.8 --exclude abuse.emails
 ```
 
-#### Lookup Abuse Contact with Specific Fields
+#### Look Up Abuse Contact with Specific Fields
 ```bash
 ipgeolocation abuse --ip 8.8.8.8 --fields abuse.emails --output table
 ```
@@ -1444,12 +1444,12 @@ ipgeolocation timezone [flags]
 | `--lo`        | string  | `""`     | LO code (e.g. DEBER).                            |
 | `--output`    | string  | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`. |
 
-#### Get time zone info about your current IP
+#### Get Time Zone Info about Your Current IP
 ```bash
 ipgeolocation timezone
 ```
 
-#### Get Timezone for a specific IP Address
+#### Get Timezone for a Specific IP Address
 ```bash
 ipgeolocation timezone --ip 8.8.8.8
 ```
@@ -1917,7 +1917,7 @@ ipgeolocation astronomy [flags]
 | `--elevation` | float64 | `0`      | Elevation.                                       |
 | `--output`    | string  | `pretty` | Output format: `pretty`, `raw`, `table`, `yaml`, `csv`. |
 
-#### Lookup Astronomy API by Coordinates
+#### Look Up Astronomy API by Coordinates
 Get astronomy info about a specific latitude and longitude:
 ```bash
 ipgeolocation astronomy --latitude 37.7749 --longitude -122.4194
@@ -1986,7 +1986,7 @@ Sample output:
 }
 ```
 
-#### Lookup Astronomy API by IP Address
+#### Look Up Astronomy API by IP Address
 Get astronomy info about your current IP:
 ```bash
 ipgeolocation astronomy
@@ -2069,7 +2069,7 @@ Sample output:
 }
 ```
 
-#### Lookup Astronomy API by Location String
+#### Look Up Astronomy API by Location String
 ```bash
 ipgeolocation astronomy --location "New York, USA"
 ```
@@ -2173,18 +2173,18 @@ ipgeolocation astronomy-timeseries [flags]
 > - The `start-date` and `end-date` should be in YYYY-MM-DD format.
 > - The `start-date` and `end-date` should be less than 90 days.
 
-#### Get astronomy timeseries info for an IP address
+#### Get Astronomy Timeseries Info for an IP Address
 For your own IP address
 ```bash
 ipgeolocation astronomy-timeseries --start-date 2023-01-01 --end-date 2023-01-02
 ```
 
-#### Get astronomy timeseries about a specific lat and lon
+#### Get Astronomy Timeseries about a Specific Lat and Lon
 ```bash
 ipgeolocation astronomy-timeseries --latitude 37.7749 --longitude -122.4194 --start-date 2023-01-01 --end-date 2023-01-02
 ```
 
-#### Get astronomy timeseries about a specific location
+#### Get Astronomy Timeseries about a Specific Location
 ```bash
 ipgeolocation astronomy-timeseries --location "New York, USA" --start-date 2023-01-01 --end-date 2023-01-02
 ```
@@ -2307,7 +2307,7 @@ ipgeolocation parse-user-agent [flags]
 
 For further information, please visit [User Agent API Documentation](https://ipgeolocation.io/documentation/user-agent-api.html).
 
-#### Parse a user agent string
+#### Parse a User Agent String
 ```bash
 ipgeolocation parse-user-agent --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
 ```
@@ -2368,7 +2368,7 @@ For further information, please visit [User Agent API bulk parsing documentation
 > - The `user-agents` flag is required.
 > - The `user-agents` flag should be an array of user agent strings.
 
-#### Parse multiple user agent strings
+#### Parse Multiple User Agent Strings
 ```bash
 ipgeolocation parse-bulk-user-agents --user-agents "Mozilla/5.0 (Windows NT 10.0; Win64; x64)","curl/7.64.1"
 ```
